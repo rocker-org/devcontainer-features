@@ -9,7 +9,7 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-architecture="$(uname -m)"
+architecture="$(dpkg --print-architecture)"
 if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     echo "(!) Architecture $architecture unsupported"
     exit 1
@@ -95,3 +95,38 @@ find_version_from_json() {
     fi
     echo "${variable_name}=${!variable_name}"
 }
+
+install_rig() {
+    local download_url
+    if [ "$architecture" = "amd64" ]; then
+        download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-latest.tar.gz"
+    elif [ "$architecture" = "arm64" ]; then
+        download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-arm64-latest.tar.gz"
+    fi
+    curl -sL "${download_url}" | tar xz -C /usr/local
+}
+
+export DEBIAN_FRONTEND=noninteractive
+
+check_packages curl ca-certificates
+
+# Soft version matching
+# https://github.com/r-lib/rig/issues/101
+if [ "${R_VERSION}" != "release" ] && [ "${R_VERSION}" != "devel" ]; then
+    if [ "${architecture}" = "amd64" ]; then
+        find_version_from_json R_VERSION "https://cdn.rstudio.com/r/versions.json"
+    elif [ "${architecture}" = "arm64" ]; then
+        find_version_from_git_tags R_VERSION "https://github.com/r-hub/R"
+    fi
+fi
+
+# Install rig
+echo "Downloading rig..."
+
+install_rig
+
+echo "Downloading R..."
+
+rig add "${R_VERSION}"
+
+echo "Done!"
