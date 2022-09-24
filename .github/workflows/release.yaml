@@ -2,6 +2,10 @@ name: "Release dev container features & Generate Documentation"
 on:
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
