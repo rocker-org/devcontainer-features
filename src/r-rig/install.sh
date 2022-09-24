@@ -125,7 +125,7 @@ echo "Downloading rig..."
 
 install_rig
 
-echo "Downloading R..."
+echo "Downloading R ${R_VERSION}..."
 
 rig add "${R_VERSION}"
 
