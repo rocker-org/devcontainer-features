@@ -1,0 +1,24 @@
+{
+	"name": "R (via rig)",
+	"id": "r-rig",
+	"version": "0.1.0",
+	"description": "Installs R, rig, and needed dependencies.",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"release",
+				"none"
+			],
+			"default": "release",
+			"description": "Select version of R, if not the latest release version."
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r"
+			]
+		}
+	}
+}

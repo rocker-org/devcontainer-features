@@ -1,0 +1,9 @@
+{
+	"r_quarto": {
+		"image": "ubuntu:latest",
+		"features": {
+			"r-rig": {},
+			"quarto-cli": {}
+		}
+	}
+}
