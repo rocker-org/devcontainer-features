@@ -112,7 +112,7 @@ check_packages curl ca-certificates
 
 # Soft version matching
 # https://github.com/r-lib/rig/issues/101
-if [ "${R_VERSION}" != "release" ] && [ "${R_VERSION}" != "devel" ]; then
+if [ "${R_VERSION}" != "release" ] && [ "${R_VERSION}" != "devel" ] && [ "${R_VERSION}" != "none" ]; then
     if [ "${architecture}" = "amd64" ]; then
         find_version_from_json R_VERSION "https://cdn.rstudio.com/r/versions.json"
     elif [ "${architecture}" = "arm64" ]; then
@@ -122,11 +122,11 @@ fi
 
 # Install rig
 echo "Downloading rig..."
-
 install_rig
 
-echo "Downloading R ${R_VERSION}..."
-
-rig add "${R_VERSION}"
+if [ "${R_VERSION}" != "none" ]; then
+    echo "Downloading R ${R_VERSION}..."
+    rig add "${R_VERSION}"
+fi
 
 echo "Done!"
