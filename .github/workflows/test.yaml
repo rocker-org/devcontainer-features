@@ -5,7 +5,18 @@ on:
       - main
     paths:
       - src/**
+      - test/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - test/**
   workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
