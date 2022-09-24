@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - src/**
   workflow_dispatch:
 
 jobs:
@@ -11,14 +13,11 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        features: [
-           "color",
-           "hello"
-        ]
+        features:
+          - color
+          - hello
         baseImage:
-          [
-            "mcr.microsoft.com/devcontainers/base:ubuntu"
-          ]
+          - mcr.microsoft.com/devcontainers/base:ubuntu
     steps:
       - uses: actions/checkout@v2
 
