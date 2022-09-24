@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "Installs the Quarto cli. Auto-detects latest version.",
 	"options": {
 		"version": {
@@ -13,6 +13,13 @@
 			],
 			"default": "latest",
 			"description": "Select version of the Quarto CLI, if not latest."
+		}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"quarto.quarto"
+			]
 		}
 	}
 }
