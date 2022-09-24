@@ -70,16 +70,16 @@ install() {
     local download_url
     architecture="$(dpkg --print-architecture)"
     if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "release" ] ; then
-        download_url=$(curl https://quarto.org/docs/download/_download.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
+        download_url=$(curl -sL https://quarto.org/docs/download/_download.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
     elif [ "${CLI_VERSION}" = "prerelease" ]; then
-        download_url=$(curl https://quarto.org/docs/download/_prerelease.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
+        download_url=$(curl -sL https://quarto.org/docs/download/_prerelease.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
     else
         download_url="https://github.com/quarto-dev/quarto-cli/releases/download/v${CLI_VERSION}/quarto-${CLI_VERSION}-linux-${architecture}.deb"
     fi
 
     mkdir -p /tmp/quarto
     pushd /tmp/quarto
-    curl -L -o "${deb_file}" "${download_url}"
+    curl -sLo "${deb_file}" "${download_url}"
     dpkg -i "${deb_file}"
     popd
     rm -rf /tmp/quarto
