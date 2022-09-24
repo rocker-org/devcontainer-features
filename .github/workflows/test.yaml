@@ -25,10 +25,11 @@ jobs:
     strategy:
       matrix:
         features:
-          - color
-          - hello
+          - quarto
         baseImage:
-          - mcr.microsoft.com/devcontainers/base:ubuntu
+          - debian:stable-slim
+          - ubuntu:focal
+          - ubuntu:jammy
     steps:
       - uses: actions/checkout@v2
 

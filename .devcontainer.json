@@ -8,7 +8,10 @@
 				"foxundermoon.shell-format",
 				"timonwong.shellcheck",
 				"redhat.vscode-yaml"
-			]
+			],
+			"settings": {
+				"terminal.integrated.defaultProfile.linux": "zsh"
+			}
 		}
 	},
 	"features": {
