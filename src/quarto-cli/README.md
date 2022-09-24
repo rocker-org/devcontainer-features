@@ -23,4 +23,4 @@ Installs the Quarto cli. Auto-detects latest version.
 
 ---
 
-_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
+_Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/rocker-org/devcontainer-features/blob/main/src/quarto-cli/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
