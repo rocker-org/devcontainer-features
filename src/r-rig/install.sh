@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-R_VERSION=${VERSION:-"release"} # 'system' checks the base image first, else installs 'release' via rig
+R_VERSION=${VERSION:-"release"}
 
 set -e
 
