@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 R_VERSION=${VERSION:-"release"}
-INSTALL_KNITR=${INSTALLKNITR:-"false"}
+INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 
 USERNAME=${USERNAME:-"automatic"}
 
@@ -38,9 +38,9 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
-if [ "${INSTALL_KNITR}" = "true" ]; then
-    APT_PACKAGES+=(libicu-dev pandoc)
-    R_PACKAGES+=(knitr)
+if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
+    APT_PACKAGES+=(make libicu-dev pandoc)
+    R_PACKAGES+=(rmarkdown)
 fi
 
 apt_get_update() {

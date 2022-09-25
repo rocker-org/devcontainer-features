@@ -13,10 +13,10 @@
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."
 		},
-		"installKnitr": {
+		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the knitr R package."
+			"description": "Install the rmarkdown R package."
 		}
 	},
 	"customizations": {

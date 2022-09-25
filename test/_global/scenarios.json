@@ -3,7 +3,7 @@
 		"image": "ubuntu:latest",
 		"features": {
 			"r-rig": {
-				"installKnitr": true
+				"installRMarkdown": true
 			},
 			"quarto-cli": {}
 		}
