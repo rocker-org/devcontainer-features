@@ -6,7 +6,7 @@ INSTALL_KNITR=${INSTALLKNITR:-"false"}
 USERNAME=${USERNAME:-"automatic"}
 
 APT_PACKAGES=(curl ca-certificates)
-R_PACKAGES=()
+R_PACKAGES=(jsonlite)
 
 set -e
 
