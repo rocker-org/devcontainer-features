@@ -2,7 +2,7 @@
 	"name": "R (via rig)",
 	"id": "r-rig",
 	"version": "0.2.0",
-	"description": "Installs R, rig, some R packages, and needed dependencies.",
+	"description": "Installs R, rig, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"options": {
 		"version": {
 			"type": "string",
