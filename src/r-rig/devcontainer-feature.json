@@ -23,7 +23,12 @@
 		"vscode": {
 			"extensions": [
 				"REditorSupport.r"
-			]
+			],
+			"settings": {
+				"[r]": {
+					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+				}
+			}
 		}
 	}
 }
