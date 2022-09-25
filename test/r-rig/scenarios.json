@@ -1,11 +1,10 @@
 {
-	"r_quarto": {
-		"image": "ubuntu:latest",
+	"rpackages-source-install": {
+		"image": "debian:stable-slim",
 		"features": {
 			"r-rig": {
 				"installRMarkdown": true
-			},
-			"quarto-cli": {}
+			}
 		}
 	}
 }
