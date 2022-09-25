@@ -1,7 +1,7 @@
 
 # R (via rig) (r-rig)
 
-Installs R, rig, and needed dependencies.
+Installs R, rig, some R packages, and needed dependencies.
 
 ## Example Usage
 
@@ -18,6 +18,7 @@ Installs R, rig, and needed dependencies.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
+| installRMarkdown | Install the rmarkdown R package. | boolean | - |
 
 
 
