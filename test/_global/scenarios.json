@@ -7,5 +7,15 @@
 			},
 			"quarto-cli": {}
 		}
+	},
+	"python_quarto": {
+		"image": "mcr.microsoft.com/devcontainers/python:3",
+		"features": {
+			"ghcr.io/devcontainers/features/python:1": {
+				"version": "none",
+				"installJupyterlab": true
+			},
+			"quarto-cli": {}
+		}
 	}
 }
