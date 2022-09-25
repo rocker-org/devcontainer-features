@@ -13,7 +13,10 @@ Heavily under development.
 
 ### [`quarto-cli`](src/quarto-cli/README.md)
 
-Install [the quarto cli](https://quarto.org/).
+Install [the Quarto CLI](https://quarto.org/).
+
+This feature will not install execution engines such as `Jupyter` and `knitr`,
+so if you wish to use them, please install them separately.
 
 Currently the arm64 platform is not supported.
 
