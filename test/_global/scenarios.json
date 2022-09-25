@@ -2,7 +2,9 @@
 	"r_quarto": {
 		"image": "ubuntu:latest",
 		"features": {
-			"r-rig": {},
+			"r-rig": {
+				"installKnitr": true
+			},
 			"quarto-cli": {}
 		}
 	}
