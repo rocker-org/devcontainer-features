@@ -4,7 +4,8 @@
 		"features": {
 			"r-rig": {
 				"installRMarkdown": true
-			}
+			},
+			"quarto-cli": {}
 		}
 	}
 }
