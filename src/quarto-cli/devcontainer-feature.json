@@ -16,7 +16,7 @@
 		"installTinyTex": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install TinyTeX by using the  `quarto tools install tinytex` command."
+			"description": "Install TinyTeX by using the `quarto tools install tinytex` command."
 		}
 	},
 	"customizations": {
