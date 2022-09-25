@@ -1,6 +1,6 @@
 {
 	"r_quarto": {
-		"image": "ubuntu:latest",
+		"image": "debian:stable-slim",
 		"features": {
 			"r-rig": {
 				"installRMarkdown": true
