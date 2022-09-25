@@ -9,7 +9,7 @@
 		}
 	},
 	"jupyter_quarto": {
-		"image": "jupyter/datascience-notebook:latest",
+		"image": "mcr.microsoft.com/devcontainers/anaconda:3",
 		"features": {
 			"quarto-cli": {}
 		}
