@@ -1,11 +1,5 @@
 name: "CI - Test Features"
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - src/**
-      - test/**
   pull_request:
     branches:
       - main
@@ -19,7 +13,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      features: ${{ steps.filter.outputs.changes }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            quarto-cli: ./**/quarto-cli/**
+            r-rig: ./**/r-rig/**
+
+  test-detects:
+    if: ${{ github.event_name == 'pull_request' }}
+    needs:
+      - detect-changes
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    strategy:
+      matrix:
+        features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
+        baseImage:
+          - debian:stable-slim
+          - ubuntu:focal
+          - ubuntu:jammy
+          - mcr.microsoft.com/devcontainers/base:ubuntu
+          - mcr.microsoft.com/devcontainers/base:debian
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "Install latest devcontainer CLI"
+        run: npm install -g @devcontainers/cli
+
+      - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
+        run: devcontainer features test -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
+
+  test-all:
+    if: ${{ github.event_name != 'pull_request' }}
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
