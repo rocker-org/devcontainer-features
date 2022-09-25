@@ -18,6 +18,7 @@ Installs the Quarto cli. Auto-detects latest version.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of the Quarto CLI, if not latest. | string | latest |
+| installTinyTex | Install TinyTeX by using the  `quarto tools install tinytex` command. | boolean | - |
 
 
 
