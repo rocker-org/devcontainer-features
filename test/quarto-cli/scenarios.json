@@ -5,8 +5,7 @@
 			"quarto-cli": {
 				"installTinyTex": true
 			}
-		},
-		"remoteUser": "vscode"
+		}
 	},
 	"jupyter_quarto": {
 		"image": "mcr.microsoft.com/devcontainers/anaconda:3",
