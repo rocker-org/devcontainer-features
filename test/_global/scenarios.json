@@ -7,5 +7,11 @@
 			},
 			"quarto-cli": {}
 		}
+	},
+	"jupyter_quarto": {
+		"image": "mcr.microsoft.com/devcontainers/anaconda:3",
+		"features": {
+			"quarto-cli": {}
+		}
 	}
 }
