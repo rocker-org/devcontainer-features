@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"description": "Installs the Quarto cli. Auto-detects latest version.",
 	"options": {
 		"version": {
@@ -12,6 +12,11 @@
 			],
 			"default": "latest",
 			"description": "Select version of the Quarto CLI, if not latest."
+		},
+		"installTinyTex": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install TinyTeX by using the  `quarto tools install tinytex` command."
 		}
 	},
 	"customizations": {

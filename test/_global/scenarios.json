@@ -5,7 +5,9 @@
 			"r-rig": {
 				"installRMarkdown": true
 			},
-			"quarto-cli": {}
+			"quarto-cli": {
+				"installTinyTex": true
+			}
 		}
 	},
 	"jupyter_quarto": {
