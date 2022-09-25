@@ -135,7 +135,7 @@ install_rig() {
 }
 
 install_r_packages() {
-    packages=$1
+    packages="$*"
     if [ -n "${packages}" ]; then
         su ${USERNAME} -c "R -q -e \"pak::pak(unlist(strsplit('${packages}',' ')))\""
     fi
@@ -143,7 +143,8 @@ install_r_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-check_packages "${APT_PACKAGES[*]}"
+# shellcheck disable=SC2048 disable=SC2086
+check_packages ${APT_PACKAGES[*]}
 
 # Soft version matching
 # https://github.com/r-lib/rig/issues/101
@@ -169,7 +170,8 @@ rig add "${R_VERSION}" --without-pak
 
 echo "Install R packages..."
 su ${USERNAME} -c "rig system add-pak"
-install_r_packages "${R_PACKAGES[*]}"
+# shellcheck disable=SC2048 disable=SC2086
+install_r_packages ${R_PACKAGES[*]}
 
 # Clean up
 rm -rf /tmp/rig
