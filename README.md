@@ -45,10 +45,10 @@ Do not this feature for R-installed images, as rig does not manage R installed o
 {
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     "features": {
-            "ghcr.io/rocker-org/devcontainer-features/r-rig:0": {
-                "version": "latest",
-                "installRMarkdown": false
-            }
+        "ghcr.io/rocker-org/devcontainer-features/r-rig:0": {
+            "version": "latest",
+            "installRMarkdown": false
+        }
     }
 }
 ```
