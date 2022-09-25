@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
 R_VERSION=${VERSION:-"release"}
+INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 
 USERNAME=${USERNAME:-"automatic"}
+
+APT_PACKAGES=(curl ca-certificates)
+R_PACKAGES=(jsonlite)
 
 set -e
 
@@ -32,6 +36,11 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     fi
 elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
+fi
+
+if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
+    APT_PACKAGES+=(make libicu-dev pandoc)
+    R_PACKAGES+=(rmarkdown)
 fi
 
 apt_get_update() {
@@ -125,9 +134,17 @@ install_rig() {
     curl -sL "${download_url}" | tar xz -C /usr/local
 }
 
+install_r_packages() {
+    packages="$*"
+    if [ -n "${packages}" ]; then
+        su ${USERNAME} -c "R -q -e \"pak::pak(unlist(strsplit('${packages}',' ')))\""
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
-check_packages curl ca-certificates
+# shellcheck disable=SC2048 disable=SC2086
+check_packages ${APT_PACKAGES[*]}
 
 # Soft version matching
 # https://github.com/r-lib/rig/issues/101
@@ -151,7 +168,10 @@ fi
 echo "Downloading R ${R_VERSION}..."
 rig add "${R_VERSION}" --without-pak
 
+echo "Install R packages..."
 su ${USERNAME} -c "rig system add-pak"
+# shellcheck disable=SC2048 disable=SC2086
+install_r_packages ${R_PACKAGES[*]}
 
 # Clean up
 rm -rf /tmp/rig
