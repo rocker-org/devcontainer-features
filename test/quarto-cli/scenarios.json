@@ -1,0 +1,17 @@
+{
+	"tinytex": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"installTinyTex": true
+			}
+		},
+		"remoteUser": "vscode"
+	},
+	"jupyter_quarto": {
+		"image": "mcr.microsoft.com/devcontainers/anaconda:3",
+		"features": {
+			"quarto-cli": {}
+		}
+	}
+}
