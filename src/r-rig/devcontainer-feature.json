@@ -1,8 +1,8 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "0.1.0",
-	"description": "Installs R, rig (R Installation Manager), some R packages, and needed dependencies.",
+	"version": "0.2.0",
+	"description": "Installs R, rig, some R packages, and needed dependencies.",
 	"options": {
 		"version": {
 			"type": "string",
