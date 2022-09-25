@@ -151,7 +151,7 @@ fi
 echo "Downloading R ${R_VERSION}..."
 rig add "${R_VERSION}" --without-pak
 
-su ${USERNAME} rig system add-pak
+su ${USERNAME} -c "rig system add-pak"
 
 # Clean up
 rm -rf /tmp/rig
