@@ -111,6 +111,9 @@ check_packages curl ca-certificates
 
 # Soft version matching
 if [ "${CLI_VERSION}" != "latest" ] && [ "${CLI_VERSION}" != "release" ] && [ "${CLI_VERSION}" != "prerelease" ]; then
+    if [ ! -x "$(command -v git)" ]; then
+        check_packages git
+    fi
     find_version_from_git_tags CLI_VERSION "https://github.com/quarto-dev/quarto-cli"
 fi
 

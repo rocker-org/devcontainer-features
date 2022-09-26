@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Installs the Quarto cli. Auto-detects latest version.",
 	"options": {
 		"version": {
