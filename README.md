@@ -39,7 +39,7 @@ Install a version of [R](https://www.r-project.org/) of your choice using [rig](
 There are also options to install some R packages,
 but be aware that R packages are source-installed and will take longer to build (except for amd64 Ubuntu).
 
-Do not this feature for R-installed images, as rig does not manage R installed outside of rig.
+Do not install this feature on R-installed images, as rig does not manage R installed outside of rig.
 
 ```json
 {
@@ -47,7 +47,8 @@ Do not this feature for R-installed images, as rig does not manage R installed o
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/r-rig:0": {
             "version": "latest",
-            "installRMarkdown": false
+            "installRMarkdown": false,
+            "pandocVersion": "auto"
         }
     }
 }
