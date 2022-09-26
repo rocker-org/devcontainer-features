@@ -2,6 +2,7 @@
 
 R_VERSION=${VERSION:-"release"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
+PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
@@ -38,9 +39,22 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
     USERNAME=root
 fi
 
+# Check options for installing packages
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
-    APT_PACKAGES+=(make libicu-dev pandoc)
+    APT_PACKAGES+=(make libicu-dev)
     R_PACKAGES+=(rmarkdown)
+    if [ "${PANDOC_VERSION}" = "auto" ] && [ -x "$(command -v pandoc)" ]; then
+        PANDOC_VERSION="latest"
+    fi
+fi
+
+if [ "${PANDOC_VERSION}" = "os-provided" ]; then
+    APT_PACKAGES+=(pandoc)
+    PANDOC_VERSION="none"
+fi
+
+if [ "${PANDOC_VERSION}" = "auto" ]; then
+    PANDOC_VERSION="none"
 fi
 
 apt_get_update() {
@@ -68,7 +82,7 @@ find_version_from_git_tags() {
         local escaped_separator=${separator//./\\.}
         local last_part
         if [ "${last_part_optional}" = "true" ]; then
-            last_part="(${escaped_separator}[0-9]+)?"
+            last_part="(${escaped_separator}[0-9]+)*?"
         else
             last_part="${escaped_separator}[0-9]+"
         fi
@@ -134,6 +148,22 @@ install_rig() {
     curl -sL "${download_url}" | tar xz -C /usr/local
 }
 
+install_pandoc() {
+    local version=$1
+    local deb_file="pandoc.deb"
+    local architecture
+    local download_url
+    architecture="$(dpkg --print-architecture)"
+    download_url="https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-${architecture}.deb"
+
+    mkdir -p /tmp/pandoc
+    pushd /tmp/pandoc
+    curl -sLo "${deb_file}" "${download_url}"
+    dpkg -i "${deb_file}"
+    popd
+    rm -rf /tmp/pandoc
+}
+
 install_r_packages() {
     packages="$*"
     if [ -n "${packages}" ]; then
@@ -145,6 +175,18 @@ export DEBIAN_FRONTEND=noninteractive
 
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
+
+# Install pandoc if needed
+if [ "${PANDOC_VERSION}" = "latest" ]; then
+    PANDOC_VERSION=$(git ls-remote --tags https://github.com/jgm/pandoc | grep -oP "\\K[0-9]+\.[0-9]+(\.[0-9]+)*" | sort -rV | head -n 1)
+elif [ "${PANDOC_VERSION}" != "none" ]; then
+    find_version_from_git_tags PANDOC_VERSION "https://github.com/jgm/pandoc" "tags/" "." "true"
+fi
+
+if [ "${PANDOC_VERSION}" != "none" ]; then
+    echo "Downloading pandoc ${PANDOC_VERSION}..."
+    install_pandoc "${PANDOC_VERSION}"
+fi
 
 # Soft version matching
 # https://github.com/r-lib/rig/issues/101

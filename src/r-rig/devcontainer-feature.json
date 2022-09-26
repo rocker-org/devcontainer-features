@@ -17,6 +17,17 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install the rmarkdown R package."
+		},
+		"pandocVersion": {
+			"type": "string",
+			"proposals": [
+				"auto",
+				"none",
+				"os-provided",
+				"latest"
+			],
+			"default": "auto",
+			"description": "Select version of Pandoc. By default, the latest version is installed if needed."
 		}
 	},
 	"customizations": {
