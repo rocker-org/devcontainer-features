@@ -43,7 +43,7 @@ fi
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
     APT_PACKAGES+=(make libicu-dev)
     R_PACKAGES+=(rmarkdown)
-    if [ "${PANDOC_VERSION}" = "auto" ] && [ -x "$(command -v pandoc)" ]; then
+    if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
         PANDOC_VERSION="latest"
     fi
 fi
