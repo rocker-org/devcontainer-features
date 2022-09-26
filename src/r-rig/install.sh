@@ -6,7 +6,7 @@ PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
-APT_PACKAGES=(curl ca-certificates git)
+APT_PACKAGES=(curl ca-certificates)
 R_PACKAGES=(jsonlite)
 
 set -e
@@ -172,6 +172,10 @@ install_r_packages() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
+
+if [ ! -x "$(command -v git)" ]; then
+    APT_PACKAGES+=(git)
+fi
 
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
