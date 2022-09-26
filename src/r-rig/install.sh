@@ -6,7 +6,7 @@ PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
-APT_PACKAGES=(curl ca-certificates)
+APT_PACKAGES=(curl ca-certificates git)
 R_PACKAGES=(jsonlite)
 
 set -e
