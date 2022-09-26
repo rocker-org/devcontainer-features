@@ -6,5 +6,23 @@
 				"installRMarkdown": true
 			}
 		}
+	},
+	"latest-pandoc": {
+		"image": "ubuntu:latest",
+		"features": {
+			"r-rig": {
+				"installRMarkdown": true,
+				"pandocVersion": "latest"
+			}
+		}
+	},
+	"os-pandoc": {
+		"image": "ubuntu:latest",
+		"features": {
+			"r-rig": {
+				"installRMarkdown": true,
+				"pandocVersion": "os-provided"
+			}
+		}
 	}
 }
