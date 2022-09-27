@@ -84,17 +84,18 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
-install() {
+install_cli() {
+    local version=$1
     local deb_file="quarto.deb"
     local architecture
     local download_url
     architecture="$(dpkg --print-architecture)"
-    if [ "${CLI_VERSION}" = "latest" ] || [ "${CLI_VERSION}" = "release" ] ; then
+    if [ "${version}" = "latest" ] || [ "${version}" = "release" ] ; then
         download_url=$(curl -sL https://quarto.org/docs/download/_download.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
-    elif [ "${CLI_VERSION}" = "prerelease" ]; then
+    elif [ "${version}" = "prerelease" ]; then
         download_url=$(curl -sL https://quarto.org/docs/download/_prerelease.json | grep -oP "(?<=\"download_url\":\s\")https.*${architecture}\.deb")
     else
-        download_url="https://github.com/quarto-dev/quarto-cli/releases/download/v${CLI_VERSION}/quarto-${CLI_VERSION}-linux-${architecture}.deb"
+        download_url="https://github.com/quarto-dev/quarto-cli/releases/download/v${version}/quarto-${version}-linux-${architecture}.deb"
     fi
 
     mkdir -p /tmp/quarto
@@ -120,7 +121,7 @@ fi
 # Install the Quarto CLI
 echo "Downloading Quarto CLI..."
 
-install
+install_cli "${CLI_VERSION}"
 
 if [ "${INSTALL_TINYTEX}" = "true" ]; then
     echo "Installing TinyTeX..."
