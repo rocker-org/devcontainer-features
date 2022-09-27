@@ -27,7 +27,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
     POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
     for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
-        if id -u "${CURRENT_USER}" > /dev/null 2>&1; then
+        if id -u "${CURRENT_USER}" >/dev/null 2>&1; then
             USERNAME=${CURRENT_USER}
             break
         fi
@@ -35,7 +35,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     if [ "${USERNAME}" = "" ]; then
         USERNAME=root
     fi
-elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} > /dev/null 2>&1; then
+elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -167,7 +167,7 @@ install_pandoc() {
 install_r_packages() {
     packages="$*"
     if [ -n "${packages}" ]; then
-        su ${USERNAME} -c "R -q -e \"pak::pak(unlist(strsplit('${packages}',' ')))\""
+        su ${USERNAME} -c "R -q -e \"pak::pak(unlist(strsplit('${packages}', ' ')))\""
     fi
 }
 
