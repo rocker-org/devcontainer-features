@@ -24,5 +24,13 @@
 				"pandocVersion": "os-provided"
 			}
 		}
+	},
+	"version-latest": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-rig": {
+				"version": "latest"
+			}
+		}
 	}
 }

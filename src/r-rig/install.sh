@@ -39,6 +39,11 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
     USERNAME=root
 fi
 
+# Allow latest as an alias of release for compatibility
+if [ "${R_VERSION}" = "latest" ]; then
+    R_VERSION="release"
+fi
+
 # Check options for installing packages
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
     APT_PACKAGES+=(make libicu-dev)
