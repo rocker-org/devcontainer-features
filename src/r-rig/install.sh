@@ -212,7 +212,7 @@ if [ "${R_VERSION}" = "none" ]; then
 fi
 
 echo "Downloading R ${R_VERSION}..."
-rig add "${R_VERSION}" --without-pak
+rig add "${R_VERSION}" --without-pak --without-sysreqs
 
 echo "Install R packages..."
 su ${USERNAME} -c "rig system add-pak"
