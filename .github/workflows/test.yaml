@@ -41,7 +41,7 @@ jobs:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -59,7 +59,7 @@ jobs:
       matrix:
         features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -83,7 +83,7 @@ jobs:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -101,7 +101,7 @@ jobs:
           - quarto
           - r-rig
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -113,7 +113,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
