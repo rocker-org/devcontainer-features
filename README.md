@@ -15,23 +15,6 @@ Heavily under development.
 
 Install [the Quarto CLI](https://quarto.org/).
 
-This feature will not install execution engines such as `Jupyter` and `knitr`,
-so if you wish to use them, please install them separately.
-
-Currently the arm64 platform is not supported.
-
-```json
-{
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-    "features": {
-        "ghcr.io/rocker-org/devcontainer-features/quarto-cli:0": {
-            "version": "latest",
-            "installTinyTex": false
-        }
-    }
-}
-```
-
 ### [`r-rig`](src/r-rig/README.md)
 
 Install a version of [R](https://www.r-project.org/) of your choice using [rig](https://github.com/r-lib/rig).
