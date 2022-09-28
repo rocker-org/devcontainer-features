@@ -3,6 +3,7 @@
 	"id": "quarto-cli",
 	"version": "0.3.2",
 	"description": "Installs the Quarto CLI. Auto-detects latest version.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/quarto-cli",
 	"options": {
 		"version": {
 			"type": "string",
