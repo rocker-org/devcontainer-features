@@ -3,6 +3,7 @@
 		"image": "debian:stable-slim",
 		"features": {
 			"r-rig": {
+				"vscodeRSupport": "full",
 				"installRMarkdown": true
 			}
 		}
