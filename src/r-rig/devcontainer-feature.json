@@ -14,6 +14,17 @@
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."
 		},
+		"vscodeRSupport": {
+			"type": "string",
+			"enum": [
+				"minimal",
+				"languageserver",
+				"full",
+				"none"
+			],
+			"default": "minimal",
+			"description": "Install R packages to make vscode-R work. languageserver means the `languageserver` package, full means plus the `httpgd` package."
+		},
 		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
