@@ -17,13 +17,13 @@
 		"vscodeRSupport": {
 			"type": "string",
 			"enum": [
+				"none",
 				"minimal",
 				"languageserver",
-				"full",
-				"none"
+				"full"
 			],
-			"default": "minimal",
-			"description": "Install R packages to make vscode-R work. languageserver means the `languageserver` package, full means plus the `httpgd` package."
+			"default": "full",
+			"description": "Install R packages to make vscode-R work. languageserver means the `languageserver` package, full means `languageserver` plus the `httpgd` package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",
