@@ -219,16 +219,24 @@ if [ "${R_VERSION}" != "release" ] && [ "${R_VERSION}" != "devel" ] && [ "${R_VE
 fi
 
 # Install rig
-echo "Downloading rig..."
-install_rig
+if [ "${R_VERSION}" = "none" ] && [ -x "$(command -v R)" ]; then
+    echo "R is already installed. Skipping rig installation"
+else
+    echo "Downloading rig..."
+    install_rig
+fi
 
-if [ "${R_VERSION}" = "none" ]; then
+if [ "${R_VERSION}" = "none" ] && [ ! -x "$(command -v R)" ]; then
     echo "Skipping R and R packages installation"
     exit 0
 fi
 
-echo "Downloading R ${R_VERSION}..."
-rig add "${R_VERSION}" --without-pak --without-sysreqs
+if [ "${R_VERSION}" = "none" ]; then
+    echo "Skipping R installation"
+else
+    echo "Downloading R ${R_VERSION}..."
+    rig add "${R_VERSION}" --without-pak --without-sysreqs
+fi
 
 echo "Install R packages..."
 # Install the pak package
