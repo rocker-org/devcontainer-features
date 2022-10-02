@@ -33,5 +33,14 @@
 				"version": "latest"
 			}
 		}
+	},
+	"install-on-rocker-r-ver": {
+		"image": "rocker/r-ver:4.0",
+		"features": {
+			"r-rig": {
+				"version": "none",
+				"installRMarkdown": true
+			}
+		}
 	}
 }
