@@ -8,7 +8,8 @@
 
 This feature uses [rig](https://github.com/r-lib/rig) to install [R](https://www.r-project.org/).
 
-**Do not install this feature on R-installed images**, as rig does not manage R installed outside of rig.
+Note that rig does not manage R installed outside of rig.
+If R is already installed and `"version": "none"` is set, rig will not be installed.
 
 ## R package installation
 
