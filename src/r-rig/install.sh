@@ -48,7 +48,7 @@ fi
 # Check options for installing packages
 if [ "${VSCODE_R_SUPPORT}" = "minimal" ]; then
     R_PACKAGES+=(jsonlite rlang)
-elif [ "${VSCODE_R_SUPPORT}" = "languageserver" ]; then
+elif [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ]; then
     R_PACKAGES+=(languageserver)
     APT_PACKAGES+=(libxml2-dev libicu-dev)
 elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then

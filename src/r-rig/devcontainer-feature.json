@@ -19,11 +19,11 @@
 			"enum": [
 				"none",
 				"minimal",
-				"languageserver",
+				"lsp",
 				"full"
 			],
 			"default": "minimal",
-			"description": "Install R packages to make vscode-R work. languageserver means the `languageserver` package, full means `languageserver` plus the `httpgd` package."
+			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",
