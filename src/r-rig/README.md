@@ -18,6 +18,7 @@ Installs R, rig, some R packages, and needed dependencies. Note: May require sou
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
+| vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
 | installRMarkdown | Install the rmarkdown R package. | boolean | - |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
@@ -25,7 +26,7 @@ Installs R, rig, some R packages, and needed dependencies. Note: May require sou
 
 ## Supported platforms
 
-`linux/amd64` and `linux/arm64` platforms `debian` and `ubuntu`(LTS).
+`linux/amd64` and `linux/arm64` platforms `debian` and `ubuntu` (LTS).
 
 ## Install R
 
@@ -34,6 +35,14 @@ This feature uses [rig](https://github.com/r-lib/rig) to install [R](https://www
 **Do not install this feature on R-installed images**, as rig does not manage R installed outside of rig.
 
 ## R package installation
+
+### Binary installation from RSPM
+
+On `ubuntu` on `linux/amd64` platforms, When you try to install the R package,
+it installs binaries from RStudio Public Package Manager.
+For other distributions or platforms, the R packages are installed from source, which takes longer to build.
+
+For more information, please check [the Rocker Project website](https://rocker-project.org/use/extending.html).
 
 ### Install R packages via `pak`
 
