@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 R_VERSION=${VERSION:-"release"}
+VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
 APT_PACKAGES=(curl ca-certificates)
-R_PACKAGES=(jsonlite)
+R_PACKAGES=()
 
 set -e
 
@@ -45,6 +46,16 @@ if [ "${R_VERSION}" = "latest" ]; then
 fi
 
 # Check options for installing packages
+if [ "${VSCODE_R_SUPPORT}" = "minimal" ]; then
+    R_PACKAGES+=(jsonlite rlang)
+elif [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ]; then
+    R_PACKAGES+=(languageserver)
+    APT_PACKAGES+=(libxml2-dev libicu-dev)
+elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then
+    R_PACKAGES+=(languageserver httpgd)
+    APT_PACKAGES+=(libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev)
+fi
+
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
     APT_PACKAGES+=(make libicu-dev)
     R_PACKAGES+=(rmarkdown)

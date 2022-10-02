@@ -1,7 +1,7 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"description": "Installs R, rig, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
@@ -13,6 +13,17 @@
 			],
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."
+		},
+		"vscodeRSupport": {
+			"type": "string",
+			"enum": [
+				"none",
+				"minimal",
+				"lsp",
+				"full"
+			],
+			"default": "minimal",
+			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",
