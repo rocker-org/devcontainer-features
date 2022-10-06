@@ -38,8 +38,10 @@ elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
 fi
 
 apt_get_update() {
-    echo "Running apt-get update..."
-    apt-get update -y
+    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update -y
+    fi
 }
 
 # Checks if packages are installed and installs them if not
@@ -108,6 +110,9 @@ install_cli() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+# Clean up
+rm -rf /var/lib/apt/lists/*
+
 check_packages curl ca-certificates
 
 # Soft version matching
@@ -125,7 +130,11 @@ install_cli "${CLI_VERSION}"
 
 if [ "${INSTALL_TINYTEX}" = "true" ]; then
     echo "Installing TinyTeX..."
+    check_packages libfontconfig
     su ${USERNAME} -c 'quarto tools install tinytex'
 fi
+
+# Clean up
+rm -rf /var/lib/apt/lists/*
 
 echo "Done!"
