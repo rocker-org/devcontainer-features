@@ -1,7 +1,6 @@
 {
 	"tinytex": {
-		"image": "mcr.microsoft.com/devcontainers/base:debian",
-		"remoteUser": "vscode",
+		"image": "debian:stable-slim",
 		"features": {
 			"quarto-cli": {
 				"installTinyTex": true
