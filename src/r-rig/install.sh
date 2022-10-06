@@ -74,8 +74,10 @@ if [ "${PANDOC_VERSION}" = "auto" ]; then
 fi
 
 apt_get_update() {
-    echo "Running apt-get update..."
-    apt-get update -y
+    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update -y
+    fi
 }
 
 # Checks if packages are installed and installs them if not
@@ -189,6 +191,9 @@ install_r_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
+# Clean up
+rm -rf /var/lib/apt/lists/*
+
 if [ ! -x "$(command -v git)" ]; then
     APT_PACKAGES+=(git)
 fi
@@ -246,6 +251,8 @@ su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://
 install_r_packages ${R_PACKAGES[*]}
 
 # Clean up
+rm -rf /var/lib/apt/lists/*
 rm -rf /tmp/rig
+rm -rf /tmp/Rtmp*
 
 echo "Done!"
