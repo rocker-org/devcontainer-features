@@ -35,7 +35,7 @@
 		}
 	},
 	"install-on-rocker-r-ver": {
-		"image": "rocker/r-ver:4.0",
+		"image": "rocker/r-ver:4.0.5",
 		"features": {
 			"r-rig": {
 				"version": "none",
