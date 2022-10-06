@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "version" quarto check all
+check "tools" quarto tools list
 
 # Report result
 reportResults
