@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 CLI_VERSION=${VERSION:-"latest"}
-INSTALL_TINYTEX=${INSTALL_TINYTEXT-"false"}
+INSTALL_TINYTEX=${INSTALLTINYTEX-"false"}
 
 USERNAME=${USERNAME:-"automatic"}
 
