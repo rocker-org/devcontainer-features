@@ -2,7 +2,7 @@
 	"name": "R (via rig)",
 	"id": "r-rig",
 	"version": "0.5.0",
-	"description": "Installs R, rig, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
+	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
 		"version": {
