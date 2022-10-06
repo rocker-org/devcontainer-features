@@ -7,7 +7,9 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 check "R" R -q -e "sessionInfo()"
-check "pandoc" R -q -e 'rmarkdown::pandoc_version()'
+check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
+check "languageserver" R -q -e 'names(installed.packages()[, 3])' | grep languageserver
+check "httpgd" R -q -e 'names(installed.packages()[, 3])' | grep httpgd
 
 # Report result
 reportResults
