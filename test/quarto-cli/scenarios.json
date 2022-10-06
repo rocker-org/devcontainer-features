@@ -3,6 +3,7 @@
 		"image": "debian:stable-slim",
 		"features": {
 			"quarto-cli": {
+				"version": "1.2",
 				"installTinyTex": true
 			}
 		}
