@@ -5,8 +5,19 @@ set -e
 # Optional: Import test library bundled with the devcontainer CLI
 source dev-container-features-test-lib
 
+cat <<"EOF" >/tmp/test.qmd
+---
+title: Test
+engine: jupyter
+---
+
+```{python}
+print("Hello Quarto!")
+```
+EOF
+
 # Feature-specific tests
-check "check for quarto" quarto check all
+check "check rendering" quarto render /tmp/test.qmd
 
 # Report result
 reportResults
