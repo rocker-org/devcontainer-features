@@ -125,7 +125,7 @@ install_cli "${CLI_VERSION}"
 
 if [ "${INSTALL_TINYTEX}" = "true" ]; then
     echo "Installing TinyTeX..."
-    su ${USERNAME} -c 'quarto install tool tinytex'
+    su ${USERNAME} -c 'quarto tools install tinytex'
 fi
 
 echo "Done!"
