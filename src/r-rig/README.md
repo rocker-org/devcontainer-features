@@ -1,7 +1,7 @@
 
 # R (via rig) (r-rig)
 
-Installs R, rig, some R packages, and needed dependencies. Note: May require source code compilation for R packages.
+Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.
 
 ## Example Usage
 
@@ -19,7 +19,7 @@ Installs R, rig, some R packages, and needed dependencies. Note: May require sou
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
-| installRMarkdown | Install the rmarkdown R package. | boolean | - |
+| installRMarkdown | Install the `rmarkdown` R package. | boolean | - |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
 <!-- markdownlint-disable MD041 -->
@@ -32,7 +32,8 @@ Installs R, rig, some R packages, and needed dependencies. Note: May require sou
 
 This feature uses [rig](https://github.com/r-lib/rig) to install [R](https://www.r-project.org/).
 
-**Do not install this feature on R-installed images**, as rig does not manage R installed outside of rig.
+Note that rig does not manage R installed outside of rig.
+If R is already installed and `"version": "none"` is set, rig will not be installed.
 
 ## R package installation
 
