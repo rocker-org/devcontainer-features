@@ -2,9 +2,10 @@
 
 R_VERSION=${VERSION:-"release"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
+INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
-PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
+PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
@@ -56,6 +57,29 @@ elif [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageser
 elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then
     R_PACKAGES+=(languageserver httpgd)
     APT_PACKAGES+=(libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev)
+fi
+
+if [ "${INSTALL_DEVTOOLS}" = "true" ]; then
+    APT_PACKAGES+=( \
+        make \
+        libgit2-dev \
+        libcurl4-openssl-dev \
+        libxml2-dev \
+        libssl-dev \
+        libfontconfig1-dev \
+        libharfbuzz-dev \
+        libfribidi-dev \
+        libfreetype6-dev \
+        libpng-dev \
+        libtiff-dev \
+        libjpeg-dev \
+        libicu-dev \
+        zlib1g-dev \
+    )
+    R_PACKAGES+=(devtools)
+    if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
+        PANDOC_VERSION="latest"
+    fi
 fi
 
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then

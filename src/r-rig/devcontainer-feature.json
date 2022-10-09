@@ -25,6 +25,11 @@
 			"default": "minimal",
 			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
 		},
+		"installDevTools": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `devtools` R package."
+		},
 		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
