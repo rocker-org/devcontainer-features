@@ -7,9 +7,9 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 
 ```json
 "features": {
-        "ghcr.io/rocker-org/devcontainer-features/r-rig:0": {
-            "version": "latest"
-        }
+    "ghcr.io/rocker-org/devcontainer-features/r-rig:0": {
+        "version": "latest"
+    }
 }
 ```
 
@@ -19,7 +19,10 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
-| installRMarkdown | Install the `rmarkdown` R package. | boolean | - |
+| installDevTools | Install the `devtools` R package. | boolean | - |
+| installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | - |
+| installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | - |
+| installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | - |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
 <!-- markdownlint-disable MD041 -->
@@ -81,6 +84,11 @@ $ R -q -e 'pak::pak("curl")'
 ℹ Executing `sudo sh -c apt-get install -y libssl-dev`
 ✔ 1 pkg: kept 1 [11.8s]
 ```
+
+## Python package installation
+
+This feature has some options to install Python packages such as `jupyterlab`.
+When installing Python packages, if `python3 -m pip` is not available, it will install `python3-pip` via apt.
 
 
 ---
