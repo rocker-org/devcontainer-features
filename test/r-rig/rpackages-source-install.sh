@@ -12,7 +12,7 @@ check "httpgd" R -q -e 'names(installed.packages()[, 3])' | grep httpgd
 check "devtools" R -q -e 'names(installed.packages()[, 3])' | grep devtools
 check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
 check "jupyter" /root/.local/bin/jupyter kernelspec list | grep jupyter/kernels/ir
-check "radian" radian --version
+check "radian" /root/.local/bin/radian --version
 
 # Report result
 reportResults
