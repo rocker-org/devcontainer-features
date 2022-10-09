@@ -28,7 +28,7 @@
 		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `rmarkdown` R package."
+			"description": "Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation."
 		},
 		"pandocVersion": {
 			"type": "string",
