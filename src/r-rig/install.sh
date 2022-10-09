@@ -5,6 +5,7 @@ VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
+INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
 PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
@@ -88,6 +89,10 @@ if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
     if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
         PANDOC_VERSION="latest"
     fi
+fi
+
+if [ "${INSTALL_RADIAN}" = "true" ]; then
+    PIP_PACKAGES+=(radian)
 fi
 
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then

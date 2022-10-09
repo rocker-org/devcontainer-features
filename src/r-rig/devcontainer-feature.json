@@ -40,6 +40,11 @@
 			"default": false,
 			"description": "Install and setup JupyterLab, a web-based interactive development environment for notebooks."
 		},
+		"installRadian": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install radian, an R console with multiline editing and rich syntax highlight."
+		},
 		"pandocVersion": {
 			"type": "string",
 			"proposals": [
