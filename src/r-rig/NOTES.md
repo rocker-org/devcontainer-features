@@ -57,3 +57,8 @@ $ R -q -e 'pak::pak("curl")'
 ℹ Executing `sudo sh -c apt-get install -y libssl-dev`
 ✔ 1 pkg: kept 1 [11.8s]
 ```
+
+## Python package installation
+
+This feature has some options to install Python packages such as `jupyterlab`.
+When installing Python packages, if `python3 -m pip` is not available, it will install `python3-pip` via apt.
