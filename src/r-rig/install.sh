@@ -310,7 +310,7 @@ install_r_packages ${R_PACKAGES[*]}
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
     echo "Register IRkernel..."
     # shellcheck disable=SC2016
-    su ${USERNAME} -c 'export PATH="/home/'${USERNAME}'/.local/bin:${PATH}"; R -q -e "IRkernel::installspec()"'
+    su ${USERNAME} -c 'export PATH="/home/'${USERNAME}'/.local/bin:/root/.local/bin:${PATH}"; R -q -e "IRkernel::installspec()"'
 fi
 
 # Clean up
