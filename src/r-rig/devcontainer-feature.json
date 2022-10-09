@@ -38,12 +38,12 @@
 		"installJupyterlab": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install and setup JupyterLab, a web-based interactive development environment for notebooks."
+			"description": "Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks."
 		},
 		"installRadian": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install radian, an R console with multiline editing and rich syntax highlight."
+			"description": "Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight."
 		},
 		"pandocVersion": {
 			"type": "string",
