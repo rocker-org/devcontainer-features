@@ -233,6 +233,9 @@ fi
 
 if [ "${R_VERSION}" = "none" ] && [ ! -x "$(command -v R)" ]; then
     echo "Skipping R and R packages installation"
+    # Clean up
+    rm -rf /tmp/rig
+    rm -rf /var/lib/apt/lists/*
     exit 0
 fi
 
