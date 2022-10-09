@@ -207,7 +207,7 @@ install_pip_packages() {
     packages="$*"
     if [ -n "${packages}" ]; then
         check_pip
-        su ${USERNAME} -c "python3 -m pip install --user --upgrade --no-cache-dir ${packages}"
+        su ${USERNAME} -c "python3 -m pip install --user --upgrade --no-cache-dir --no-warn-script-location ${packages}"
     fi
 }
 
@@ -280,7 +280,8 @@ install_r_packages ${R_PACKAGES[*]}
 # Set up IRkernel
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
     echo "Register IRkernel..."
-    su ${USERNAME} -c 'R -q -e "IRkernel::installspec()"'
+    # shellcheck disable=SC2016
+    su ${USERNAME} -c 'export PATH="/home/'${USERNAME}'/.local/bin:${PATH}"; R -q -e "IRkernel::installspec()"'
 fi
 
 # Clean up
