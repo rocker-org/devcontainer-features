@@ -4,7 +4,10 @@
 		"features": {
 			"r-rig": {
 				"vscodeRSupport": "full",
-				"installRMarkdown": true
+				"installDevTools": true,
+				"installRMarkdown": true,
+				"installJupyterlab": true,
+				"installRadian": true
 			}
 		}
 	},
@@ -39,7 +42,8 @@
 		"features": {
 			"r-rig": {
 				"version": "none",
-				"installRMarkdown": true
+				"installRMarkdown": true,
+				"installJupyterlab": true
 			}
 		}
 	}

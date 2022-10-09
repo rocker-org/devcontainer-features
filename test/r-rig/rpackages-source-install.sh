@@ -7,9 +7,11 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 check "R" R -q -e "sessionInfo()"
-check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
 check "languageserver" R -q -e 'names(installed.packages()[, 3])' | grep languageserver
 check "httpgd" R -q -e 'names(installed.packages()[, 3])' | grep httpgd
+check "devtools" R -q -e 'names(installed.packages()[, 3])' | grep devtools
+check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
+check "jupyter" sh -c "jupyter kernelspec list" | grep jupyter/kernels/ir
 
 # Report result
 reportResults
