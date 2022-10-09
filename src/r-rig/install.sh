@@ -2,12 +2,16 @@
 
 R_VERSION=${VERSION:-"release"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
+INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
+INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
+INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
 PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
 APT_PACKAGES=(curl ca-certificates)
+PIP_PACKAGES=()
 R_PACKAGES=()
 
 set -e
@@ -56,12 +60,45 @@ elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then
     APT_PACKAGES+=(libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev)
 fi
 
+if [ "${INSTALL_DEVTOOLS}" = "true" ]; then
+    APT_PACKAGES+=( \
+        make \
+        libgit2-dev \
+        libcurl4-openssl-dev \
+        libxml2-dev \
+        libssl-dev \
+        libfontconfig1-dev \
+        libharfbuzz-dev \
+        libfribidi-dev \
+        libfreetype6-dev \
+        libpng-dev \
+        libtiff-dev \
+        libjpeg-dev \
+        libicu-dev \
+        zlib1g-dev \
+    )
+    R_PACKAGES+=(devtools)
+    if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
+        PANDOC_VERSION="latest"
+    fi
+fi
+
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
     APT_PACKAGES+=(make libicu-dev)
     R_PACKAGES+=(rmarkdown)
     if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
         PANDOC_VERSION="latest"
     fi
+fi
+
+if [ "${INSTALL_RADIAN}" = "true" ]; then
+    PIP_PACKAGES+=(radian)
+fi
+
+if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
+    APT_PACKAGES+=(libzmq3-dev)
+    PIP_PACKAGES+=(jupyterlab)
+    R_PACKAGES+=(IRkernel)
 fi
 
 if [ "${PANDOC_VERSION}" = "os-provided" ]; then
@@ -189,6 +226,20 @@ install_r_packages() {
     fi
 }
 
+check_pip() {
+    if ! python3 -m pip --help >/dev/null 2>&1; then
+        check_packages python3-pip
+    fi
+}
+
+install_pip_packages() {
+    packages="$*"
+    if [ -n "${packages}" ]; then
+        check_pip
+        su ${USERNAME} -c "python3 -m pip install --user --upgrade --no-cache-dir --no-warn-script-location ${packages}"
+    fi
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Clean up
@@ -200,6 +251,8 @@ fi
 
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
+# shellcheck disable=SC2048 disable=SC2086
+install_pip_packages ${PIP_PACKAGES[*]}
 
 # Install pandoc if needed
 if [ "${PANDOC_VERSION}" = "latest" ]; then
@@ -249,9 +302,16 @@ fi
 echo "Install R packages..."
 # Install the pak package
 # shellcheck disable=SC2016
-su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/stable/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
+su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
+
+# Set up IRkernel
+if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
+    echo "Register IRkernel..."
+    # shellcheck disable=SC2016
+    su ${USERNAME} -c 'export PATH="/home/'${USERNAME}'/.local/bin:/root/.local/bin:${PATH}"; R -q -e "IRkernel::installspec()"'
+fi
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
