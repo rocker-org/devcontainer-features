@@ -273,7 +273,7 @@ fi
 echo "Install R packages..."
 # Install the pak package
 # shellcheck disable=SC2016
-su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/stable/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
+su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
 
