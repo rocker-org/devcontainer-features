@@ -30,6 +30,11 @@
 			"default": false,
 			"description": "Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation."
 		},
+		"installJupyterlab": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install and setup JupyterLab, a web-based interactive development environment for notebooks."
+		},
 		"pandocVersion": {
 			"type": "string",
 			"proposals": [
