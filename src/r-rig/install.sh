@@ -250,14 +250,14 @@ if [ ! -x "$(command -v git)" ]; then
     APT_PACKAGES+=(git)
 fi
 
-if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
-    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | tail -n 1)")
-fi
-
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
 # shellcheck disable=SC2048 disable=SC2086
 install_pip_packages ${PIP_PACKAGES[*]}
+
+if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
+    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | tail -n 1)")
+fi
 
 # Install pandoc if needed
 if [ "${PANDOC_VERSION}" = "latest" ]; then
