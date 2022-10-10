@@ -23,6 +23,7 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 | installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | - |
 | installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | - |
 | installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | - |
+| installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | - |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
 <!-- markdownlint-disable MD041 -->
