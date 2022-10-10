@@ -1,7 +1,7 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "0.6.0",
+	"version": "0.7.0",
 	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
@@ -44,6 +44,11 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight."
+		},
+		"installVscDebugger": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
 		},
 		"pandocVersion": {
 			"type": "string",
