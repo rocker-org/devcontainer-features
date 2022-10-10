@@ -6,6 +6,7 @@ INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
 INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
+INSTALL_VSCDEBUGGER=${INSTALLVSCDEBUGGER:-"false"}
 PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
@@ -247,6 +248,10 @@ rm -rf /var/lib/apt/lists/*
 
 if [ ! -x "$(command -v git)" ]; then
     APT_PACKAGES+=(git)
+fi
+
+if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
+    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | tail -n 1)")
 fi
 
 # shellcheck disable=SC2048 disable=SC2086

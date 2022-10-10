@@ -6,6 +6,7 @@
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installRMarkdown": true,
+				"installVscDebugger": true,
 				"installJupyterlab": true,
 				"installRadian": true
 			}

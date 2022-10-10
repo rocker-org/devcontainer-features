@@ -10,6 +10,7 @@ check "R" R -q -e "sessionInfo()"
 check "languageserver" R -q -e 'names(installed.packages()[, 3])' | grep languageserver
 check "httpgd" R -q -e 'names(installed.packages()[, 3])' | grep httpgd
 check "devtools" R -q -e 'names(installed.packages()[, 3])' | grep devtools
+check "vscDebugger" R -q -e 'names(installed.packages()[, 3])' | grep vscDebugger
 check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
 check "jupyter" /root/.local/bin/jupyter kernelspec list | grep jupyter/kernels/ir
 check "radian" /root/.local/bin/radian --version
