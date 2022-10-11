@@ -232,7 +232,7 @@ install_r_packages() {
 
 check_pip() {
     if ! python3 -m pip --help >/dev/null 2>&1; then
-        check_packages python3-pip
+        check_packages python3-pip python3-dev
     fi
 }
 
