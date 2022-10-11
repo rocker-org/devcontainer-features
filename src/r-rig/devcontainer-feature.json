@@ -62,6 +62,10 @@
 			"description": "Select version of Pandoc. By default, the latest version is installed if needed."
 		}
 	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/features/python"
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [

@@ -20,6 +20,9 @@
 			"description": "Install TinyTeX by using the `quarto tools install tinytex` command. Works only with version 1.2 or later."
 		}
 	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
