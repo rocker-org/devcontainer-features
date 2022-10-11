@@ -7,6 +7,9 @@ USERNAME=${USERNAME:-"automatic"}
 
 set -e
 
+# Clean up
+rm -rf /var/lib/apt/lists/*
+
 if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
@@ -109,9 +112,6 @@ install_cli() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
-
-# Clean up
-rm -rf /var/lib/apt/lists/*
 
 check_packages curl ca-certificates
 

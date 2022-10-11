@@ -1,7 +1,7 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "0.7.0",
+	"version": "0.7.1",
 	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
@@ -62,6 +62,10 @@
 			"description": "Select version of Pandoc. By default, the latest version is installed if needed."
 		}
 	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/features/python"
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [

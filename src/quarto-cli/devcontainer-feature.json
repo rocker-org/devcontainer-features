@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "0.3.3",
+	"version": "0.3.4",
 	"description": "Installs the Quarto CLI. Auto-detects latest version.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/quarto-cli",
 	"options": {
@@ -20,6 +20,9 @@
 			"description": "Install TinyTeX by using the `quarto tools install tinytex` command. Works only with version 1.2 or later."
 		}
 	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	],
 	"customizations": {
 		"vscode": {
 			"extensions": [
