@@ -256,7 +256,7 @@ check_packages ${APT_PACKAGES[*]}
 install_pip_packages ${PIP_PACKAGES[*]}
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
-    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | tail -n 1)")
+    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)")
 fi
 
 # Install pandoc if needed
