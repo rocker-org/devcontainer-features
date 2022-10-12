@@ -240,7 +240,7 @@ install_pip_packages() {
     packages="$*"
     if [ -n "${packages}" ]; then
         check_pip
-        python3 -m pip install --user --upgrade --no-cache-dir --no-warn-script-location "${packages}"
+        python3 -m pip install --upgrade --no-cache-dir --no-warn-script-location "${packages}"
     fi
 }
 
