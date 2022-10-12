@@ -47,5 +47,14 @@
 				"installJupyterlab": true
 			}
 		}
+	},
+	"python-packages-global": {
+		"image": "rocker/rstudio:4",
+		"features": {
+			"r-rig": {
+				"version": "none",
+				"installRadian": true
+			}
+		}
 	}
 }
