@@ -49,7 +49,7 @@
 		}
 	},
 	"python-packages-global": {
-		"image": "r-base:latest",
+		"image": "rocker/rstudio:4",
 		"features": {
 			"r-rig": {
 				"version": "none",
