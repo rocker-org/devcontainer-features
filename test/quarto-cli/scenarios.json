@@ -9,8 +9,8 @@
 		}
 	},
 	"jupyter_quarto": {
-		"image": "mcr.microsoft.com/devcontainers/anaconda:3",
-		"remoteUser": "vscode",
+		"image": "jupyter/base-notebook:latest",
+		"remoteUser": "jovyan",
 		"features": {
 			"quarto-cli": {}
 		}
