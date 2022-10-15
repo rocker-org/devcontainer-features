@@ -69,7 +69,7 @@ elif grep -q "Debian" </etc/os-release; then
 fi
 
 apt-get update -y
-apt install --no-install-recommends r-base
+apt-get -y install --no-install-recommends r-base
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
