@@ -6,9 +6,8 @@ For a detailed explanation of Dev Container Features,
 please check [the specification](https://containers.dev/implementors/features/) and
 [the devcontainers' official Development Container Features repository](https://github.com/devcontainers/features).
 
-This repository is intended to make it easy to add R-related functionality on top of the Debian base containers.
-
-This repository is based on the [the `devcontainers/features` repository](https://github.com/devcontainers/features).
+This repository is based on the [the `devcontainers/features` repository](https://github.com/devcontainers/features),
+and intended to make it easy to add R-related functionality on top of the Debian base containers.
 
 ## Contents
 
