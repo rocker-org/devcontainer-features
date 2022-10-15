@@ -1,13 +1,14 @@
 # Dev Container Features (for R)
 
-This repository contains a _collection_ of devcontainer features.
+This repository contains a _collection_ of Dev Container Features.
 
-For a detailed explanation of devcontainer features,
-please check [the devcontainers' official devcontainer features repository](https://github.com/devcontainers/features).
+For a detailed explanation of Dev Container Features,
+please check [the specification](https://containers.dev/implementors/features/) and
+[the devcontainers' official Development Container Features repository](https://github.com/devcontainers/features).
 
 This repository is intended to make it easy to add R-related functionality on top of the Debian base containers.
 
-Heavily under development.
+This repository is based on the [the `devcontainers/features` repository](https://github.com/devcontainers/features).
 
 ## Contents
 
