@@ -173,7 +173,7 @@ if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
 fi
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
-    check_packages git make r-base-dev r-cran-remotes r-cran-r6 r-cran-jsonlite
+    check_packages git make r-base-dev r-cran-r6 r-cran-jsonlite
     R -q -e "pak::pkg_install('ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)')"
 fi
 
