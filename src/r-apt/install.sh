@@ -134,6 +134,7 @@ install_pip_packages ${PIP_PACKAGES[*]}
 
 if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
     check_packages \
+        make \
         r-cran-callr \
         r-cran-fs \
         r-cran-jsonlite \
@@ -161,7 +162,7 @@ if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
 fi
 
 if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
-    check_packages r-cran-later r-cran-systemfonts r-cran-bh
+    check_packages make r-cran-later r-cran-systemfonts r-cran-bh
     R -q -e 'install.packages("httpgd")'
 fi
 
