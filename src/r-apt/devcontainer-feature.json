@@ -2,7 +2,7 @@
 	"name": "R (via apt)",
 	"id": "r-apt",
 	"version": "0.1.0",
-	"description": "Installs R, some R packages, and needed dependencies.",
+	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
 		"version": {
