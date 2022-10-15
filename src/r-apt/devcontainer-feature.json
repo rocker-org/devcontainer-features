@@ -8,10 +8,10 @@
 		"version": {
 			"type": "string",
 			"proposals": [
-				"os-provided"
+				"latest"
 			],
-			"default": "os-provided",
-			"description": "Currently Unused."
+			"default": "latest",
+			"description": "Currently unused."
 		}
 	},
 	"installsAfter": [
