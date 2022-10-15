@@ -55,10 +55,10 @@ export DEBIAN_FRONTEND=noninteractive
 if grep -q "Ubuntu" </etc/os-release; then
     # shellcheck source=/dev/null
     source /etc/os-release
-    check_packages wget
-    wget -q -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+    check_packages curl ca-certificates
+    curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
     echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
-    wget -q -O- https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
+    curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
     echo "deb [arch=amd64] https://dirk.eddelbuettel.com/cranapt ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
 elif grep -q "Debian" </etc/os-release; then
     # shellcheck source=/dev/null
