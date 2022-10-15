@@ -2,7 +2,7 @@
 	"all-on-debian-stable": {
 		"image": "debian:stable-slim",
 		"features": {
-			"r-rig": {
+			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installRMarkdown": true,
@@ -15,7 +15,7 @@
 	"all-on-focal": {
 		"image": "ubuntu:focal",
 		"features": {
-			"r-rig": {
+			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installRMarkdown": true,
@@ -28,7 +28,7 @@
 	"all-on-jammy": {
 		"image": "ubuntu:jammy",
 		"features": {
-			"r-rig": {
+			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installRMarkdown": true,
