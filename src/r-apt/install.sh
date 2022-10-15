@@ -132,6 +132,9 @@ check_packages ${APT_PACKAGES[*]}
 # shellcheck disable=SC2048 disable=SC2086
 install_pip_packages ${PIP_PACKAGES[*]}
 
+# Install pak
+R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"
+
 if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
     check_packages \
         gcc \
@@ -171,7 +174,7 @@ fi
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
     check_packages git make r-base-dev r-cran-remotes r-cran-r6 r-cran-jsonlite
-    R -q -e "remotes::install_github('ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)')"
+    R -q -e "pak::pkg_install('ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)')"
 fi
 
 # Set up IRkernel
