@@ -1,0 +1,32 @@
+{
+	"name": "R (via apt)",
+	"id": "r-apt",
+	"version": "0.1.0",
+	"description": "Installs R, some R packages, and needed dependencies.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"os-provided"
+			],
+			"default": "os-provided",
+			"description": "Currently Unused."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r"
+			],
+			"settings": {
+				"[r]": {
+					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+				}
+			}
+		}
+	}
+}
