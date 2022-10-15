@@ -23,6 +23,7 @@ jobs:
         with:
           filters: |
             quarto-cli: ./**/quarto-cli/**
+            r-apt: ./**/r-apt/**
             r-rig: ./**/r-rig/**
 
   test-detects:
@@ -75,6 +76,7 @@ jobs:
       matrix:
         features:
           - quarto
+          - r-apt
           - r-rig
         baseImage:
           - debian:stable-slim
@@ -99,6 +101,7 @@ jobs:
       matrix:
         features:
           - quarto
+          - r-apt
           - r-rig
     steps:
       - uses: actions/checkout@v3
