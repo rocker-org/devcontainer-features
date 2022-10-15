@@ -50,8 +50,11 @@ if [ "${VSCODE_R_SUPPORT}" = "minimal" ]; then
     APT_PACKAGES+=(r-cran-jsonlite r-cran-rlang)
 elif [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ]; then
     APT_PACKAGES+=(r-cran-languageserver)
+    install_languageserver="true"
 elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then
     APT_PACKAGES+=(r-cran-languageserver r-cran-httpgd)
+    install_languageserver="true"
+    install_httpgd="true"
 fi
 
 if [ "${INSTALL_DEVTOOLS}" = "true" ]; then
@@ -106,16 +109,21 @@ export DEBIAN_FRONTEND=noninteractive
 # shellcheck source=/dev/null
 source /etc/os-release
 
-if grep -q "Ubuntu" </etc/os-release; then
+if [ "${ID}" = "ubuntu" ]; then
     check_packages curl ca-certificates
     curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
     echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
     curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
     echo "deb [arch=amd64] https://r2u.stat.illinois.edu/ubuntu ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
-elif grep -q "Debian" </etc/os-release; then
+elif [ "${ID}" = "debian" ]; then
     check_packages gnupg2
     apt-key adv --keyserver keyserver.ubuntu.com --recv-key "95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7"
     echo "deb http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >>/etc/apt/sources.list
+    # On Debian, languageserver and httpgd are not available via apt
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
 fi
 
 apt-get update -y
@@ -123,6 +131,39 @@ apt-get update -y
 check_packages ${APT_PACKAGES[*]}
 # shellcheck disable=SC2048 disable=SC2086
 install_pip_packages ${PIP_PACKAGES[*]}
+
+if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
+    check_packages \
+        r-cran-callr \
+        r-cran-fs \
+        r-cran-jsonlite \
+        r-cran-codetools \
+        r-cran-crayon \
+        r-cran-desc \
+        r-cran-remotes \
+        r-cran-withr \
+        r-cran-digest \
+        r-cran-glue \
+        r-cran-knitr \
+        r-cran-lazyeval \
+        r-cran-xml2 \
+        r-cran-roxygen2 \
+        r-cran-stringi \
+        r-cran-stringi \
+        r-cran-magrittr \
+        r-cran-purrr \
+        r-cran-r.cache \
+        r-cran-rematch2 \
+        r-cran-rlang \
+        r-cran-rprojroot \
+        r-cran-tibble
+    R -q -e 'install.packages("languageserver")'
+fi
+
+if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
+    check_packages r-cran-later r-cran-systemfonts r-cran-bh
+    R -q -e 'install.packages("httpgd")'
+fi
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
     check_packages git make r-base-dev r-cran-remotes r-cran-r6 r-cran-jsonlite
