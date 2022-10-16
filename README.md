@@ -15,6 +15,10 @@ and intended to make it easy to add R-related functionality on top of the Debian
 
 Install [the Quarto CLI](https://quarto.org/).
 
+### [`r-apt`](src/r-apt/README.md)
+
+Install the latest [R](https://www.r-project.org/) and R packages via apt. (amd64 only)
+
 ### [`r-rig`](src/r-rig/README.md)
 
 Install a version of [R](https://www.r-project.org/) of your choice using [rig](https://github.com/r-lib/rig).

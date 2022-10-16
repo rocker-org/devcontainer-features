@@ -1,0 +1,69 @@
+{
+	"name": "R (via apt)",
+	"id": "r-apt",
+	"version": "0.1.0",
+	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"latest"
+			],
+			"default": "latest",
+			"description": "Currently unused."
+		},
+		"vscodeRSupport": {
+			"type": "string",
+			"enum": [
+				"none",
+				"minimal",
+				"lsp",
+				"full"
+			],
+			"default": "minimal",
+			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
+		},
+		"installDevTools": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `devtools` R package."
+		},
+		"installRMarkdown": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation."
+		},
+		"installJupyterlab": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks."
+		},
+		"installRadian": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight."
+		},
+		"installVscDebugger": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/features/python"
+	],
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"REditorSupport.r"
+			],
+			"settings": {
+				"[r]": {
+					"editor.wordSeparators": "`~!@#%$^&*()-=+[{]}\\|;:'\",<>/?"
+				}
+			}
+		}
+	}
+}

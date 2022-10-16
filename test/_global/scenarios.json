@@ -1,8 +1,18 @@
 {
-	"r_quarto": {
+	"r-rig_quarto": {
 		"image": "ubuntu:latest",
 		"features": {
 			"r-rig": {
+				"installRMarkdown": true,
+				"installJupyterlab": true
+			},
+			"quarto-cli": {}
+		}
+	},
+	"r-apt_quarto": {
+		"image": "ubuntu:latest",
+		"features": {
+			"r-apt": {
 				"installRMarkdown": true,
 				"installJupyterlab": true
 			},
