@@ -115,6 +115,13 @@ if [ "${ID}" = "ubuntu" ]; then
     echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
     curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
     echo "deb [arch=amd64] https://r2u.stat.illinois.edu/ubuntu ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
+    # Pinning
+    cat <<EOF >"/etc/apt/preferences.d/99cranapt"
+Package: *
+Pin: release o=CRAN-Apt Project
+Pin: release l=CRAN-Apt Packages
+Pin-Priority: 700
+EOF
 elif [ "${ID}" = "debian" ]; then
     check_packages gnupg2
     apt-key adv --keyserver keyserver.ubuntu.com --recv-key "95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7"
