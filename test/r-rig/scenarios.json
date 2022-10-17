@@ -38,6 +38,14 @@
 			}
 		}
 	},
+	"version-specific": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-rig": {
+				"version": "3"
+			}
+		}
+	},
 	"install-on-rocker-r-ver": {
 		"image": "rocker/r-ver:4.0.5",
 		"features": {
