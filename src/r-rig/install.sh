@@ -181,7 +181,7 @@ find_version_from_json() {
         fi
         local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
         local version_list
-        version_list="$(curl -sL ${json_url} | tr '"' '\n' | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
+        version_list="$(curl -sL "${json_url}" | tr '"' '\n' | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
         if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
             declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
         else
