@@ -75,7 +75,7 @@ jobs:
     strategy:
       matrix:
         features:
-          - quarto
+          - quarto-cli
           - r-apt
           - r-rig
         baseImage:
