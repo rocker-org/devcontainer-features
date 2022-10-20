@@ -105,12 +105,12 @@ install_pip_packages() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
+check_packages curl ca-certificates
 
 # shellcheck source=/dev/null
 source /etc/os-release
 
 if [ "${ID}" = "ubuntu" ]; then
-    check_packages curl ca-certificates
     curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
     echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
     curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
@@ -123,8 +123,7 @@ Pin: release l=CRAN-Apt Packages
 Pin-Priority: 700
 EOF
 elif [ "${ID}" = "debian" ]; then
-    check_packages curl
-    curl -fsSL "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
+    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
     echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
     # On Debian, languageserver and httpgd are not available via apt
     # shellcheck disable=SC2206
