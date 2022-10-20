@@ -123,7 +123,7 @@ Pin: release l=CRAN-Apt Packages
 Pin-Priority: 700
 EOF
 elif [ "${ID}" = "debian" ]; then
-    check_packages gnupg2
+    check_packages curl
     curl -fsSL "http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
     echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
     # On Debian, languageserver and httpgd are not available via apt
