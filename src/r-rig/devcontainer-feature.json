@@ -9,7 +9,8 @@
 			"type": "string",
 			"proposals": [
 				"release",
-				"none"
+				"none",
+				"4"
 			],
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."

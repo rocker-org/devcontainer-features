@@ -38,11 +38,19 @@
 			}
 		}
 	},
-	"version-specific": {
+	"version-specific-3": {
 		"image": "debian:stable-slim",
 		"features": {
 			"r-rig": {
 				"version": "3"
+			}
+		}
+	},
+	"version-specific-40": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-rig": {
+				"version": "4.0"
 			}
 		}
 	},
