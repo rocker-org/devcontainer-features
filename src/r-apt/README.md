@@ -17,7 +17,6 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | Currently unused. | string | latest |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
 | installDevTools | Install the `devtools` R package. | boolean | - |
 | installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | - |
