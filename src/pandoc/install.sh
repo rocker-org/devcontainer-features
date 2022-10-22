@@ -95,13 +95,9 @@ install_pandoc() {
 export DEBIAN_FRONTEND=noninteractive
 
 # Install Pandoc
-echo "Downloading Pandoc..."
-
-
 find_version_from_git_tags PANDOC_VERSION "https://github.com/jgm/pandoc" "tags/" "." "true"
 echo "Downloading pandoc ${PANDOC_VERSION}..."
 install_pandoc "${PANDOC_VERSION}"
-
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
