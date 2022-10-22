@@ -6,6 +6,7 @@ on:
     paths:
       - src/**
       - test/**
+      - "!**.md"
   workflow_dispatch:
 
 concurrency:
@@ -23,6 +24,7 @@ jobs:
         id: filter
         with:
           filters: |
+            pandoc: ./**/pandoc/**
             quarto-cli: ./**/quarto-cli/**
             r-apt: ./**/r-apt/**
             r-rig: ./**/r-rig/**
@@ -75,6 +77,7 @@ jobs:
     strategy:
       matrix:
         features:
+          - pandoc
           - quarto-cli
           - r-apt
           - r-rig
@@ -100,6 +103,7 @@ jobs:
     strategy:
       matrix:
         features:
+          - pandoc
           - quarto-cli
           - r-apt
           - r-rig
