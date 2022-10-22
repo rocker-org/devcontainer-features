@@ -11,7 +11,7 @@ PANDOC_VERSION=${PANDOCVERSION:-"auto"}
 
 USERNAME=${USERNAME:-"automatic"}
 
-APT_PACKAGES=(curl ca-certificates)
+APT_PACKAGES=()
 PIP_PACKAGES=()
 R_PACKAGES=()
 
@@ -129,6 +129,12 @@ check_packages() {
     fi
 }
 
+check_git() {
+    if [ ! -x "$(command -v git)" ]; then
+        check_packages git
+    fi
+}
+
 find_version_from_git_tags() {
     local variable_name=$1
     local requested_version=${!variable_name}
@@ -141,12 +147,14 @@ find_version_from_git_tags() {
         local escaped_separator=${separator//./\\.}
         local last_part
         if [ "${last_part_optional}" = "true" ]; then
-            last_part="(${escaped_separator}[0-9]+)*?"
+            last_part="(${escaped_separator}[0-9]+)*"
         else
             last_part="${escaped_separator}[0-9]+"
         fi
         local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
         local version_list
+        check_git
+        check_packages ca-certificates
         version_list="$(git ls-remote --tags "${repository}" | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
         if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
             declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
@@ -181,6 +189,7 @@ find_version_from_json() {
         fi
         local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
         local version_list
+        check_packages curl ca-certificates
         version_list="$(curl -sL "${json_url}" | tr '"' '\n' | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
         if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
             declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
@@ -204,6 +213,7 @@ install_rig() {
     elif [ "$architecture" = "arm64" ]; then
         download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-arm64-latest.tar.gz"
     fi
+    check_packages curl ca-certificates
     curl -sL "${download_url}" | tar xz -C /usr/local
 }
 
@@ -214,7 +224,7 @@ install_pandoc() {
     local download_url
     architecture="$(dpkg --print-architecture)"
     download_url="https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-${architecture}.deb"
-
+    check_packages curl ca-certificates
     mkdir -p /tmp/pandoc
     pushd /tmp/pandoc
     curl -sLo "${deb_file}" "${download_url}"
@@ -224,7 +234,7 @@ install_pandoc() {
 }
 
 install_r_packages() {
-    packages="$*"
+    local packages="$*"
     if [ -n "${packages}" ]; then
         su ${USERNAME} -c "R -q -e \"pak::pak(unlist(strsplit('${packages}', ' ')))\""
     fi
@@ -237,7 +247,7 @@ check_pip() {
 }
 
 install_pip_packages() {
-    packages="$*"
+    local packages="$*"
     if [ -n "${packages}" ]; then
         check_pip
         # shellcheck disable=SC2086
@@ -247,27 +257,19 @@ install_pip_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-if [ ! -x "$(command -v git)" ]; then
-    APT_PACKAGES+=(git)
-fi
-
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
 # shellcheck disable=SC2048 disable=SC2086
 install_pip_packages ${PIP_PACKAGES[*]}
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
+    check_git
     R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)")
 fi
 
 # Install pandoc if needed
-if [ "${PANDOC_VERSION}" = "latest" ]; then
-    PANDOC_VERSION=$(git ls-remote --tags https://github.com/jgm/pandoc | grep -oP "\\K[0-9]+\.[0-9]+(\.[0-9]+)*" | sort -rV | head -n 1)
-elif [ "${PANDOC_VERSION}" != "none" ]; then
-    find_version_from_git_tags PANDOC_VERSION "https://github.com/jgm/pandoc" "tags/" "." "true"
-fi
-
 if [ "${PANDOC_VERSION}" != "none" ]; then
+    find_version_from_git_tags PANDOC_VERSION "https://github.com/jgm/pandoc" "tags/" "." "true"
     echo "Downloading pandoc ${PANDOC_VERSION}..."
     install_pandoc "${PANDOC_VERSION}"
 fi
