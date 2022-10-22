@@ -11,6 +11,10 @@ and intended to make it easy to add R-related functionality on top of the Debian
 
 ## Contents
 
+### [`pandoc`](src/pandoc/README.md)
+
+Install [Pandoc](https://pandoc.org/).
+
 ### [`quarto-cli`](src/quarto-cli/README.md)
 
 Install [the Quarto CLI](https://quarto.org/).
