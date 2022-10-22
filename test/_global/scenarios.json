@@ -18,5 +18,14 @@
 			},
 			"quarto-cli": {}
 		}
+	},
+	"r-apt_pandoc": {
+		"image": "ubuntu:latest",
+		"features": {
+			"r-apt": {
+				"installRMarkdown": true
+			},
+			"pandoc": {}
+		}
 	}
 }

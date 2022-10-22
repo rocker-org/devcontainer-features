@@ -1,0 +1,10 @@
+{
+	"version-specific": {
+		"image": "debian:stable-slim",
+		"features": {
+			"pandoc": {
+				"version": "2.17"
+			}
+		}
+	}
+}
