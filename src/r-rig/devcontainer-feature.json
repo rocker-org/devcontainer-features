@@ -1,7 +1,7 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
@@ -9,7 +9,8 @@
 			"type": "string",
 			"proposals": [
 				"release",
-				"none"
+				"none",
+				"4"
 			],
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."
