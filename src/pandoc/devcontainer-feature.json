@@ -1,7 +1,7 @@
 {
 	"name": "Pandoc",
 	"id": "pandoc",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Installs Pandoc, a universal document converter.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/pandoc",
 	"options": {
