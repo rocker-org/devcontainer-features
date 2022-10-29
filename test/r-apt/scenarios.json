@@ -38,7 +38,7 @@
 			}
 		}
 	},
-	"all-on-unstable-on-stable" {
+	"all-on-unstable-on-stable": {
 		"image": "debian:stable-slim",
 		"features": {
 			"r-apt": {
