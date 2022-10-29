@@ -24,8 +24,20 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ]; then
+if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     echo "(!) Architecture $architecture unsupported"
+    exit 1
+fi
+
+# Only debian testing supports arm64
+# shellcheck source=/dev/null
+source /etc/os-release
+if [ "${ID}" = "ubuntu" ] && [ "${architecture}" != "amd64" ]; then
+    echo "(!) Ubuntu $architecture unsupported"
+    exit 1
+fi
+if [ "${ID}" = "debian" ] && [ "${architecture}" != "amd64" ] && [ "${USE_TESTING}" != "true" ]; then
+    echo "(!) To use Debian $architecture, please set useTesting option to true"
     exit 1
 fi
 
@@ -107,9 +119,6 @@ install_pip_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 check_packages curl ca-certificates
-
-# shellcheck source=/dev/null
-source /etc/os-release
 
 if [ "${ID}" = "ubuntu" ]; then
     echo "Set up for Ubuntu..."
