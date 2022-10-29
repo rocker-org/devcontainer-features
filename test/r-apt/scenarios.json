@@ -38,11 +38,11 @@
 			}
 		}
 	},
-	"all-on-unstable-on-stable": {
+	"all-on-not-testing": {
 		"image": "debian:stable-slim",
 		"features": {
 			"r-apt": {
-				"useUnstable": true,
+				"useTesting": false,
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installRMarkdown": true,
