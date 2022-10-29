@@ -129,12 +129,6 @@ elif [ "${ID}" = "debian" ]; then
     if [ "${USE_UNSTABLE}" = "true" ]; then
         echo "Set up Debian unstable..."
         echo "deb http://http.debian.net/debian sid main" >/etc/apt/sources.list.d/debian-unstable.list
-        # Pinning
-        cat <<EOF >"/etc/apt/preferences.d/99debian-unstable"
-Package: *
-Pin: release a=unstable
-Pin-Priority: 700
-EOF
     else
         echo "Set up for Debian ${VERSION_CODENAME}..."
         curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
