@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+USE_TESTING=${USETESTING:-"true"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
@@ -23,8 +24,20 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ]; then
+if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     echo "(!) Architecture $architecture unsupported"
+    exit 1
+fi
+
+# Only debian testing supports arm64
+# shellcheck source=/dev/null
+source /etc/os-release
+if [ "${ID}" = "ubuntu" ] && [ "${architecture}" != "amd64" ]; then
+    echo "(!) Ubuntu $architecture unsupported"
+    exit 1
+fi
+if [ "${ID}" = "debian" ] && [ "${architecture}" != "amd64" ] && [ "${USE_TESTING}" != "true" ]; then
+    echo "(!) To use Debian $architecture, please set useTesting option to true"
     exit 1
 fi
 
@@ -107,13 +120,12 @@ install_pip_packages() {
 export DEBIAN_FRONTEND=noninteractive
 check_packages curl ca-certificates
 
-# shellcheck source=/dev/null
-source /etc/os-release
-
 if [ "${ID}" = "ubuntu" ]; then
-    curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
+    echo "Set up for Ubuntu..."
+    curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc >/dev/null
     echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
-    curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc
+    echo "Set up r2u..."
+    curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc >/dev/null
     echo "deb [arch=amd64] https://r2u.stat.illinois.edu/ubuntu ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
     # Pinning
     cat <<EOF >"/etc/apt/preferences.d/99cranapt"
@@ -123,8 +135,16 @@ Pin: release l=CRAN-Apt Packages
 Pin-Priority: 700
 EOF
 elif [ "${ID}" = "debian" ]; then
-    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
-    echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
+    if [ "${USE_TESTING}" = "true" ]; then
+        echo "Set up Debian testing..."
+        echo "deb http://http.debian.net/debian testing main" >/etc/apt/sources.list.d/debian-testing.list
+        echo "deb http://http.debian.net/debian unstable main" >/etc/apt/sources.list.d/debian-unstable.list
+        echo 'APT::Default-Release "testing";' >/etc/apt/apt.conf.d/default
+    else
+        echo "Set up for Debian ${VERSION_CODENAME}..."
+        curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
+        echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
+    fi
     # On Debian, languageserver and httpgd are not available via apt
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})

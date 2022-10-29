@@ -2,7 +2,9 @@
 
 ## Supported platforms
 
-`linux/amd64` platforms `debian`, `ubuntu:focal` and `ubuntu:jammy`.
+`linux/amd64` platform `debian`, `ubuntu:focal` and `ubuntu:jammy`.
+
+If the `useTesting` is `true`, `linux/arm64` platform `debian` also supported.
 
 ## R package installation
 

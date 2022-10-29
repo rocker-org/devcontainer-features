@@ -1,7 +1,7 @@
 {
 	"name": "R (via apt)",
 	"id": "r-apt",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
@@ -40,6 +40,11 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
+		},
+		"useTesting": {
+			"type": "boolean",
+			"default": true,
+			"description": "For Debian, install packages from Debian testing. If false, the R package installed by apt may be out of date."
 		}
 	},
 	"installsAfter": [
