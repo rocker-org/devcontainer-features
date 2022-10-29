@@ -23,12 +23,15 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 | installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | - |
 | installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | - |
 | installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | - |
+| useTesting | For Debian, install packages from Debian testing. If false, the R package installed by apt may be out of date. | boolean | true |
 
 <!-- markdownlint-disable MD041 -->
 
 ## Supported platforms
 
-`linux/amd64` platforms `debian`, `ubuntu:focal` and `ubuntu:jammy`.
+`linux/amd64` platform `debian`, `ubuntu:focal` and `ubuntu:jammy`.
+
+If the `useTesting` is `true`, `linux/arm64` platform `debian` also supported.
 
 ## R package installation
 
