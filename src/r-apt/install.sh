@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+USE_UNSTABLE=${USEUNSTABLE:-"false"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
@@ -123,8 +124,18 @@ Pin: release l=CRAN-Apt Packages
 Pin-Priority: 700
 EOF
 elif [ "${ID}" = "debian" ]; then
-    curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
-    echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
+    if [ "${USE_UNSTABLE}" = "true" ]; then
+        echo "deb http://http.debian.net/debian sid main" >/etc/apt/sources.list.d/debian-unstable.list
+        # Pinning
+        cat <<EOF >"/etc/apt/preferences.d/99debian-unstable"
+Package: *
+Pin: release a=unstable
+Pin-Priority: 700
+EOF
+    else
+        curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc
+        echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
+    fi
     # On Debian, languageserver and httpgd are not available via apt
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})

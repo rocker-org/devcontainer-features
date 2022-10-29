@@ -5,6 +5,11 @@
 	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
+		"useUnstable": {
+			"type": "boolean",
+			"default": false,
+			"description": "For Debian, install packages from Debian unstable. If false, the R package installed by apt may be out of date."
+		}
 		"vscodeRSupport": {
 			"type": "string",
 			"enum": [
