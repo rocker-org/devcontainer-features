@@ -37,5 +37,19 @@
 				"installRadian": true
 			}
 		}
+	},
+	"all-on-unstable-on-stable" {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-apt": {
+				"useUnstable": true,
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installRMarkdown": true,
+				"installVscDebugger": true,
+				"installJupyterlab": true,
+				"installRadian": true
+			}
+		}
 	}
 }
