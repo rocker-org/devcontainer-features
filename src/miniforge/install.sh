@@ -148,7 +148,7 @@ conda config --set env_prompt '({name})'
 echo "source ${CONDA_SCRIPT}" >>"/root/.bashrc"
 if [ "${USERNAME}" != "root" ]; then
     echo "source ${CONDA_SCRIPT}" >>"/home/${USERNAME}/.bashrc"
-    chown -R "${USERNAME}:${USERNAME}" "${BASH_RC}"
+    chown -R "${USERNAME}:${USERNAME}" "/home/${USERNAME}/.bashrc"
 fi
 
 chown -R "${USERNAME}:conda" "${CONDA_DIR}"
