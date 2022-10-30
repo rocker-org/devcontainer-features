@@ -145,12 +145,11 @@ CONDA_SCRIPT="${CONDA_DIR}/etc/profile.d/conda.sh"
 source "${CONDA_SCRIPT}"
 conda config --set env_prompt '({name})'
 
-BASH_RC="/home/${USERNAME}/.bashrc"
-if [ "${USERNAME}" = "root" ]; then
-    BASH_RC="/root/.bashrc"
+echo "source ${CONDA_SCRIPT}" >>"/root/.bashrc"
+if [ "${USERNAME}" != "root" ]; then
+    echo "source ${CONDA_SCRIPT}" >>"/home/${USERNAME}/.bashrc"
+    chown -R "${USERNAME}:${USERNAME}" "${BASH_RC}"
 fi
-echo "source ${CONDA_SCRIPT}" >>"${BASH_RC}"
-chown -R "${USERNAME}:${USERNAME}" "${BASH_RC}"
 
 chown -R "${USERNAME}:conda" "${CONDA_DIR}"
 chmod -R g+r+w "${CONDA_DIR}"
