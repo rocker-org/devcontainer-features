@@ -21,8 +21,10 @@ Install [the Quarto CLI](https://quarto.org/).
 
 ### [`r-apt`](src/r-apt/README.md)
 
-Install the latest [R](https://www.r-project.org/) and R packages via apt. (amd64 only)
+Install the latest [R](https://www.r-project.org/) and R packages via apt.
+When installing R packages via apt, dependencies are automatically installed as well, and it is very fast.
 
 ### [`r-rig`](src/r-rig/README.md)
 
 Install a version of [R](https://www.r-project.org/) of your choice using [rig](https://github.com/r-lib/rig).
+R packages must be installed via R functions.
