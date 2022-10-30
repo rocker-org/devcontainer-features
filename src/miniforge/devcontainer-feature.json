@@ -1,0 +1,36 @@
+{
+	"name": "Conda, Mamba (Miniforge)",
+	"id": "miniforge",
+	"version": "0.1.0",
+	"description": "Installs Conda or Mamba package manager. conda-forge set as the default (and only) channel.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/miniforge",
+	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"latest"
+			],
+			"default": "latest",
+			"description": "Select version of Miniforge."
+		},
+		"variant": {
+			"type": "string",
+			"enum": [
+				"Miniforge",
+				"Miniforge-pypy3",
+				"Mambaforge",
+				"Mambaforge-pypy3"
+			],
+			"default": "Mambaforge",
+			"description": "Select Conda (Miniforge) or Mamba (Mambaforge), and support CPython (non-suffixed) or PyPy (-pypy3)."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	],
+	"containerEnv": {
+		"CONDA_DIR": "/opt/conda",
+		"CONDA_SCRIPT": "/opt/conda/etc/profile.d/conda.sh",
+		"PATH": "/opt/conda/bin:${PATH}"
+	}
+}
