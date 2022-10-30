@@ -16,7 +16,7 @@
 		"variant": {
 			"type": "string",
 			"enum": [
-				"Miniforge",
+				"Miniforge3",
 				"Miniforge-pypy3",
 				"Mambaforge",
 				"Mambaforge-pypy3"
