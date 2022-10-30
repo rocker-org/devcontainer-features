@@ -11,6 +11,15 @@ and intended to make it easy to add R-related functionality on top of the Debian
 
 ## Contents
 
+### [`miniforge`](src/miniforge/README.md)
+
+Install [Conda](https://docs.conda.io) or [Mamba](https://mamba.readthedocs.io)
+via [Miniforge](https://github.com/conda-forge/miniforge) installer.
+[conda-forge](https://conda-forge.org/) set as the default (and only) channel.
+
+Similar to
+[`ghcr.io/devcontainers/features/conda`](https://github.com/devcontainers/features/blob/main/src/conda/README.md).
+
 ### [`pandoc`](src/pandoc/README.md)
 
 Install [Pandoc](https://pandoc.org/).
