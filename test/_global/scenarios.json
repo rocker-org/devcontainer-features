@@ -27,5 +27,12 @@
 			},
 			"pandoc": {}
 		}
+	},
+	"mamba_quarto": {
+		"image": "debian:stable-slim",
+		"features": {
+			"quarto-cli": {},
+			"miniforge": {}
+		}
 	}
 }
