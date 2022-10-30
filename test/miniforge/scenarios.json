@@ -1,0 +1,26 @@
+{
+	"miniforge3": {
+		"image": "debian:stable-slim",
+		"features": {
+			"miniforge": {
+				"variant": "Miniforge3"
+			}
+		}
+	},
+	"miniforge-pypy3": {
+		"image": "debian:stable-slim",
+		"features": {
+			"miniforge": {
+				"variant": "Miniforge-pypy3"
+			}
+		}
+	},
+	"mambaforge-pypy3": {
+		"image": "debian:stable-slim",
+		"features": {
+			"miniforge": {
+				"variant": "Mambaforge-pypy3"
+			}
+		}
+	}
+}
