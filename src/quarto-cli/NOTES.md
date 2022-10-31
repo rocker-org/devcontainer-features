@@ -4,6 +4,10 @@
 
 `linux/amd64` platform `debian` and `ubuntu`.
 
+## Refferences
+
+- [Quarto](https://quarto.org)
+
 ## Execution Engine
 
 This feature will not install execution engines such as `jupyter` or `knitr`,
