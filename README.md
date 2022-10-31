@@ -13,7 +13,7 @@ and intended to make it easy to add R-related functionality on top of the Debian
 
 ### [`miniforge`](src/miniforge/README.md)
 
-Install [Conda](https://docs.conda.io) or [Mamba](https://mamba.readthedocs.io)
+Install [Conda](https://docs.conda.io) and [Mamba](https://mamba.readthedocs.io)
 via [Miniforge](https://github.com/conda-forge/miniforge) installer.
 [conda-forge](https://conda-forge.org/) set as the default (and only) channel.
 
