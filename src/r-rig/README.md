@@ -19,11 +19,11 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
-| installDevTools | Install the `devtools` R package. | boolean | - |
-| installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | - |
-| installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | - |
-| installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | - |
-| installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | - |
+| installDevTools | Install the `devtools` R package. | boolean | false |
+| installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | false |
+| installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | false |
+| installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | false |
+| installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | false |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
 <!-- markdownlint-disable MD041 -->
