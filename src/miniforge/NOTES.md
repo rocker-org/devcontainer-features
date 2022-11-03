@@ -6,7 +6,8 @@
 
 ## Install packages from conda-forge
 
-You can install packages from the conda-forge using conda or mamba. For example, install Pytnon 3.7 as follows:
+We can install packages from [conda-forge](https://conda-forge.org) using `conda` or `mamba`.
+For example, install specific version of Pytnon as follows:
 
 ```sh
 mamba install -y python=3.7
