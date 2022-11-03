@@ -309,10 +309,13 @@ fi
 
 echo "Install R packages..."
 # Install the pak package
+mkdir /tmp/r-rig
+pushd /tmp/r-rig
 # shellcheck disable=SC2016
 su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
+popd
 
 # Set up IRkernel
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
