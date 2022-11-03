@@ -316,6 +316,7 @@ su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
 popd
+rm -rf /tmp/r-rig
 
 # Set up IRkernel
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
