@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 VERSION=${VERSION:-"latest"}
-VARIANT=${VARIANT-"Mambaforge"}
+VARIANT=${VARIANT:-"Mambaforge"}
 
 USERNAME=${USERNAME:-"automatic"}
 CONDA_DIR="/opt/conda"
