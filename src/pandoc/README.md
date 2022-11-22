@@ -7,9 +7,7 @@ Installs Pandoc, a universal document converter.
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {
-        "version": "latest"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/pandoc:1": {}
 }
 ```
 

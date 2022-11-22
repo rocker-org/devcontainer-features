@@ -7,9 +7,7 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
-        "version": "latest"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {}
 }
 ```
 
