@@ -7,9 +7,7 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {
-        "version": "latest"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {}
 }
 ```
 

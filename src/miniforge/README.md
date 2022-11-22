@@ -7,9 +7,7 @@ Installs Conda and Mamba package manager and Python3. conda-forge set as the def
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/miniforge:0": {
-        "version": "latest"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/miniforge:0": {}
 }
 ```
 

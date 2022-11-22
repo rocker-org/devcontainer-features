@@ -7,9 +7,7 @@ Installs the Quarto CLI. Auto-detects latest version.
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
-        "version": "latest"
-    }
+    "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {}
 }
 ```
 
