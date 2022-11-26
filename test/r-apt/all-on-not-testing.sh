@@ -11,6 +11,7 @@ check "languageserver" R -q -e 'names(installed.packages()[, 3])' | grep languag
 check "httpgd" R -q -e 'names(installed.packages()[, 3])' | grep httpgd
 check "devtools" R -q -e 'names(installed.packages()[, 3])' | grep devtools
 check "vscDebugger" R -q -e 'names(installed.packages()[, 3])' | grep vscDebugger
+check "renv" R -q -e 'names(installed.packages()[, 3])' | grep renv
 check "rmarkdown" R -q -e 'rmarkdown::pandoc_version()'
 check "jupyter" jupyter kernelspec list | grep jupyter/kernels/ir
 check "radian" radian --version

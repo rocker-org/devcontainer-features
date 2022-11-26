@@ -3,6 +3,7 @@
 USE_TESTING=${USETESTING:-"true"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
+INSTALL_RENV=${INSTALLRENV:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
 INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
@@ -72,6 +73,10 @@ fi
 
 if [ "${INSTALL_DEVTOOLS}" = "true" ]; then
     APT_PACKAGES+=(r-cran-devtools)
+fi
+
+if [ "${INSTALL_RENV}" = "true" ]; then
+    APT_PACKAGES+=(r-cran-renv)
 fi
 
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
@@ -145,7 +150,9 @@ elif [ "${ID}" = "debian" ]; then
         curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
         echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
     fi
-    # On Debian, languageserver and httpgd are not available via apt
+    # On Debian, renv, languageserver and httpgd are not available via apt
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-renv})
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
     # shellcheck disable=SC2206
@@ -196,6 +203,10 @@ if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
         g++ make r-cran-later r-cran-systemfonts r-cran-bh \
         libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev
     R -q -e 'install.packages("httpgd")'
+fi
+
+if [ "${ID}" = "debian" ] && [ "${INSTALL_RENV}" = "true" ]; then
+    R -q -e 'install.packages("renv")'
 fi
 
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then

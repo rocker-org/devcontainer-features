@@ -5,6 +5,7 @@
 			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
+				"installREnv": true,
 				"installRMarkdown": true,
 				"installVscDebugger": true,
 				"installJupyterlab": true,
@@ -18,6 +19,7 @@
 			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
+				"installREnv": true,
 				"installRMarkdown": true,
 				"installVscDebugger": true,
 				"installJupyterlab": true,
@@ -31,6 +33,7 @@
 			"r-apt": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
+				"installREnv": true,
 				"installRMarkdown": true,
 				"installVscDebugger": true,
 				"installJupyterlab": true,
@@ -45,6 +48,7 @@
 				"useTesting": false,
 				"vscodeRSupport": "full",
 				"installDevTools": true,
+				"installREnv": true,
 				"installRMarkdown": true,
 				"installVscDebugger": true,
 				"installJupyterlab": true,
