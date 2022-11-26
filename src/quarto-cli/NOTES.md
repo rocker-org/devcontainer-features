@@ -43,7 +43,6 @@ You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:latest": {
             "version": "1"
         }
-    },
-    "remoteUser": "vscode"
+    }
 }
 ```
