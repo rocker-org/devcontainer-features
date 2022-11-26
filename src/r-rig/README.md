@@ -18,6 +18,7 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 | version | Select version of R, if not the latest release version. | string | release |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
 | installDevTools | Install the `devtools` R package. | boolean | false |
+| installREnv | Install the `renv` R package. | boolean | false |
 | installRMarkdown | Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation. | boolean | false |
 | installJupyterlab | Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks. | boolean | false |
 | installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | false |
@@ -63,7 +64,6 @@ You can configure this in `remoteEnv` in `devcontainer.json` as like follows.
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/r-rig:latest": {}
     },
-    "remoteUser": "vscode",
     "remoteEnv": {
         "PKG_SYSREQS": "true"
     }
