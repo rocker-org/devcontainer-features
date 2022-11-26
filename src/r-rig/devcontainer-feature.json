@@ -1,7 +1,7 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
@@ -30,6 +30,11 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install the `devtools` R package."
+		},
+		"installREnv": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install the `renv` R package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",

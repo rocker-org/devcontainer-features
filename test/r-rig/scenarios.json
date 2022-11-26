@@ -5,6 +5,7 @@
 			"r-rig": {
 				"vscodeRSupport": "full",
 				"installDevTools": true,
+				"installREnv": true,
 				"installRMarkdown": true,
 				"installVscDebugger": true,
 				"installJupyterlab": true,
