@@ -37,7 +37,6 @@ You can configure this in `remoteEnv` in `devcontainer.json` as like follows.
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/r-rig:latest": {}
     },
-    "remoteUser": "vscode",
     "remoteEnv": {
         "PKG_SYSREQS": "true"
     }
