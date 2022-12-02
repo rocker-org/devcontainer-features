@@ -24,7 +24,7 @@ Installs the Quarto CLI. Auto-detects latest version.
 
 `linux/amd64` platform `debian` and `ubuntu`.
 
-## Refferences
+## References
 
 - [Quarto](https://quarto.org)
 
