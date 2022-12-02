@@ -19,6 +19,6 @@ For example, if version `2.17` is specified as follows, version `2.17.1.1` will 
 }
 ```
 
-## Refferences
+## References
 
 - [Pandoc](https://pandoc.org)

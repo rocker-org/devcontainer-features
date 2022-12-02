@@ -18,7 +18,7 @@ mamba install -y python=3.7
 - This Feature is similar to [`ghcr.io/devcontainers/features/conda`](https://github.com/devcontainers/features/tree/main/src/conda),
   but differs in options and arm64 platform support.
 
-## Refferences
+## References
 
 - [Conda](https://docs.conda.io)
 - [Mamba](https://mamba.readthedocs.io)
