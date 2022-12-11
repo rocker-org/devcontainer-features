@@ -3,7 +3,7 @@
 CLI_VERSION=${VERSION:-"latest"}
 INSTALL_TINYTEX=${INSTALLTINYTEX-"false"}
 
-USERNAME=${USERNAME:-"automatic"}
+USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
 set -e
 
