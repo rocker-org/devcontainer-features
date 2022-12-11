@@ -34,5 +34,12 @@
 			"quarto-cli": {},
 			"miniforge": {}
 		}
+	},
+	"mamba_quarto_non_root": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {},
+			"miniforge": {}
+		}
 	}
 }
