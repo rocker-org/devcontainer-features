@@ -17,6 +17,7 @@ print("Hello Quarto!")
 EOF
 
 # Feature-specific tests
+check "ensure i am user jovyan"  bash -c "whoami | grep 'jovyan'"
 check "check rendering" quarto render /tmp/test.qmd
 
 # Report result

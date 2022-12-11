@@ -29,6 +29,7 @@ cat("Hello Quarto!")
 EOF
 
 # Feature-specific tests
+check "ensure i am user vscode"  bash -c "whoami | grep 'vscode'"
 check "check rendering (knitr)" quarto render /tmp/knitr.qmd
 check "check rendering (jupyter)" quarto render /tmp/jupyter.qmd
 # Report result

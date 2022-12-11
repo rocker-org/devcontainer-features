@@ -16,6 +16,7 @@ Hello Quarto!
 EOF
 
 # Feature-specific tests
+check "ensure i am user vscode"  bash -c "whoami | grep 'vscode'"
 check "check rendering" quarto render /tmp/test.qmd
 
 # Report result
