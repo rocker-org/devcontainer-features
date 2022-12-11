@@ -8,16 +8,15 @@ source dev-container-features-test-lib
 cat <<"EOF" >/tmp/test.qmd
 ---
 title: Test
-engine: jupyter
+format:
+    pdf: default
 ---
 
-```{python}
-print("Hello Quarto!")
-```
+Hello Quarto!
 EOF
 
 # Feature-specific tests
-check "ensure i am user jovyan"  bash -c "whoami | grep 'jovyan'"
+check "ensure i am user vscode"  bash -c "whoami | grep 'vscode'"
 check "check rendering" quarto render /tmp/test.qmd
 
 # Report result

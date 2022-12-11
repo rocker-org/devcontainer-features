@@ -1,7 +1,7 @@
 {
 	"name": "Conda, Mamba (Miniforge)",
 	"id": "miniforge",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Installs Conda and Mamba package manager and Python3. conda-forge set as the default (and only) channel.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/miniforge",
 	"options": {

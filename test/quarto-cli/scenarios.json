@@ -8,6 +8,14 @@
 			}
 		}
 	},
+	"tinytex_non_root": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"installTinyTex": true
+			}
+		}
+	},
 	"jupyter_quarto": {
 		"image": "jupyter/base-notebook:latest",
 		"remoteUser": "jovyan",
