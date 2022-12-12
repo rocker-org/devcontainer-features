@@ -11,6 +11,10 @@ and intended to make it easy to add R-related functionality on top of the Debian
 
 ## Contents
 
+### [`apt-packages`](src/apt-packages/README.md)
+
+Installs packages of the user's choice via apt.
+
 ### [`miniforge`](src/miniforge/README.md)
 
 Install [Conda](https://docs.conda.io) and [Mamba](https://mamba.readthedocs.io)
