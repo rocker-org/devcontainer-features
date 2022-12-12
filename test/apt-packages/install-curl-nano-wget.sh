@@ -8,6 +8,7 @@ source dev-container-features-test-lib
 # Feature-specific tests
 check "curl" curl --version
 check "nano" nano --version
+check "wget" wget --version
 
 # Report result
 reportResults

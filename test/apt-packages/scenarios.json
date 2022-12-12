@@ -1,9 +1,9 @@
 {
-	"install-curl-nano": {
+	"install-curl-nano-wget": {
 		"image": "debian:stable-slim",
 		"features": {
 			"apt-packages": {
-				"packages": "curl,nano"
+				"packages": "curl,nano,wget"
 			}
 		}
 	},
