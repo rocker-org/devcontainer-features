@@ -1,0 +1,22 @@
+{
+	"name": "apt packages",
+	"id": "apt-packages",
+	"version": "1.0.0",
+	"description": "Installs packages via apt.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages",
+	"options": {
+		"packages": {
+			"type": "string",
+			"default": "",
+			"description": "Comma separated list of packages to install."
+		},
+		"upgradePackages": {
+			"type": "boolean",
+			"default": false,
+			"description": "Upgrade apt packages?"
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}

@@ -1,0 +1,22 @@
+{
+	"install-curl-nano-wget": {
+		"image": "debian:stable-slim",
+		"features": {
+			"apt-packages": {
+				"packages": "curl,nano,wget"
+			}
+		}
+	},
+	"install-r-packages": {
+		"image": "ubuntu:jammy",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
+			"apt-packages": {
+				"packages": "r-cran-curl,r-cran-dplyr"
+			}
+		},
+		"overrideFeatureInstallOrder": [
+			"ghcr.io/rocker-org/devcontainer-features/r-apt"
+		]
+	}
+}
