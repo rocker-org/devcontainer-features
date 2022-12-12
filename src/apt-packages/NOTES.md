@@ -4,6 +4,8 @@
 
 Specify package names separated by commas in the `packages` option.
 
+The following example installs `curl` and `nano`.
+
 ```json
 "features": {
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
@@ -17,9 +19,11 @@ Specify package names separated by commas in the `packages` option.
 Specify the installation order of Features
 by [the `overrideFeatureInstallOrder` property](https://containers.dev/implementors/features/#overrideFeatureInstallOrder).
 
+The following example installs the `r-cran-curl` package after the `r-apt` Feature is installed.
+
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
         "packages": "r-cran-curl"
     },
