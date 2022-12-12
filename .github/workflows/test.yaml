@@ -24,6 +24,7 @@ jobs:
         id: filter
         with:
           filters: |
+            apt-packages: ./**/apt-packages/**
             miniforge: ./**/miniforge/**
             pandoc: ./**/pandoc/**
             quarto-cli: ./**/quarto-cli/**
@@ -78,6 +79,7 @@ jobs:
     strategy:
       matrix:
         features:
+          - apt-packages
           - miniforge
           - pandoc
           - quarto-cli
@@ -105,6 +107,7 @@ jobs:
     strategy:
       matrix:
         features:
+          - apt-packages
           - miniforge
           - pandoc
           - quarto-cli
