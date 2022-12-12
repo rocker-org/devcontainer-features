@@ -23,7 +23,7 @@ The following example installs the `r-cran-curl` package after the `r-apt` Featu
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
         "packages": "r-cran-curl"
     },
