@@ -317,7 +317,7 @@ echo "Install R packages..."
 # Should not add .gitconfig to the user's home directory
 # https://github.com/r-lib/credentials/issues/25
 if [ ! -f "${_REMOTE_USER_HOME}/.gitconfig" ]; then
-    echo "There is no .gitconfig file in the user's home directory..."
+    echo "There is no ${_REMOTE_USER_HOME}/.gitconfig file..."
     DELETE_GITCONFIG=true
 fi
 
@@ -333,8 +333,8 @@ rm -rf /tmp/r-rig
 
 # Should not add .gitconfig to the user's home directory
 # https://github.com/r-lib/credentials/issues/25
-if [ "${DELETE_GITCONFIG}" = "true" ]; then
-    echo "Removing .gitconfig file in the user's home directory..."
+if [ "${DELETE_GITCONFIG}" = "true" ] && [ -f "${_REMOTE_USER_HOME}/.gitconfig" ] ; then
+    echo "Remove ${_REMOTE_USER_HOME}/.gitconfig file..."
     rm -f "${_REMOTE_USER_HOME}/.gitconfig"
 fi
 
