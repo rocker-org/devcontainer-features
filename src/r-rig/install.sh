@@ -313,6 +313,14 @@ else
 fi
 
 echo "Install R packages..."
+
+# Should not add .gitconfig to the user's home directory
+# https://github.com/r-lib/credentials/issues/25
+if [ ! -f "${_REMOTE_USER_HOME}/.gitconfig" ]; then
+    echo "There is no ${_REMOTE_USER_HOME}/.gitconfig file..."
+    DELETE_GITCONFIG=true
+fi
+
 # Install the pak package
 mkdir /tmp/r-rig
 pushd /tmp/r-rig
@@ -322,6 +330,13 @@ su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://
 install_r_packages ${R_PACKAGES[*]}
 popd
 rm -rf /tmp/r-rig
+
+# Should not add .gitconfig to the user's home directory
+# https://github.com/r-lib/credentials/issues/25
+if [ "${DELETE_GITCONFIG}" = "true" ] && [ -f "${_REMOTE_USER_HOME}/.gitconfig" ] ; then
+    echo "Remove ${_REMOTE_USER_HOME}/.gitconfig file..."
+    rm -f "${_REMOTE_USER_HOME}/.gitconfig"
+fi
 
 # Set up IRkernel
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
