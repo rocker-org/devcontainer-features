@@ -46,11 +46,11 @@ The following example installs the `r-cran-curl` package after the `r-apt` Featu
     "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
     "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
         "packages": "r-cran-curl"
-    },
-    "overrideFeatureInstallOrder": [
-        "ghcr.io/rocker-org/devcontainer-features/r-apt"
-    ]
-}
+    }
+},
+"overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/r-apt"
+]
 ```
 
 
