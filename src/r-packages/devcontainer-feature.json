@@ -1,7 +1,7 @@
 {
 	"name": "R packages",
 	"id": "r-packages",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Installs R packages via pak.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages",
 	"options": {
