@@ -7,6 +7,14 @@
 			}
 		}
 	},
+	"install-from-github": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-packages": {
+				"packages": "github::r-lib/crayon"
+			}
+		}
+	},
 	"install-from-r-universe": {
 		"image": "rocker/r-ver:4",
 		"features": {
