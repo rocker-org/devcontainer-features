@@ -23,7 +23,7 @@
 		"additionalRepositories": {
 			"type": "string",
 			"default": "",
-			"description": "Comma separated list of CRAN-like repositories to pass to the `pak::repo_add()` function."
+			"description": "String passed to the `pak::repo_add()` function."
 		}
 	},
 	"installsAfter": [
