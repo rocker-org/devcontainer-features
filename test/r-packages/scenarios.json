@@ -18,7 +18,7 @@
 	"install-from-r-universe": {
 		"image": "rocker/r-ver:4",
 		"features": {
-			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+			"apt-packages": {
 				"packages": "libxml2-dev"
 			},
 			"r-packages": {
@@ -39,7 +39,7 @@
 	"install-after-r-apt": {
 		"image": "debian:stable-slim",
 		"features": {
-			"ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
+			"r-apt": {},
 			"r-packages": {
 				"packages": "cli,rlang"
 			}
