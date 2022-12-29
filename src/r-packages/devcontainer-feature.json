@@ -1,0 +1,34 @@
+{
+	"name": "R packages",
+	"id": "r-packages",
+	"version": "0.1.0",
+	"description": "Installs R packages via pak.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages",
+	"options": {
+		"packages": {
+			"type": "string",
+			"default": "",
+			"description": "Comma separated list of packages to install to pass to the `pak::pak()` function."
+		},
+		"pakVersion": {
+			"type": "string",
+			"enum": [
+				"auto",
+				"devel",
+				"stable"
+			],
+			"default": "auto",
+			"description": "Version of pak to install. By default, the devel version is installed if needed."
+		},
+		"additionalRepositories": {
+			"type": "string",
+			"default": "",
+			"description": "Comma separated list of CRAN-like repositories to pass to the `pak::repo_add()` function."
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/rocker-org/devcontainer-features/r-apt",
+		"ghcr.io/rocker-org/devcontainer-features/r-rig"
+	]
+}
