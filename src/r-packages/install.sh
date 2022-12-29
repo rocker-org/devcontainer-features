@@ -21,7 +21,8 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 if [ ! -x "$(command -v R)" ]; then
-    echo "Cannot run R. Set R before installing this Feature..."
+    echo "Cannot run R. Please install R before installing this Feature."
+    echo "See https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages"
     exit 1
 fi
 
