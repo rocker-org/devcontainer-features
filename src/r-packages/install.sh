@@ -22,7 +22,6 @@ fi
 
 if [ ! -x "$(command -v R)" ]; then
     echo "Cannot run R. Please install R before installing this Feature."
-    echo "See https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages"
     exit 1
 fi
 
