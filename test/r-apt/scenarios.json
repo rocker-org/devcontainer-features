@@ -55,5 +55,21 @@
 				"installRadian": true
 			}
 		}
+	},
+	"install-r-package-non-root-debian": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"r-apt": {
+				"vscodeRSupport": "none"
+			}
+		}
+	},
+	"install-r-package-non-root-ubuntu": {
+		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+		"features": {
+			"r-apt": {
+				"vscodeRSupport": "none"
+			}
+		}
 	}
 }
