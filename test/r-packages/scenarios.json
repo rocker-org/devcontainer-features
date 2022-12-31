@@ -41,7 +41,7 @@
 		"features": {
 			"r-apt": {},
 			"r-packages": {
-				"packages": "cli,rlang"
+				"packages": "R6"
 			}
 		}
 	}
