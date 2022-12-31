@@ -10,6 +10,7 @@ INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
 INSTALL_VSCDEBUGGER=${INSTALLVSCDEBUGGER:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
+R_LIBRARY_PATH="/usr/local/lib/R/site-library"
 
 APT_PACKAGES=(r-base)
 PIP_PACKAGES=()
@@ -123,6 +124,12 @@ install_pip_packages() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
+
+if ! grep -e "^staff:" "/etc/group" >/dev/null 2>&1; then
+    groupadd -r staff
+fi
+usermod -a -G staff "${USERNAME}"
+
 check_packages curl ca-certificates
 
 if [ "${ID}" = "ubuntu" ]; then
@@ -162,6 +169,10 @@ fi
 apt-get update -y
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
+
+chown root:staff "${R_LIBRARY_PATH}"
+chmod g+ws "${R_LIBRARY_PATH}"
+
 # shellcheck disable=SC2048 disable=SC2086
 install_pip_packages ${PIP_PACKAGES[*]}
 
