@@ -16,10 +16,7 @@ or this should be installed after installing Features that installs R
     "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
         "packages": "cli,rlang"
     }
-},
-"overrideFeatureInstallOrder": [
-    "ghcr.io/rocker-org/devcontainer-features/r-rig"
-]
+}
 ```
 
 ## How to specify packages?
