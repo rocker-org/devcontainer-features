@@ -37,7 +37,7 @@
 		}
 	},
 	"install-after-r-apt": {
-		"image": "debian:stable-slim",
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
 			"r-apt": {},
 			"r-packages": {
