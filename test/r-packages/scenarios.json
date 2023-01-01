@@ -44,5 +44,15 @@
 				"packages": "R6"
 			}
 		}
+	},
+	"pkgsysreqs-true": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"r-apt": {},
+			"r-packages": {
+				"packages": "curl",
+				"installSystemRequirements": true
+			}
+		}
 	}
 }

@@ -24,6 +24,11 @@
 			"type": "string",
 			"default": "",
 			"description": "String passed to the `pak::repo_add()` function."
+		},
+		"installSystemRequirements": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install packages' system requirements if available via `pak::pkg_system_requirements()`."
 		}
 	},
 	"installsAfter": [

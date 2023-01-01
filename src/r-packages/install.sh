@@ -3,6 +3,7 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
+INSTALL_SYS_REQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -59,6 +60,15 @@ install_pak() {
     su "${USERNAME}" -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/'"${version}"'/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 }
 
+install_r_package_system_requirements() {
+    local packages="$*"
+    local install_command
+    if [ -n "${packages}" ]; then
+        install_command=$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements('${packages}'))")
+        $install_command
+    fi
+}
+
 install_r_packages() {
     local packages="$*"
     if [ -n "${packages}" ]; then
@@ -68,12 +78,15 @@ install_r_packages() {
 
 export DEBIAN_FRONTEND=noninteractive
 
-
 echo "Install R packages..."
 mkdir /tmp/r-packages
 pushd /tmp/r-packages
 
 install_pak "${PAK_VERSION}"
+if [ "${INSTALL_SYS_REQS}" = "true" ]; then
+    # shellcheck disable=SC2048 disable=SC2086
+    install_r_package_system_requirements ${R_PACKAGES[*]}
+fi
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
 
