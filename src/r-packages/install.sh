@@ -43,6 +43,13 @@ elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" >/dev/null 2>&1; then
     USERNAME=root
 fi
 
+apt_get_update() {
+    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+        echo "Running apt-get update..."
+        apt-get update -y
+    fi
+}
+
 install_pak() {
     local version=$1
 
@@ -65,6 +72,7 @@ install_r_package_system_requirements() {
     local install_command
     if [ -n "${packages}" ]; then
         install_command=$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements('${packages}'))")
+        apt_get_update
         $install_command
     fi
 }
@@ -92,5 +100,8 @@ install_r_packages ${R_PACKAGES[*]}
 
 popd
 rm -rf /tmp/r-packages
+
+# Clean up
+rm -rf /var/lib/apt/lists/*
 
 echo "Done!"
