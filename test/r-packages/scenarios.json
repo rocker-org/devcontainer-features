@@ -49,6 +49,9 @@
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
 			"r-apt": {},
+			"apt-packages": {
+				"packages": "make,gcc,g++"
+			},
 			"r-packages": {
 				"packages": "curl",
 				"installSystemRequirements": true
