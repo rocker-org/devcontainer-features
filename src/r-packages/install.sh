@@ -125,5 +125,6 @@ install_r_packages ${R_PACKAGES[*]}
 
 popd
 rm -rf /tmp/r-packages
+rm -rf /tmp/Rtmp*
 
 echo "Done!"
