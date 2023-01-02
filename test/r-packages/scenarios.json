@@ -81,8 +81,8 @@
 			}
 		}
 	},
-	"pkgsysreqs-true-rockylinux9-curl": {
-		"image": "rstudio/r-base:4.1-rockylinux9",
+	"pkgsysreqs-true-centos7-curl": {
+		"image": "rstudio/r-base:4.1-centos7",
 		"features": {
 			"r-packages": {
 				"packages": "curl",
