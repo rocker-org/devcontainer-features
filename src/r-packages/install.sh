@@ -83,8 +83,8 @@ install_r_package_system_requirements() {
         is_apt="true"
     fi
 
-    if R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}')" >/dev/null 2>&1; then
-        if [ -z "$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements('${packages}'))")" ]; then
+    if R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements(unlist(strsplit('${packages}', ' ')))" >/dev/null 2>&1; then
+        if [ -z "$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements(unlist(strsplit('${packages}', ' '))))")" ]; then
             echo "There are no system requirements to install for the specified R packages."
             return
         fi
@@ -92,7 +92,7 @@ install_r_package_system_requirements() {
             apt_get_update
         fi
         echo "Install system requirements for the R packages..."
-        R -q -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}', execute = TRUE, sudo = FALSE)"
+        R -q -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements(unlist(strsplit('${packages}', ' ')), execute = TRUE, sudo = FALSE)"
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
