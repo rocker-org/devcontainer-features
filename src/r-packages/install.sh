@@ -85,16 +85,20 @@ install_r_package_system_requirements() {
 
     if R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}')" >/dev/null 2>&1; then
         if [ -z "$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements('${packages}'))")" ]; then
+            echo "There are no system requirements to install for the specified R packages."
             return
         fi
         if [ "${is_apt}" = "true" ]; then
             apt_get_update
         fi
+        echo "Install system requirements for the R packages..."
         R -q -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}', execute = TRUE, sudo = FALSE)"
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
         fi
+    else
+        echo "(!) This distribution is not supported by 'pak::pkg_system_requirements()'."
     fi
 }
 
