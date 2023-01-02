@@ -22,8 +22,9 @@ or this should be installed after installing Features that installs R
 Note that source installation of the R packages may require the installation of
 additional build tools and system packages.
 
-For Debian and Ubuntu, we can use the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature
-to install apt packages prior to installing this Feature.
+For Debian and Ubuntu,
+you can use [the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature](https://github.com/rocker-org/devcontainer-features/blob/main/src/apt-packages)
+to install apt packages before installing this Feature.
 
 ```json
 "features": {
@@ -50,6 +51,20 @@ The following example installs `cli` and `rlang`.
     }
 }
 ```
+
+You can also specify packages on GitHub, etc.
+For example, the following example installs a package from <https://github.com/r-lib/crayon>.
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+        "packages": "github::r-lib/crayon"
+    }
+}
+```
+
+Please check [the `pak` documentation](https://pak.r-lib.org/dev/reference/pak_package_sources.html)
+for information on how to specify individual package names.
 
 ## How to add other repositories?
 
