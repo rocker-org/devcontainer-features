@@ -69,11 +69,23 @@ install_pak() {
 
 install_r_package_system_requirements() {
     local packages="$*"
-    local install_command
+    local is_apt="false"
+
+    # shellcheck source=/dev/null
+    source /etc/os-release
+    if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
+        is_apt="true"
+    fi
+
     if [ -n "${packages}" ]; then
-        install_command=$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements('${packages}'))")
-        apt_get_update
-        $install_command
+        if [ "${is_apt}" = "true" ]; then
+            apt_get_update
+        fi
+        R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}', execute = TRUE, sudo = FALSE)"
+        if [ "${is_apt}" = "true" ]; then
+            # Clean up
+            rm -rf /var/lib/apt/lists/*
+        fi
     fi
 }
 
@@ -100,8 +112,5 @@ install_r_packages ${R_PACKAGES[*]}
 
 popd
 rm -rf /tmp/r-packages
-
-# Clean up
-rm -rf /var/lib/apt/lists/*
 
 echo "Done!"
