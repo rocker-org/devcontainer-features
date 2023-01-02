@@ -28,7 +28,7 @@ if [ "${architecture}" != "x86_64" ] && [ "${architecture}" != "aarch64" ]; then
 fi
 
 if [ ! -x "$(command -v R)" ]; then
-    echo "Cannot run R. Please install R before installing this Feature."
+    echo "(!) Cannot run R. Please install R before installing this Feature."
     exit 1
 fi
 
@@ -98,7 +98,7 @@ install_r_package_system_requirements() {
             rm -rf /var/lib/apt/lists/*
         fi
     else
-        echo "(!) This distribution is not supported by 'pak::pkg_system_requirements()'."
+        echo "(!) This OS is not supported by 'pak::pkg_system_requirements()'."
     fi
 }
 
