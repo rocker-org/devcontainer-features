@@ -60,7 +60,7 @@ install_pak() {
     local version=$1
 
     if [ "${version}" = "auto" ]; then
-        if su "${USERNAME}" -c "R -q -e 'names(installed.packages()[, 3])'" | grep "pak" >/dev/null 2>&1; then
+        if su "${USERNAME}" -c "R -s -e 'packageVersion(\"pak\")'" >/dev/null 2>&1; then
             echo "pak is already installed. Skip pak installation..."
             return
         else
