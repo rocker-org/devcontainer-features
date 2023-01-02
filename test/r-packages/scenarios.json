@@ -58,6 +58,16 @@
 			}
 		}
 	},
+	"pkgsysreqs-true-debian-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"r-apt": {},
+			"r-packages": {
+				"packages": "R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
 	"pkgsysreqs-true-ubuntu-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
