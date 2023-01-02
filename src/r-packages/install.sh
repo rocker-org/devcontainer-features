@@ -87,7 +87,7 @@ install_r_package_system_requirements() {
         if [ "${is_apt}" = "true" ]; then
             apt_get_update
         fi
-        R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}', execute = TRUE, sudo = FALSE)"
+        R -q -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}', execute = TRUE, sudo = FALSE)"
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
