@@ -21,8 +21,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
+architecture="$(uname -m)"
+if [ "${architecture}" != "x86_64" ] && [ "${architecture}" != "aarch64" ]; then
     echo "(!) Architecture $architecture unsupported"
     exit 1
 fi
