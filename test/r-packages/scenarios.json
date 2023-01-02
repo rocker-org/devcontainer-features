@@ -45,13 +45,35 @@
 			}
 		}
 	},
-	"pkgsysreqs-true": {
+	"pkgsysreqs-true-ubuntu-curl": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
 			"r-apt": {},
 			"apt-packages": {
 				"packages": "make,gcc,g++"
 			},
+			"r-packages": {
+				"packages": "curl",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-ubuntu-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"r-apt": {},
+			"apt-packages": {
+				"packages": "make,gcc,g++"
+			},
+			"r-packages": {
+				"packages": "R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-rockylinux9-curl": {
+		"image": "rstudio/r-base:4.1-rockylinux9",
+		"features": {
 			"r-packages": {
 				"packages": "curl",
 				"installSystemRequirements": true
