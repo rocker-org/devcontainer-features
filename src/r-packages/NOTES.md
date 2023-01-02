@@ -2,7 +2,7 @@
 
 ## System Requirements
 
-Supports `linux/amd64` and `linux/arm64` platforms with R installed.
+This Feature supports `linux/amd64` and `linux/arm64` platforms with R installed.
 
 This Feature does not install R.
 Please use this with an R-installed image (e.g. [`ghcr.io/rocker-org/devcontainer/r-ver`](https://rocker-project.org/images/devcontainer/images.html))
@@ -14,7 +14,25 @@ or this should be installed after installing Features that installs R
 "features": {
     "ghcr.io/rocker-org/devcontainer-features/r-rig:1": {},
     "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-        "packages": "cli,rlang"
+        "packages": "rlang"
+    }
+}
+```
+
+Note that source installation of the R packages may require the installation of
+additional build tools and system packages.
+
+For Debian and Ubuntu, we can use the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature
+to install apt packages prior to installing this Feature.
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+        "packages": "make,gcc,g++"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+        "packages": "cli"
     }
 }
 ```
