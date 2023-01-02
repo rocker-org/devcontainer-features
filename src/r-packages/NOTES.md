@@ -4,7 +4,6 @@
 
 This Feature supports `linux/amd64` and `linux/arm64` platforms with R installed.
 
-This Feature does not install R.
 Please use this with an R-installed image (e.g. [`ghcr.io/rocker-org/devcontainer/r-ver`](https://rocker-project.org/images/devcontainer/images.html))
 or this should be installed after installing Features that installs R
 (e.g. [`ghcr.io/rocker-org/devcontainer-features/r-apt`](https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt),
