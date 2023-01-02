@@ -83,7 +83,7 @@ install_r_package_system_requirements() {
         is_apt="true"
     fi
 
-    if [ -n "${packages}" ]; then
+    if R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements('${packages}')" >/dev/null 2>&1; then
         if [ "${is_apt}" = "true" ]; then
             apt_get_update
         fi
