@@ -45,7 +45,7 @@
 			}
 		}
 	},
-	"pkgsysreqs-true-ubuntu-curl": {
+	"pkgsysreqs-true-ubuntu-curl-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
 			"r-apt": {},
@@ -53,7 +53,7 @@
 				"packages": "make,gcc,g++"
 			},
 			"r-packages": {
-				"packages": "curl",
+				"packages": "curl,R6",
 				"installSystemRequirements": true
 			}
 		}
@@ -81,11 +81,11 @@
 			}
 		}
 	},
-	"pkgsysreqs-true-centos7-curl": {
+	"pkgsysreqs-true-centos7-curl-R6": {
 		"image": "rstudio/r-base:4.1-centos7",
 		"features": {
 			"r-packages": {
-				"packages": "curl",
+				"packages": "curl,R6",
 				"installSystemRequirements": true
 			}
 		}
