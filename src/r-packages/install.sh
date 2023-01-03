@@ -85,6 +85,7 @@ install_r_packages() {
         if [ "${INSTALL_SYS_REQS}" = "true" ]; then
             ci_old="${CI}"
             export CI="true"
+            echo "Set 'CI' to '${CI}'..."
             # shellcheck source=/dev/null
             source /etc/os-release
             if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
@@ -101,6 +102,7 @@ install_r_packages() {
         fi
         if [ "${INSTALL_SYS_REQS}" = "true" ]; then
             export CI="${ci_old}"
+            echo "Set 'CI' to '${CI}'..."
         fi
     fi
 }
