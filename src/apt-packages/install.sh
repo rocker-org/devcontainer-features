@@ -7,6 +7,11 @@ APT_PACKAGES=("${PACKAGES//,/ }")
 
 set -e
 
+if [ -z "${PACKAGES}" ]; then
+    echo "No packages specified. Skip installation..."
+    exit 0
+fi
+
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
