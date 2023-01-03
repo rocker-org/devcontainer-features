@@ -4,7 +4,7 @@ PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
 
-export PKG_SYSREQS=${PKGSYSREQS:-"false"}
+export PKGSYSREQS=${PKGSYSREQS:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -77,10 +77,13 @@ install_pak() {
 install_r_packages() {
     local packages="$*"
     local is_apt="false"
+    local ci_old
 
     if [ -n "${packages}" ]; then
 
-        if [ "${PKG_SYSREQS}" = "true" ]; then
+        if [ "${PKGSYSREQS}" = "true" ]; then
+            ci_old="${CI}"
+            export CI="true"
             # shellcheck source=/dev/null
             source /etc/os-release
             if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
@@ -94,6 +97,9 @@ install_r_packages() {
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
+        fi
+        if [ "${PKGSYSREQS}" = "true" ]; then
+            export CI="${ci_old}"
         fi
     fi
 }
