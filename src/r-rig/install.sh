@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 R_VERSION=${VERSION:-"release"}
+PAK_VERSION=${PAKVERSION:-"auto"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RENV=${INSTALLRENV:-"false"}
@@ -238,6 +239,23 @@ install_pandoc() {
     rm -rf /tmp/pandoc
 }
 
+install_pak() {
+    local version=$1
+
+    if [ "${version}" = "auto" ]; then
+        if su "${USERNAME}" -c "R -s -e 'packageVersion(\"pak\")'" >/dev/null 2>&1; then
+            echo "pak is already installed. Skip pak installation..."
+            return
+        else
+            version="devel"
+        fi
+    fi
+
+    echo "Installing pak ${version}..."
+    # shellcheck disable=SC2016
+    su "${USERNAME}" -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/'"${version}"'/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
+}
+
 install_r_packages() {
     local packages="$*"
     if [ -n "${packages}" ]; then
@@ -324,6 +342,8 @@ fi
 # Install the pak package
 mkdir /tmp/r-rig
 pushd /tmp/r-rig
+
+install_pak "${PAK_VERSION}"
 # shellcheck disable=SC2016
 su ${USERNAME} -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 # shellcheck disable=SC2048 disable=SC2086

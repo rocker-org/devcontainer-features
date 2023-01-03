@@ -15,6 +15,16 @@
 			"default": "release",
 			"description": "Select version of R, if not the latest release version."
 		},
+		"pakVersion": {
+			"type": "string",
+			"enum": [
+				"auto",
+				"devel",
+				"stable"
+			],
+			"default": "auto",
+			"description": "Version of pak to install. By default, the devel version is installed if needed."
+		},
 		"vscodeRSupport": {
 			"type": "string",
 			"enum": [
