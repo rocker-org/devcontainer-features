@@ -7,7 +7,7 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 check "R" R -q -e "sessionInfo()"
-check "radian" radian --version
+check "radian" /usr/local/bin/radian --version
 
 # Report result
 reportResults
