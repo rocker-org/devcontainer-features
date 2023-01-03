@@ -14,18 +14,20 @@
 		}
 	},
 	"latest-pandoc": {
-		"image": "ubuntu:latest",
+		"image": "rocker/r-ver:4",
 		"features": {
 			"r-rig": {
+				"version": "none",
 				"installRMarkdown": true,
 				"pandocVersion": "latest"
 			}
 		}
 	},
 	"os-pandoc": {
-		"image": "ubuntu:latest",
+		"image": "rocker/r-ver:4",
 		"features": {
 			"r-rig": {
+				"version": "none",
 				"installRMarkdown": true,
 				"pandocVersion": "os-provided"
 			}
@@ -55,12 +57,11 @@
 			}
 		}
 	},
-	"install-on-rocker-r-ver": {
-		"image": "rocker/r-ver:4.0.5",
+	"install-on-devcontainer-r-ver": {
+		"image": "ghcr.io/rocker-org/devcontainer/r-ver:4",
 		"features": {
 			"r-rig": {
 				"version": "none",
-				"installRMarkdown": true,
 				"installJupyterlab": true
 			}
 		}
