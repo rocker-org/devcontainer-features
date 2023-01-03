@@ -1,0 +1,22 @@
+name: "Validate devcontainer-feature.json files"
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - src/**
+      - test/**
+      - "!**.md"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Validate devcontainer-feature.json files"
+        uses: devcontainers/action@v1
+        with:
+          validate-only: "true"
+          base-path-to-features: "./src"
