@@ -45,6 +45,16 @@
 			}
 		}
 	},
+	"pkgsysreqs-true-install-after-r-rig": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
+			"r-packages": {
+				"packages": "curl,R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
 	"pkgsysreqs-true-ubuntu-curl-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
