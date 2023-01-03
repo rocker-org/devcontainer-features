@@ -7,8 +7,8 @@ APT_PACKAGES=("${PACKAGES//,/ }")
 
 set -e
 
-if [ -z "${PACKAGES}" ]; then
-    echo "No packages specified. Skip installation..."
+if [ -z "${PACKAGES}" ] && [ "${UPGRADE_PACKAGES}" = "false" ] ; then
+    echo "No packages specified, and no upgrade required. Skip installation..."
     exit 0
 fi
 
