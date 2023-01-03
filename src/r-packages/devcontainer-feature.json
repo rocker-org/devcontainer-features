@@ -29,6 +29,11 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install packages' system requirements if available via `pak::pak()`."
+		},
+		"notCran":{
+			"type": "boolean",
+			"default": false,
+			"description": "The 'NOT_CRAN' environment variable that is referenced during the installation of this Feature."
 		}
 	},
 	"installsAfter": [
