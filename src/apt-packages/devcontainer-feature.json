@@ -1,7 +1,7 @@
 {
 	"name": "apt packages",
 	"id": "apt-packages",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Installs packages via apt.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages",
 	"options": {
