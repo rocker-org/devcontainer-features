@@ -18,7 +18,7 @@
 	"install-from-r-universe": {
 		"image": "rocker/r-ver:4",
 		"features": {
-			"apt-packages": {
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
 				"packages": "libxml2-dev"
 			},
 			"r-packages": {
@@ -39,7 +39,7 @@
 	"install-after-r-apt": {
 		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
-			"r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
 			"r-packages": {
 				"packages": "R6"
 			}
@@ -48,8 +48,8 @@
 	"pkgsysreqs-true-ubuntu-curl-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
-			"r-apt": {},
-			"apt-packages": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
 				"packages": "make,gcc,g++"
 			},
 			"r-packages": {
@@ -61,7 +61,7 @@
 	"pkgsysreqs-true-debian-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
-			"r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
 			"r-packages": {
 				"packages": "R6",
 				"installSystemRequirements": true
@@ -71,8 +71,8 @@
 	"pkgsysreqs-true-ubuntu-R6": {
 		"image": "mcr.microsoft.com/devcontainers/base:focal",
 		"features": {
-			"r-apt": {},
-			"apt-packages": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
 				"packages": "make,gcc,g++"
 			},
 			"r-packages": {
