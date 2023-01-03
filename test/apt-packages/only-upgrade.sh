@@ -6,8 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "R" R --version | grep 4.0.5
-check "pandoc" R -q -e 'rmarkdown::pandoc_version()'
+check "version" apt --version
 
 # Report result
 reportResults

@@ -16,6 +16,7 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of R, if not the latest release version. | string | release |
+| pakVersion | Version of pak to install. By default, the devel version is installed if needed. | string | auto |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
 | installDevTools | Install the `devtools` R package. | boolean | false |
 | installREnv | Install the `renv` R package. | boolean | false |

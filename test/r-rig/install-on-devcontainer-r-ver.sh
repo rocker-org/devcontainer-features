@@ -6,8 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "R" R -q -e "sessionInfo()"
-check "radian" /usr/local/bin/radian --version
+check "R" R --version
+check "jupyter" jupyter kernelspec list
 
 # Report result
 reportResults
