@@ -54,7 +54,7 @@
 			},
 			"r-packages": {
 				"packages": "curl,R6",
-				"installSystemRequirements": true
+				"pkgSysReqs": true
 			}
 		}
 	},
@@ -64,7 +64,7 @@
 			"r-apt": {},
 			"r-packages": {
 				"packages": "R6",
-				"installSystemRequirements": true
+				"pkgSysReqs": true
 			}
 		}
 	},
@@ -77,7 +77,7 @@
 			},
 			"r-packages": {
 				"packages": "R6",
-				"installSystemRequirements": true
+				"pkgSysReqs": true
 			}
 		}
 	},
@@ -86,7 +86,7 @@
 		"features": {
 			"r-packages": {
 				"packages": "curl,R6",
-				"installSystemRequirements": true
+				"pkgSysReqs": true
 			}
 		}
 	}

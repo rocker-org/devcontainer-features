@@ -25,10 +25,10 @@
 			"default": "",
 			"description": "String passed to the `pak::repo_add()` function."
 		},
-		"installSystemRequirements": {
+		"pkgSysReqs": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install packages' system requirements if available via `pak::pkg_system_requirements()`."
+			"description": "The 'PKG_SYSREQS' environment variable that is referenced during the installation of this Feature."
 		}
 	},
 	"installsAfter": [

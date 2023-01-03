@@ -3,7 +3,8 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-INSTALL_SYS_REQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
+
+export PKG_SYSREQS=${PKGSYSREQS:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -73,39 +74,27 @@ install_pak() {
     su "${USERNAME}" -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/'"${version}"'/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 }
 
-install_r_package_system_requirements() {
+install_r_packages() {
     local packages="$*"
     local is_apt="false"
 
-    # shellcheck source=/dev/null
-    source /etc/os-release
-    if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
-        is_apt="true"
-    fi
+    if [ -n "${packages}" ]; then
 
-    if R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements(unlist(strsplit('${packages}', ' ')))" >/dev/null 2>&1; then
-        if [ -z "$(R -s -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); cat(pak::pkg_system_requirements(unlist(strsplit('${packages}', ' '))))")" ]; then
-            echo "There are no system requirements to install for the specified R packages."
-            return
+        if [ "${PKG_SYSREQS}" = "true" ]; then
+            # shellcheck source=/dev/null
+            source /etc/os-release
+            if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
+                is_apt="true"
+                apt_get_update
+            fi
         fi
-        if [ "${is_apt}" = "true" ]; then
-            apt_get_update
-        fi
-        echo "Install system requirements for the R packages..."
-        R -q -e "pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pkg_system_requirements(unlist(strsplit('${packages}', ' ')), execute = TRUE, sudo = FALSE)"
+
+        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(unlist(strsplit('${packages}', ' ')))\""
+
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
         fi
-    else
-        echo "(!) This OS is not supported by 'pak::pkg_system_requirements()'."
-    fi
-}
-
-install_r_packages() {
-    local packages="$*"
-    if [ -n "${packages}" ]; then
-        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(unlist(strsplit('${packages}', ' ')))\""
     fi
 }
 
@@ -116,10 +105,7 @@ mkdir /tmp/r-packages
 pushd /tmp/r-packages
 
 install_pak "${PAK_VERSION}"
-if [ "${INSTALL_SYS_REQS}" = "true" ]; then
-    # shellcheck disable=SC2048 disable=SC2086
-    install_r_package_system_requirements ${R_PACKAGES[*]}
-fi
+
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
 
