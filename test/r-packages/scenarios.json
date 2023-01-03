@@ -11,7 +11,7 @@
 		"image": "rocker/r-ver:4",
 		"features": {
 			"r-packages": {
-				"packages": "github::r-lib/crayon"
+				"packages": "cli,github::r-lib/crayon,rlang"
 			}
 		}
 	},
