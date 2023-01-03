@@ -7,6 +7,14 @@
 			}
 		}
 	},
+	"only-upgrade": {
+		"image": "debian:stable-slim",
+		"features": {
+			"apt-packages": {
+				"upgradePackages": true
+			}
+		}
+	},
 	"install-r-packages": {
 		"image": "ubuntu:jammy",
 		"features": {
