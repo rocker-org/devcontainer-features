@@ -29,6 +29,7 @@ jobs:
             pandoc: ./**/pandoc/**
             quarto-cli: ./**/quarto-cli/**
             r-apt: ./**/r-apt/**
+            r-packages: ./**/r-packages/**
             r-rig: ./**/r-rig/**
 
   test-detects:
@@ -84,6 +85,7 @@ jobs:
           - pandoc
           - quarto-cli
           - r-apt
+          - r-packages
           - r-rig
         baseImage:
           - debian:stable-slim
@@ -112,6 +114,7 @@ jobs:
           - pandoc
           - quarto-cli
           - r-apt
+          - r-packages
           - r-rig
     steps:
       - uses: actions/checkout@v3

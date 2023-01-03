@@ -1,0 +1,103 @@
+{
+	"install-cli-rlang": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-packages": {
+				"packages": "cli,rlang"
+			}
+		}
+	},
+	"install-from-github": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-packages": {
+				"packages": "cli,github::r-lib/crayon,rlang"
+			}
+		}
+	},
+	"install-from-r-universe": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
+				"packages": "libxml2-dev"
+			},
+			"r-packages": {
+				"packages": "rversions",
+				"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
+			}
+		}
+	},
+	"install-stable-pak": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-packages": {
+				"packages": "cli,rlang",
+				"pakVersion": "stable"
+			}
+		}
+	},
+	"install-after-r-apt": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"r-packages": {
+				"packages": "R6"
+			}
+		}
+	},
+	"pkgsysreqs-true-install-after-r-rig": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
+			"r-packages": {
+				"packages": "curl,R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-ubuntu-curl-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
+				"packages": "make,gcc,g++"
+			},
+			"r-packages": {
+				"packages": "curl,R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-debian-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"r-packages": {
+				"packages": "R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-ubuntu-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
+				"packages": "make,gcc,g++"
+			},
+			"r-packages": {
+				"packages": "R6",
+				"installSystemRequirements": true
+			}
+		}
+	},
+	"pkgsysreqs-true-centos7-curl-R6": {
+		"image": "rstudio/r-base:4.1-centos7",
+		"features": {
+			"r-packages": {
+				"packages": "curl,R6",
+				"installSystemRequirements": true
+			}
+		}
+	}
+}
