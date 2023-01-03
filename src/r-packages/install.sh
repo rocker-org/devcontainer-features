@@ -3,8 +3,7 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-
-export PKGSYSREQS=${PKGSYSREQS:-"false"}
+INSTALL_SYS_REQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -81,7 +80,7 @@ install_r_packages() {
 
     if [ -n "${packages}" ]; then
 
-        if [ "${PKGSYSREQS}" = "true" ]; then
+        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
             ci_old="${CI}"
             export CI="true"
             # shellcheck source=/dev/null
@@ -98,7 +97,7 @@ install_r_packages() {
             # Clean up
             rm -rf /var/lib/apt/lists/*
         fi
-        if [ "${PKGSYSREQS}" = "true" ]; then
+        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
             export CI="${ci_old}"
         fi
     fi
