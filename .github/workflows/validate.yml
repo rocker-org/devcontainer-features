@@ -4,9 +4,7 @@ on:
     branches:
       - main
     paths:
-      - src/**
-      - test/**
-      - "!**.md"
+      - "**/devcontainer-feature.json"
   workflow_dispatch:
 
 jobs:
