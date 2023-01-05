@@ -55,8 +55,13 @@ For more information, please check [the Rocker Project website](https://rocker-p
 By default, this feature installs [the `pak` package](https://pak.r-lib.org/),
 which is useful for installing the R packages.
 
+If you want to install R packages via `pak` during the container build phase,
+you can use [the `ghcr.io/rocker-org/devcontainer-features/r-packages` Feature](https://github.com/rocker-org/devcontainer-features/blob/main/src/r-packages)
+to do so.
+Please check the `ghcr.io/rocker-org/devcontainer-features/r-packages` Feature's document for more information.
+
 The `pak` package has the ability to install system libraries in certain distributions, but is turned off by default.
-To enable this ability, set the `PKG_SYSREQS` environment variable to `true`.
+To enable this ability, set the `PKG_SYSREQS` environment variable or the `CI` environment variable to `true`.
 
 You can configure this in `remoteEnv` in `devcontainer.json` as like follows.
 
@@ -90,6 +95,12 @@ $ R -q -e 'pak::pak("curl")'
 
 This feature has some options to install Python packages such as `jupyterlab`.
 When installing Python packages, if `python3 -m pip` is not available, it will install `python3-pip` via apt.
+
+## References
+
+- [rig](https://github.com/r-lib/rig)
+- [pak](https://pak.r-lib.org)
+- [Rocker Project](https://rocker-project.org)
 
 
 ---
