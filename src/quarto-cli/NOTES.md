@@ -4,10 +4,6 @@
 
 `linux/amd64` platform `debian` and `ubuntu`.
 
-## References
-
-- [Quarto](https://quarto.org)
-
 ## Execution Engine
 
 This feature will not install execution engines such as `jupyter` or `knitr`,
@@ -21,7 +17,6 @@ For example, set `postCreateCommand` to install `jupyter` on `mcr.microsoft.com/
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:latest": {}
     },
-    "remoteUser": "vscode",
     "postCreateCommand": "python3 -m pip install jupyter"
 }
 ```
@@ -46,3 +41,7 @@ You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
     }
 }
 ```
+
+## References
+
+- [Quarto](https://quarto.org)
