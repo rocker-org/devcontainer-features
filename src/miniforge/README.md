@@ -36,8 +36,16 @@ mamba install -y python=3.7
 
 ## Conda or Miniforge?
 
-- This Feature is similar to [`ghcr.io/devcontainers/features/conda`](https://github.com/devcontainers/features/tree/main/src/conda),
-  but differs in options and arm64 platform support.
+This Feature is similar to [`ghcr.io/devcontainers/features/conda`](https://github.com/devcontainers/features/tree/main/src/conda),
+but differs in options and arm64 platform support.
+
+## Mambaforge or micormamba?
+
+[The `ghcr.io/mamba-org/devcontainer-features/micromamba` Feature](https://github.com/mamba-org/devcontainer-features/tree/main/src/micromamba)
+installs only [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html), a single binary command line tool.
+micromamba is lightweight, so installation is quick.
+
+If you do not need Conda, Mamba (which exist on top of Python) or Python by default, the micromamba Feature may be a better choice.
 
 ## References
 
