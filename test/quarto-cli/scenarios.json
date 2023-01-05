@@ -22,5 +22,16 @@
 		"features": {
 			"quarto-cli": {}
 		}
+	},
+	"chromium-on-debian": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"installChromium": true
+			},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+				"packages": "chromium"
+			}
+		}
 	}
 }
