@@ -138,8 +138,7 @@ fi
 if [ "${INSTALL_CHROMIUM}" = "true" ]; then
     echo "Installing chromium..."
     echo "(!) Quarto installs headless Chromium via Puppeteer. The bundled Chromium that Puppeteer installs may not work on Docker containers."
-    echo "(!) Please check the Puppeteer document: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker"
-    check_packages libfontconfig
+    echo "    Please check the Puppeteer document: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker"
     su "${USERNAME}" -c 'quarto tools install chromium'
 fi
 
