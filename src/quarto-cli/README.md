@@ -1,4 +1,5 @@
 
+
 # Quarto CLI (quarto-cli)
 
 Installs the Quarto CLI. Auto-detects latest version.
