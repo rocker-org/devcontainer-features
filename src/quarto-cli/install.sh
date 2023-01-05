@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 CLI_VERSION=${VERSION:-"latest"}
-INSTALL_TINYTEX=${INSTALLTINYTEX-"false"}
+INSTALL_TINYTEX=${INSTALLTINYTEX:-"false"}
+INSTALL_CHROMIUM=${INSTALLCHROMIUM:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -36,7 +37,7 @@ if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     if [ "${USERNAME}" = "" ]; then
         USERNAME=root
     fi
-elif [ "${USERNAME}" = "none" ] || ! id -u ${USERNAME} >/dev/null 2>&1; then
+elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" >/dev/null 2>&1; then
     USERNAME=root
 fi
 
@@ -131,7 +132,15 @@ install_cli "${CLI_VERSION}"
 if [ "${INSTALL_TINYTEX}" = "true" ]; then
     echo "Installing TinyTeX..."
     check_packages libfontconfig
-    su ${USERNAME} -c 'quarto tools install tinytex'
+    su "${USERNAME}" -c 'quarto tools install tinytex'
+fi
+
+if [ "${INSTALL_CHROMIUM}" = "true" ]; then
+    echo "Installing chromium..."
+    echo "(!) Quarto installs headless Chromium via Puppeteer. The bundled Chromium that Puppeteer installs may not work on Docker containers."
+    echo "(!) Please check the Puppeteer document: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker"
+    check_packages libfontconfig
+    su "${USERNAME}" -c 'quarto tools install chromium'
 fi
 
 # Clean up
