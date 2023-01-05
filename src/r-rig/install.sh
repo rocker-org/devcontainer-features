@@ -344,10 +344,10 @@ mkdir /tmp/r-rig
 pushd /tmp/r-rig
 
 install_pak "${PAK_VERSION}"
-# shellcheck disable=SC2016
-su "${USERNAME}" -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
+
 # shellcheck disable=SC2048 disable=SC2086
 install_r_packages ${R_PACKAGES[*]}
+
 popd
 rm -rf /tmp/r-rig
 
