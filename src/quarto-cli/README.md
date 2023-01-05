@@ -18,16 +18,13 @@ Installs the Quarto CLI. Auto-detects latest version.
 |-----|-----|-----|-----|
 | version | Select version of the Quarto CLI, if not latest. | string | latest |
 | installTinyTex | Install TinyTeX by using the `quarto tools install tinytex` command. Works only with version 1.2 or later. | boolean | false |
+| installChromium | Run the `quarto tools install chromium` command. Check the document for details. | boolean | false |
 
 <!-- markdownlint-disable MD041 -->
 
 ## Supported platforms
 
 `linux/amd64` platform `debian` and `ubuntu`.
-
-## References
-
-- [Quarto](https://quarto.org)
 
 ## Execution Engine
 
@@ -42,10 +39,37 @@ For example, set `postCreateCommand` to install `jupyter` on `mcr.microsoft.com/
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/quarto-cli:latest": {}
     },
-    "remoteUser": "vscode",
     "postCreateCommand": "python3 -m pip install jupyter"
 }
 ```
+
+## Install Chromium
+
+Chromium may be required to render documents containing [diagrams code blocks](https://quarto.org/docs/authoring/diagrams.html)
+such as `{mermaid}` and `{dot}` into non-HTML formats.
+
+To do this in a Docker container, besides specifying the `installChromium` option of this Feature,
+you also need to install Chromium itself.
+For Debian, this can be done with `devcontainer.json` as follows
+using the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature.
+
+```json
+{
+    "image": "mcr.microsoft.com/devcontainers/base:debian",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+            "installChromium": true
+        },
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "chromium"
+        }
+    }
+}
+```
+
+Unfortunately, this does not work for Ubuntu because it is not possible to install chromium via apt.
+
+See also the Puppeteer documentation. <https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker>
 
 ## Available versions
 
@@ -67,6 +91,10 @@ You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
     }
 }
 ```
+
+## References
+
+- [Quarto](https://quarto.org)
 
 
 ---
