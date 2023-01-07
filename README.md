@@ -45,3 +45,7 @@ Install R packages of the user's choice via [the `pak::pak()` function](https://
 
 Install a version of [R](https://www.r-project.org/) of your choice using [rig](https://github.com/r-lib/rig).
 R packages must be installed via R functions.
+
+### [`renv-cache`](src/renv-cache/README.md)
+
+A simple setup to share [`renv`](https://rstudio.github.io/renv/) cache among multiple containers.

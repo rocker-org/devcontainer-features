@@ -1,0 +1,32 @@
+{
+	"rocker-r-ver": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"renv-cache": {}
+		}
+	},
+	"r-apt": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"renv-cache": {}
+		}
+	},
+	"r-rig": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
+			"renv-cache": {}
+		}
+	},
+	"gh-version-renv": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+				"packages": "github::rstudio/renv"
+			},
+			"renv-cache": {}
+		}
+	}
+}
