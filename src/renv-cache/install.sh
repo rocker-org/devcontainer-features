@@ -6,7 +6,8 @@ set -e
 
 if [ ! -x "$(command -v R)" ]; then
     echo "(!) Cannot run R. Please install R before installing this Feature."
-    exit 1
+    echo "    Skip installation..."
+    exit 0
 fi
 
 install_renv() {
