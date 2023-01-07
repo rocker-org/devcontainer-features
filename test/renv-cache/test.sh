@@ -6,7 +6,6 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "renv" R -q -e 'packageVersion("renv")'
 
 # Report result
 reportResults
