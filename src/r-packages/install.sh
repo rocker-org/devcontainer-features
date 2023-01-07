@@ -113,7 +113,6 @@ pushd /tmp/r-packages
 
 install_pak "${PAK_VERSION}"
 
-# shellcheck disable=SC2048 disable=SC2086
 install_r_packages "${PACKAGES}"
 
 popd
