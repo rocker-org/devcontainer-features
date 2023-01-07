@@ -14,7 +14,7 @@ install_renv() {
     if su "${USERNAME}" -c "R -s -e 'packageVersion(\"renv\")'" >/dev/null 2>&1; then
         echo "renv R package is already installed. Skip renv installation..."
     else
-        echo "Install renv R package from ..."
+        echo "Install renv R package..."
         mkdir /tmp/renv-cache
         cd /tmp/renv-cache
         su "${USERNAME}" -c "R -s -e 'install.packages(\"renv\")'"
