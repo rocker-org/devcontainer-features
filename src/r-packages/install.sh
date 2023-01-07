@@ -9,8 +9,6 @@ export NOT_CRAN=${NOTCRAN:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
-R_PACKAGES=("${PACKAGES//,/ }")
-
 set -e
 
 if [ -z "${PACKAGES}" ]; then
@@ -76,7 +74,7 @@ install_pak() {
 }
 
 install_r_packages() {
-    local packages="$*"
+    local packages=$1
     local is_apt="false"
     local ci_old
 
@@ -94,7 +92,7 @@ install_r_packages() {
             fi
         fi
 
-        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(unlist(strsplit('${packages}', ' ')))\""
+        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(unlist(strsplit('${packages}', ',')))\""
 
         if [ "${is_apt}" = "true" ]; then
             # Clean up
@@ -115,8 +113,7 @@ pushd /tmp/r-packages
 
 install_pak "${PAK_VERSION}"
 
-# shellcheck disable=SC2048 disable=SC2086
-install_r_packages ${R_PACKAGES[*]}
+install_r_packages "${PACKAGES}"
 
 popd
 rm -rf /tmp/r-packages
