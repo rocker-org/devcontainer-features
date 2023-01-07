@@ -1,0 +1,25 @@
+{
+	"name": "renv cache",
+	"id": "renv-cache",
+	"version": "0.1.0",
+	"description": "Install the renv R package and set renv cache to a Docker volume. R must already be installed.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/renv-cache",
+	"options": {},
+	"containerEnv": {
+		"RENV_PATHS_CACHE": "/renv/cache"
+	},
+	"mounts": [
+		{
+			"source": "devcontainer-renv-cache",
+			"target": "/renv/cache",
+			"type": "volume"
+		}
+	],
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/rocker-org/devcontainer-features/apt-packages",
+		"ghcr.io/rocker-org/devcontainer-features/r-apt",
+		"ghcr.io/rocker-org/devcontainer-features/r-packages",
+		"ghcr.io/rocker-org/devcontainer-features/r-rig"
+	]
+}
