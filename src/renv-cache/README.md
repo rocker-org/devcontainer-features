@@ -22,10 +22,13 @@ Install the renv R package and set renv cache to a Docker volume. Cache is share
 
 ## System Requirements
 
-R must already be installed.
+Not particularly.
 
 If R cannot be run or the `renv` R package is already installed,
-the installation script of this Feature does nothing.
+the installation script of this Feature create the cache directory and exit.
+In other words, it can be installed in a container that does not use R.
+
+If R is already installed and the `renv` R package is not, install the `renv` package.
 
 If you want to install a specific version of `renv`,
 please use [the `ghcr.io/rocker-org/devcontainer-features/r-packages` Feature](https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages).
