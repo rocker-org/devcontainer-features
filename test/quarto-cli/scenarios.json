@@ -33,5 +33,27 @@
 				"packages": "chromium"
 			}
 		}
+	},
+	"chromium-on-focal": {
+		"image": "mcr.microsoft.com/devcontainers/base:focal",
+		"features": {
+			"quarto-cli": {
+				"installChromium": true
+			},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+				"packages": "chromium-browser"
+			}
+		}
+	},
+	"chromium-on-jammy": {
+		"image": "mcr.microsoft.com/devcontainers/base:jammy",
+		"features": {
+			"quarto-cli": {
+				"installChromium": true
+			},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+				"packages": "chromium-browser"
+			}
+		}
 	}
 }
