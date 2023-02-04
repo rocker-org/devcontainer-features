@@ -259,7 +259,7 @@ install_pak() {
 install_r_packages() {
     local packages="$*"
     if [ -n "${packages}" ]; then
-        su "${USERNAME}" -c "R -q -e \"pak::pak(unlist(strsplit('${packages}', ' ')))\""
+        su "${USERNAME}" -c "R -q -e \"pak::pak(unlist(strsplit('${packages}', ' '))); pak::cache_clean()\""
     fi
 }
 
@@ -369,6 +369,5 @@ fi
 rm -rf /var/lib/apt/lists/*
 rm -rf /tmp/rig
 rm -rf /tmp/Rtmp*
-su "${USERNAME}" -c 'R -q -e "pak::cache_clean()"'
 
 echo "Done!"
