@@ -1,5 +1,4 @@
 
-
 # Conda, Mamba (Miniforge) (miniforge)
 
 Installs Conda and Mamba package manager and Python3. conda-forge set as the default (and only) channel.
