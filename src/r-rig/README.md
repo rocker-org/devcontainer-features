@@ -1,5 +1,4 @@
 
-
 # R (via rig) (r-rig)
 
 Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.

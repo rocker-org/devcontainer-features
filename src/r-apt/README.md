@@ -1,5 +1,4 @@
 
-
 # R (via apt) (r-apt)
 
 Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.
