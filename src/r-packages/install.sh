@@ -34,7 +34,7 @@ fi
 
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
-    USERNAME=""
+    USERNAME=""pak
     POSSIBLE_USERS=("vscode" "node" "codespace" "$(awk -v val=1000 -F ":" '$3==val{print $1}' /etc/passwd)")
     for CURRENT_USER in "${POSSIBLE_USERS[@]}"; do
         if id -u "${CURRENT_USER}" >/dev/null 2>&1; then
@@ -118,5 +118,6 @@ install_r_packages "${PACKAGES}"
 popd
 rm -rf /tmp/r-packages
 rm -rf /tmp/Rtmp*
+R -q -e 'pak::cache_clean()'
 
 echo "Done!"
