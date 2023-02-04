@@ -118,6 +118,6 @@ install_r_packages "${PACKAGES}"
 popd
 rm -rf /tmp/r-packages
 rm -rf /tmp/Rtmp*
-R -q -e 'pak::cache_clean()'
+su "${USERNAME}" -c 'R -q -e "pak::cache_clean()"'
 
 echo "Done!"

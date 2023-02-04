@@ -369,6 +369,6 @@ fi
 rm -rf /var/lib/apt/lists/*
 rm -rf /tmp/rig
 rm -rf /tmp/Rtmp*
-R -q -e 'pak::cache_clean()'
+su "${USERNAME}" -c 'R -q -e "pak::cache_clean()"'
 
 echo "Done!"
