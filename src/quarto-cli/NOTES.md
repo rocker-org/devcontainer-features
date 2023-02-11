@@ -52,12 +52,12 @@ See also the Puppeteer documentation. <https://github.com/puppeteer/puppeteer/bl
 ## Available versions
 
 `"latest"` and `"prerelease"` refer to the release and pre-release versions
-listed in [the quarto-cli's download page](https://quarto.org/docs/download).
+listed in [the Quarto CLI's download page](https://quarto.org/docs/download).
 
 You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
 
 `"1"` matches the highest numbered tag has pattern `1.Y.Z` in
-[the quarto-cli GitHub repository](https://github.com/quarto-dev/quarto-cli).
+[the Quarto CLI GitHub repository](https://github.com/quarto-dev/quarto-cli).
 
 ```json
 {
