@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "1.1.1",
+	"version": "1.1.2",
 	"description": "Installs the Quarto CLI. Auto-detects latest version.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/quarto-cli",
 	"options": {

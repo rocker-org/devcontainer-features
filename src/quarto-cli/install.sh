@@ -17,9 +17,10 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Check the platform
+# arm64 supports v1.3.181 or later
 # https://github.com/quarto-dev/quarto-cli/issues/190
 architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ]; then
+if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     echo "(!) Architecture $architecture unsupported"
     exit 1
 fi
@@ -137,7 +138,7 @@ fi
 
 if [ "${INSTALL_CHROMIUM}" = "true" ]; then
     echo "Installing chromium..."
-    echo "(!) Quarto installs headless Chromium via Puppeteer. The bundled Chromium that Puppeteer installs may not work on Docker containers."
+    echo "(!) Quarto CLI installs headless Chromium via Puppeteer. The bundled Chromium that Puppeteer installs may not work on Docker containers."
     echo "    Please check the Puppeteer document: https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker"
     su "${USERNAME}" -c 'quarto tools install chromium'
 fi
