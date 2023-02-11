@@ -17,9 +17,10 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Check the platform
+# arm64 supports v1.3.181 or later
 # https://github.com/quarto-dev/quarto-cli/issues/190
 architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ]; then
+if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     echo "(!) Architecture $architecture unsupported"
     exit 1
 fi
