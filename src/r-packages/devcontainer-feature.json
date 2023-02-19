@@ -1,14 +1,18 @@
 {
 	"name": "R packages (via pak)",
 	"id": "r-packages",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Installs R packages via the pak R package's function. R must be already installed.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages",
 	"options": {
 		"packages": {
 			"type": "string",
 			"default": "",
-			"description": "Comma separated list of packages to install to pass to the `pak::pak()` function."
+			"description": "Comma separated list of packages to install to pass to the `pak::pak()` function.",
+			"proposals": [
+				"",
+				"curl,R6"
+			]
 		},
 		"pakVersion": {
 			"type": "string",
@@ -23,7 +27,11 @@
 		"additionalRepositories": {
 			"type": "string",
 			"default": "",
-			"description": "String passed to the `pak::repo_add()` function."
+			"description": "String passed to the `pak::repo_add()` function.",
+			"proposals": [
+				"",
+				"rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
+			]
 		},
 		"installSystemRequirements": {
 			"type": "boolean",
