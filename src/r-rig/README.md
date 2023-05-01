@@ -26,6 +26,12 @@ Installs R, some R packages, and needed dependencies. Note: May require source c
 | installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | false |
 | pandocVersion | Select version of Pandoc. By default, the latest version is installed if needed. | string | auto |
 
+## Customizations
+
+### VS Code Extensions
+
+- `REditorSupport.r`
+
 <!-- markdownlint-disable MD041 -->
 
 ## Supported platforms
