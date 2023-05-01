@@ -24,6 +24,12 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 | installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | false |
 | useTesting | For Debian, install packages from Debian testing. If false, the R package installed by apt may be out of date. | boolean | true |
 
+## Customizations
+
+### VS Code Extensions
+
+- `REditorSupport.r`
+
 <!-- markdownlint-disable MD041 -->
 
 ## Supported platforms
