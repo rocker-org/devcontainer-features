@@ -89,6 +89,8 @@ For more information, please check [the Rocker Project website](https://rocker-p
 This feature has some options to install Python packages such as `jupyterlab`.
 When installing Python packages, if `python3 -m pip` is not available, it will install `python3-pip` via apt.
 
+This feature set `PIP_BREAK_SYSTEM_PACKAGES=1` when installing Python packages.
+
 ## References
 
 - [Rocker Project](https://rocker-project.org)
