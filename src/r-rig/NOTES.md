@@ -67,6 +67,8 @@ $ R -q -e 'pak::pak("curl")'
 This feature has some options to install Python packages such as `jupyterlab`.
 When installing Python packages, if `python3 -m pip` is not available, it will install `python3-pip` via apt.
 
+This feature set `PIP_BREAK_SYSTEM_PACKAGES=1` when installing Python packages.
+
 ## References
 
 - [rig](https://github.com/r-lib/rig)
