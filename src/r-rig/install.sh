@@ -273,6 +273,7 @@ install_pip_packages() {
     local packages="$*"
     if [ -n "${packages}" ]; then
         check_pip
+        export PIP_BREAK_SYSTEM_PACKAGES=1
         # shellcheck disable=SC2086
         python3 -m pip install --upgrade --no-cache-dir --no-warn-script-location ${packages}
     fi
