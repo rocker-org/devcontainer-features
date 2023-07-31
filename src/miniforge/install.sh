@@ -12,13 +12,13 @@ set -e
 rm -rf /var/lib/apt/lists/*
 
 if conda --version &>/dev/null; then
-    echo "(!) conda is already installed."
-    exit 1
+    echo "(!) conda is already installed - exiting."
+    exit 0
 fi
 
 if mamba --version &>/dev/null; then
-    echo "(!) mamba is already installed."
-    exit 1
+    echo "(!) mamba is already installed - exiting."
+    exit 0
 fi
 
 if [ "$(id -u)" -ne 0 ]; then
