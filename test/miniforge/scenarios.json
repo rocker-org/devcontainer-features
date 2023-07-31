@@ -22,5 +22,12 @@
 				"variant": "Mambaforge-pypy3"
 			}
 		}
+	},
+	"mambaforge-existing-conda": {
+		"image": "jupyter/base-notebook",
+		"features":{
+			"miniforge": {}
+		},
+		"containerUser": "root"
 	}
 }
