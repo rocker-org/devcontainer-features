@@ -95,7 +95,7 @@ if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
 fi
 
 if [ "${INSTALL_BSPM}" = "true" ]; then
-    APT_PACKAGES+=(python3-apt python3-dbus python3-gi)
+    APT_PACKAGES+=(make python3-apt python3-dbus python3-gi)
 fi
 
 apt_get_update() {
