@@ -8,6 +8,7 @@ INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
 INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
 INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
 INSTALL_VSCDEBUGGER=${INSTALLVSCDEBUGGER:-"false"}
+INSTALL_BSPM=${INSTALLBSPM:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 R_LIBRARY_PATH="/usr/local/lib/R/site-library"
@@ -91,6 +92,10 @@ fi
 if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
     APT_PACKAGES+=(r-cran-irkernel)
     PIP_PACKAGES+=(jupyterlab)
+fi
+
+if [ "${INSTALL_BSPM}" = "true" ]; then
+    APT_PACKAGES+=(python3-apt python3-dbus python3-gi)
 fi
 
 apt_get_update() {
@@ -224,6 +229,11 @@ fi
 if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
     check_packages git make r-base-dev r-cran-r6 r-cran-jsonlite
     R -q -e "pak::pkg_install('ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)')"
+fi
+
+if [ "${INSTALL_BSPM}" = "true" ]; then
+    R -q -e 'install.packages("bspm")'
+    echo "bspm::enable()" >>/etc/R/Rprofile.site
 fi
 
 # Set up IRkernel
