@@ -55,5 +55,21 @@
 				"installRadian": true
 			}
 		}
+	},
+	"bspm-debian": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-apt": {
+				"installBspm": true
+			}
+		}
+	},
+	"bspm-ubuntu": {
+		"image": "ubuntu:jammy",
+		"features": {
+			"r-apt": {
+				"installBspm": true
+			}
+		}
 	}
 }
