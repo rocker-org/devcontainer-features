@@ -52,6 +52,17 @@ Packages that cannot be installed via apt must be installed using the R function
 
 For more information, please check [the Rocker Project website](https://rocker-project.org/use/extending.html).
 
+
+### Binary installation via R with bspm
+
+If set the `installBspm` option to `true`, this Feature will install and set up
+the [`bspm` R package](https://github.com/Enchufa2/bspm).
+
+`bspm` provides functions to manage packages via the distribution's package manager.
+
+Known limitation: `bspm` does not seem to work correctly on Debian.
+(<https://github.com/rocker-org/devcontainer-features/pull/169#issuecomment-1665839740>)
+
 ## Python package installation
 
 This feature has some options to install Python packages such as `jupyterlab`.
