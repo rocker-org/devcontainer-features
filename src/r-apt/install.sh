@@ -95,7 +95,7 @@ if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
 fi
 
 if [ "${INSTALL_BSPM}" = "true" ]; then
-    APT_PACKAGES+=(make python3-apt python3-dbus python3-gi)
+    APT_PACKAGES+=(make sudo python3-apt python3-gi)
 fi
 
 apt_get_update() {
@@ -233,6 +233,7 @@ fi
 
 if [ "${INSTALL_BSPM}" = "true" ]; then
     R -q -e 'install.packages("bspm")'
+    echo "options(bspm.sudo = TRUE)" >>/etc/R/Rprofile.site
     echo "bspm::enable()" >>/etc/R/Rprofile.site
 fi
 
