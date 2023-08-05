@@ -1,7 +1,7 @@
 {
 	"name": "R (via apt)",
 	"id": "r-apt",
-	"version": "0.3.4",
+	"version": "0.4.0",
 	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
@@ -50,6 +50,11 @@
 			"type": "boolean",
 			"default": true,
 			"description": "For Debian, install packages from Debian testing. If false, the R package installed by apt may be out of date."
+		},
+		"installBspm": {
+			"type": "boolean",
+			"default": false,
+			"description": "Install and enable BSPM (Bridge to System Package Manager) to install R packages. This option is only working on Ubuntu now."
 		}
 	},
 	"installsAfter": [
