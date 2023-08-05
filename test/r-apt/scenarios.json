@@ -1,61 +1,61 @@
 {
-	// "all-on-debian-stable": {
-	// 	"image": "debian:stable-slim",
-	// 	"features": {
-	// 		"r-apt": {
-	// 			"vscodeRSupport": "full",
-	// 			"installDevTools": true,
-	// 			"installREnv": true,
-	// 			"installRMarkdown": true,
-	// 			"installVscDebugger": true,
-	// 			"installJupyterlab": true,
-	// 			"installRadian": true
-	// 		}
-	// 	}
-	// },
-	// "all-on-focal": {
-	// 	"image": "ubuntu:focal",
-	// 	"features": {
-	// 		"r-apt": {
-	// 			"vscodeRSupport": "full",
-	// 			"installDevTools": true,
-	// 			"installREnv": true,
-	// 			"installRMarkdown": true,
-	// 			"installVscDebugger": true,
-	// 			"installJupyterlab": true,
-	// 			"installRadian": true
-	// 		}
-	// 	}
-	// },
-	// "all-on-jammy": {
-	// 	"image": "ubuntu:jammy",
-	// 	"features": {
-	// 		"r-apt": {
-	// 			"vscodeRSupport": "full",
-	// 			"installDevTools": true,
-	// 			"installREnv": true,
-	// 			"installRMarkdown": true,
-	// 			"installVscDebugger": true,
-	// 			"installJupyterlab": true,
-	// 			"installRadian": true
-	// 		}
-	// 	}
-	// },
-	// "all-on-not-testing": {
-	// 	"image": "debian:stable-slim",
-	// 	"features": {
-	// 		"r-apt": {
-	// 			"useTesting": false,
-	// 			"vscodeRSupport": "full",
-	// 			"installDevTools": true,
-	// 			"installREnv": true,
-	// 			"installRMarkdown": true,
-	// 			"installVscDebugger": true,
-	// 			"installJupyterlab": true,
-	// 			"installRadian": true
-	// 		}
-	// 	}
-	// },
+	"all-on-debian-stable": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-apt": {
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installREnv": true,
+				"installRMarkdown": true,
+				"installVscDebugger": true,
+				"installJupyterlab": true,
+				"installRadian": true
+			}
+		}
+	},
+	"all-on-focal": {
+		"image": "ubuntu:focal",
+		"features": {
+			"r-apt": {
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installREnv": true,
+				"installRMarkdown": true,
+				"installVscDebugger": true,
+				"installJupyterlab": true,
+				"installRadian": true
+			}
+		}
+	},
+	"all-on-jammy": {
+		"image": "ubuntu:jammy",
+		"features": {
+			"r-apt": {
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installREnv": true,
+				"installRMarkdown": true,
+				"installVscDebugger": true,
+				"installJupyterlab": true,
+				"installRadian": true
+			}
+		}
+	},
+	"all-on-not-testing": {
+		"image": "debian:stable-slim",
+		"features": {
+			"r-apt": {
+				"useTesting": false,
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installREnv": true,
+				"installRMarkdown": true,
+				"installVscDebugger": true,
+				"installJupyterlab": true,
+				"installRadian": true
+			}
+		}
+	},
 	"bspm-debian": {
 		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
