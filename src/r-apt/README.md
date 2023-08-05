@@ -23,6 +23,7 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 | installRadian | Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight. | boolean | false |
 | installVscDebugger | Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger. | boolean | false |
 | useTesting | For Debian, install packages from Debian testing. If false, the R package installed by apt may be out of date. | boolean | true |
+| installBspm | Install and enable BSPM (Bridge to System Package Manager) to install R packages. This option is only working on Ubuntu now. | boolean | false |
 
 ## Customizations
 
@@ -83,6 +84,17 @@ so be sure to set up [the `overrideFeatureInstallOrder` property](https://contai
 Packages that cannot be installed via apt must be installed using the R functions.
 
 For more information, please check [the Rocker Project website](https://rocker-project.org/use/extending.html).
+
+
+### Binary installation via R with bspm
+
+If set the `installBspm` option to `true`, this Feature will install and set up
+the [`bspm` R package](https://github.com/Enchufa2/bspm).
+
+`bspm` provides functions to manage packages via the distribution's package manager.
+
+Known limitation: `bspm` does not seem to work correctly on Debian.
+(<https://github.com/rocker-org/devcontainer-features/pull/169#issuecomment-1665839740>)
 
 ## Python package installation
 
