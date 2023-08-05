@@ -57,7 +57,7 @@
 	// 	}
 	// },
 	"bspm-debian": {
-		"image": "debian:stable-slim",
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
 			"r-apt": {
 				"installBspm": true
@@ -65,7 +65,7 @@
 		}
 	},
 	"bspm-ubuntu": {
-		"image": "ubuntu:jammy",
+		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 		"features": {
 			"r-apt": {
 				"installBspm": true
