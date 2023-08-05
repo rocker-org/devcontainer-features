@@ -56,14 +56,15 @@
 			}
 		}
 	},
-	"bspm-debian": {
-		"image": "mcr.microsoft.com/devcontainers/base:debian",
-		"features": {
-			"r-apt": {
-				"installBspm": true
-			}
-		}
-	},
+	// TODO: enable tesing on debian
+	// "bspm-debian": {
+	// 	"image": "mcr.microsoft.com/devcontainers/base:debian",
+	// 	"features": {
+	// 		"r-apt": {
+	// 			"installBspm": true
+	// 		}
+	// 	}
+	// },
 	"bspm-ubuntu": {
 		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 		"features": {

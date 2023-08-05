@@ -54,7 +54,7 @@
 		"installBspm": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install and enable BSPM (Bridge to System Package Manager) to install R packages."
+			"description": "Install and enable BSPM (Bridge to System Package Manager) to install R packages. This option is only working on Ubuntu now."
 		}
 	},
 	"installsAfter": [
