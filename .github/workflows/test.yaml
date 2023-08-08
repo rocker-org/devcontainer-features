@@ -32,6 +32,7 @@ jobs:
             r-packages: ./**/r-packages/**
             r-rig: ./**/r-rig/**
             renv-cache: ./**/renv-cache/**
+            rstudio: ./**/rstudio/**
 
   test-detects:
     needs:
@@ -89,6 +90,7 @@ jobs:
           - r-packages
           - r-rig
           - renv-cache
+          - rstudio
         baseImage:
           - debian:stable-slim
           - ubuntu:focal
@@ -119,6 +121,7 @@ jobs:
           - r-packages
           - r-rig
           - renv-cache
+          - rstudio
     steps:
       - uses: actions/checkout@v3
 

@@ -1,0 +1,27 @@
+{
+	"name": "RStudio",
+	"id": "rstudio",
+	"version": "1.0.0",
+	"description": "Installs RStudio",
+	"options": {
+		"password": {
+			"type": "string",
+			"description": "Password to use for default user.",
+			"default": ""
+		},
+		"rstudioVersion": {
+			"type": "string",
+			"description": "RStudio version to install.",
+			"default": "2023.09.0-daily+301"
+		}
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/devcontainers/nvidia-cuda"
+	],
+	"dependsOn": {
+		"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
+			"packages": "r-base,ca-certificates,lsb-release,file,git,libapparmor1,libclang-dev,libcurl4-openssl-dev,libedit2,libobjc4,libssl-dev,libpq5,psmisc,procps,python-setuptools,pwgen,sudo,wget"
+		}
+	}
+}
