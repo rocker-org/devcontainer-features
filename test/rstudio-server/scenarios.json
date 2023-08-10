@@ -20,13 +20,5 @@
 				"version": "daily"
 			}
 		}
-	},
-	"version-daily-specific": {
-		"image": "rocker/r-ver",
-		"features": {
-			"rstudio-server": {
-				"version": "2023.09.0-daily+306"
-			}
-		}
 	}
 }
