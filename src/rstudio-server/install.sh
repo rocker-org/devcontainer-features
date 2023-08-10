@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION=${VERSION:-"stable"}
+RS_VERSION=${VERSION:-"stable"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
@@ -105,9 +105,9 @@ install_rstudio() {
     if [[ "${version}" == "stable" ]] || [[ "${version}" == "preview" ]] || [[ "${version}" == "daily" ]]; then
         curl -sLo "${deb_file}" "https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
     else
-        curl -sLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${VERSION/"+"/"-"}-${architecture}.deb" ||
-            curl -sLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${VERSION/"+"/"-"}-${architecture}.deb" ||
-            echo "(!) Version ${VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
+        curl -sLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
+            curl -sLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
+            echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
     fi
 
     ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
@@ -124,18 +124,18 @@ check_packages curl ca-certificates gdebi-core
 check_r
 
 # Soft version matching
-# If VERSION contains `daily` like `2023.09.0-daily+304`, the check will be skipped.
-if [[ "${VERSION}" == "stable" ]] || [[ "${VERSION}" == "preview" ]] || [[ "${VERSION}" == "*daily*" ]]; then
+# If RS_VERSION contains `daily` like `2023.09.0-daily+304`, the check will be skipped.
+if [[ "${RS_VERSION}" == "stable" ]] || [[ "${RS_VERSION}" == "preview" ]] || [[ "${RS_VERSION}" == "*daily*" ]]; then
     if [ ! -x "$(command -v git)" ]; then
         check_packages git
     fi
-    find_version_from_git_tags VERSION "https://github.com/rstudio/rstudio"
+    find_version_from_git_tags RS_VERSION "https://github.com/rstudio/rstudio"
 fi
 
 # Install the RStudio Server
 echo "Downloading RStudio Server..."
 
-install_rstudio "${VERSION}"
+install_rstudio "${RS_VERSION}"
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
