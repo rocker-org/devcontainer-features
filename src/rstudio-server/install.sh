@@ -98,6 +98,7 @@ check_r() {
 install_rstudio() {
     local version=$1
     local deb_file="rstudio-server.deb"
+    local install_url
     local architecture
     architecture="$(dpkg --print-architecture)"
 
@@ -105,10 +106,17 @@ install_rstudio() {
     pushd /tmp/rstudio-server
 
     if [[ "${version}" == "stable" ]] || [[ "${version}" == "preview" ]] || [[ "${version}" == "daily" ]]; then
-        curl -sLo "${deb_file}" "https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
+        install_url="https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
+        echo "Download from ${install_url}"
+        curl -sLo "${deb_file}" "${install_url}" ||
+            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
     else
-        curl -sLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
-            curl -sLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
+        install_url="https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" &&
+            echo "Download from ${install_url}" &&
+            curl -sLo "${deb_file}" "${install_url}" ||
+            install_url="https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" &&
+            echo "Download failed, try from ${install_url}" &&
+            curl -sLo "${deb_file}" "${install_url}" ||
             echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
     fi
 
