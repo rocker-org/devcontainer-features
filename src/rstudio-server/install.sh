@@ -120,12 +120,12 @@ install_rstudio() {
             echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
     fi
 
-    ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
-    ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
-
     gdebi --non-interactive "${deb_file}"
     popd
     rm -rf /tmp/rstudio-server
+
+    ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
+    ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 }
 
 export DEBIAN_FRONTEND=noninteractive
