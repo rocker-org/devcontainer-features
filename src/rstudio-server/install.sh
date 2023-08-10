@@ -109,7 +109,7 @@ install_rstudio() {
         install_url="https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
         echo "Download from ${install_url}"
         curl -sLo "${deb_file}" "${install_url}" ||
-            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
+            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
     else
         install_url="https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" &&
             echo "Download from ${install_url}" &&
@@ -117,7 +117,7 @@ install_rstudio() {
             install_url="https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" &&
             echo "Download failed, try from ${install_url}" &&
             curl -sLo "${deb_file}" "${install_url}" ||
-            echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
+            echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found"
     fi
 
     gdebi --non-interactive "${deb_file}"
