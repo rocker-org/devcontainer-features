@@ -57,7 +57,7 @@ jobs:
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
         run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
         # rstudio-server is not supported on Debian
-        if: matrix.features != 'rstudio-server' || matrix.baseImage != 'debian:stable-slim' || matrix.baseImage == 'mcr.microsoft.com/devcontainers/base:debian'
+        if: matrix.features != 'rstudio-server' && matrix.baseImage != 'debian:stable-slim' && matrix.baseImage != 'mcr.microsoft.com/devcontainers/base:debian'
 
   test-detectes-scenarios:
     if: ${{ github.event_name == 'pull_request' }}
