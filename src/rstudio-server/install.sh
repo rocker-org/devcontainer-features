@@ -107,8 +107,11 @@ install_rstudio() {
     else
         curl -sLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${VERSION/"+"/"-"}-${architecture}.deb" ||
             curl -sLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${VERSION/"+"/"-"}-${architecture}.deb" ||
-            echo "(!) Version ${VERSION} not found" && exit 1
+            echo "(!) Version ${VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found" && exit 1
     fi
+
+    ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
+    ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 
     gdebi "${deb_file}"
     popd
