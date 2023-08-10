@@ -39,8 +39,6 @@ jobs:
       - detect-changes
     runs-on: ubuntu-latest
     continue-on-error: true
-    # rstudio-server is not supported on Debian
-    if: needs.detect-changes.outputs.features != 'rstudio-server'
     strategy:
       matrix:
         features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
@@ -58,6 +56,8 @@ jobs:
 
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
         run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
+        # rstudio-server is not supported on Debian
+        if: matrix.features != 'rstudio-server'
 
   test-detectes-scenarios:
     if: ${{ github.event_name == 'pull_request' }}
