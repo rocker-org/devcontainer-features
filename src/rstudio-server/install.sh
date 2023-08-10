@@ -113,7 +113,7 @@ install_rstudio() {
     ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
     ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 
-    gdebi "${deb_file}"
+    gdebi --non-interactive "${deb_file}"
     popd
     rm -rf /tmp/rstudio-server
 }
