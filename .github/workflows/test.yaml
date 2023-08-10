@@ -32,12 +32,15 @@ jobs:
             r-packages: ./**/r-packages/**
             r-rig: ./**/r-rig/**
             renv-cache: ./**/renv-cache/**
+            rstudio-server: ./**/rstudio-server/**
 
   test-detects:
     needs:
       - detect-changes
     runs-on: ubuntu-latest
     continue-on-error: true
+    # rstudio-server is not supported on Debian
+    if: needs.detect-changes.outputs.features != 'rstudio-server'
     strategy:
       matrix:
         features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
@@ -119,6 +122,7 @@ jobs:
           - r-packages
           - r-rig
           - renv-cache
+          - rstudio-server
     steps:
       - uses: actions/checkout@v3
 
