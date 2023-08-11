@@ -13,6 +13,11 @@
 			],
 			"default": "stable",
 			"description": "Select version of the RStudio Server, if not stable."
+		},
+		"singleUser": {
+			"type": "boolean",
+			"default": true,
+			"description": "If `true`, configures as the single user mode."
 		}
 	},
 	"installsAfter": [

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 RS_VERSION=${VERSION:-"stable"}
+SINGLE_USER=${SINGLEUSER:-"true"}
 
 RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcotnainer-features/rstudio-server/data"}
 
@@ -125,6 +126,25 @@ install_rstudio() {
     rm -rf /tmp/rstudio-server
 }
 
+set_single_user_mode() {
+    mkdir -p "${RSTUDIO_DATA_DIR}"
+    cat <<EOF >"${RSTUDIO_DATA_DIR}/dbconf.conf"
+provider=sqlite
+directory=$RSTUDIO_DATA_DIR
+EOF
+
+    chown -R "${USERNAME}":"${USERNAME}" "${RSTUDIO_DATA_DIR}"
+
+    cat <<EOF >/etc/rstudio/rserver.conf
+# https://docs.posit.co/ide/server-pro/access_and_security/server_permissions.html#running-without-permissions
+server-user=$USERNAME
+auth-none=1
+
+server-data-dir=$RSTUDIO_DATA_DIR
+database-config-file=$RSTUDIO_DATA_DIR/dbconf.conf
+EOF
+}
+
 export DEBIAN_FRONTEND=noninteractive
 
 check_packages curl ca-certificates gdebi-core
@@ -144,25 +164,13 @@ echo "Downloading RStudio Server..."
 
 install_rstudio "${RS_VERSION}"
 
+if [ "${SINGLE_USER}" = "true" ]; then
+    echo "Setting up RStudio Server for single user mode..."
+    set_single_user_mode
+fi
+
 ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
 ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
-
-mkdir -p "${RSTUDIO_DATA_DIR}"
-cat <<EOF >"${RSTUDIO_DATA_DIR}/dbconf.conf"
-provider=sqlite
-directory=$RSTUDIO_DATA_DIR
-EOF
-
-chown -R "${USERNAME}":"${USERNAME}" "${RSTUDIO_DATA_DIR}"
-
-cat <<EOF >/etc/rstudio/rserver.conf
-# https://docs.posit.co/ide/server-pro/access_and_security/server_permissions.html#running-without-permissions
-server-user=$USERNAME
-auth-none=1
-
-server-data-dir=$RSTUDIO_DATA_DIR
-database-config-file=$RSTUDIO_DATA_DIR/dbconf.conf
-EOF
 
 # Set Lifecycle scripts
 if [ -f oncreate.sh ]; then
