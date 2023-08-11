@@ -32,7 +32,7 @@ jobs:
             r-packages: ./**/r-packages/**
             r-rig: ./**/r-rig/**
             renv-cache: ./**/renv-cache/**
-            rstudio: ./**/rstudio/**
+            rstudio-server: ./**/rstudio-server/**
 
   test-detects:
     needs:
@@ -56,8 +56,8 @@ jobs:
 
       - name: "Generating tests for '${{ matrix.features }}' against '${{ matrix.baseImage }}'"
         run: devcontainer features test --skip-scenarios -f ${{ matrix.features }} -i ${{ matrix.baseImage }} .
-        # rstudio is not supported on Debian
-        if: matrix.features == 'rstudio' && matrix.baseImage != 'debian:stable-slim' && matrix.baseImage != 'mcr.microsoft.com/devcontainers/base:debian' || matrix.features != 'rstudio'
+        # rstudio-server is not supported on Debian
+        if: matrix.features == 'rstudio-server' && matrix.baseImage != 'debian:stable-slim' && matrix.baseImage != 'mcr.microsoft.com/devcontainers/base:debian' || matrix.features != 'rstudio-server'
 
   test-detectes-scenarios:
     if: ${{ github.event_name == 'pull_request' }}
@@ -122,7 +122,7 @@ jobs:
           - r-packages
           - r-rig
           - renv-cache
-          - rstudio
+          - rstudio-server
     steps:
       - uses: actions/checkout@v3
 
