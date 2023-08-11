@@ -108,10 +108,10 @@ install_rstudio() {
     if [[ "${version}" == "stable" ]] || [[ "${version}" == "preview" ]] || [[ "${version}" == "daily" ]]; then
         install_url="https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
         echo "Download from ${install_url}"
-        curl -sLo "${deb_file}" "${install_url}" ||
+        curl -fsLo "${deb_file}" "${install_url}" ||
             echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
     else
-        curl -sLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
+        curl -fsLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
             curl -sLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
             echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found"
     fi
