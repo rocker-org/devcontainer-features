@@ -2,6 +2,8 @@
 
 RS_VERSION=${VERSION:-"stable"}
 
+RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcotnainer-features/rstudio-server/data"}
+
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
 set -e
@@ -142,6 +144,23 @@ fi
 echo "Downloading RStudio Server..."
 
 install_rstudio "${RS_VERSION}"
+
+mkdir -p "${RSTUDIO_DATA_DIR}"
+cat <<EOF >"${RSTUDIO_DATA_DIR}/dbconf.conf"
+provider=sqlite
+directory=$RSTUDIO_DATA_DIR
+EOF
+
+chown -R "${USERNAME}":"${USERNAME}" "${RSTUDIO_DATA_DIR}"
+
+cat <<EOF >/etc/rstudio/rserver.conf
+# https://docs.posit.co/ide/server-pro/access_and_security/server_permissions.html#running-without-permissions
+server-user=$USERNAME
+auth-none=1
+
+server-data-dir=$RSTUDIO_DATA_DIR
+database-config-file=$RSTUDIO_DATA_DIR/dbconf.conf
+EOF
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
