@@ -26,6 +26,6 @@
 		"ghcr.io/rocker-org/devcontainer-features/r-rig"
 	],
 	"onCreateCommand": {
-		"rstudio-settings": "/usr/local/share/rocker-devcotnainer-features/rstudio-server/scripts/oncreate.sh"
+		"rstudio-settings": "/usr/local/share/rocker-devcontainer-features/rstudio-server/scripts/oncreate.sh"
 	}
 }
