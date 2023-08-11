@@ -19,5 +19,8 @@
 		"ghcr.io/devcontainers/features/common-utils",
 		"ghcr.io/rocker-org/devcontainer-features/r-apt",
 		"ghcr.io/rocker-org/devcontainer-features/r-rig"
-	]
+	],
+	"onCreateCommand": {
+		"rstudio-settings": "/usr/local/share/rocker-devcotnainer-features/rstudio-server/scripts/oncreate.sh"
+	}
 }

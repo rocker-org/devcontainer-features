@@ -6,6 +6,8 @@ RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcotnainer-feature
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
+LIFECYCLE_SCRIPTS_DIR="/usr/local/share/rocker-devcotnainer-features/rstudio-server/scripts"
+
 set -e
 
 # Clean up
@@ -161,6 +163,12 @@ auth-none=1
 server-data-dir=$RSTUDIO_DATA_DIR
 database-config-file=$RSTUDIO_DATA_DIR/dbconf.conf
 EOF
+
+# Set Lifecycle scripts
+if [ -f oncreate.sh ]; then
+    mkidr -p "${LIFECYCLE_SCRIPTS_DIR}"
+    cp oncreate.sh "${LIFECYCLE_SCRIPTS_DIR}/oncreate.sh"
+fi
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
