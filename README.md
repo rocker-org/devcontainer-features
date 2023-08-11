@@ -49,3 +49,7 @@ R packages must be installed via R functions.
 ### [`renv-cache`](src/renv-cache/README.md)
 
 A simple setup to share [`renv`](https://rstudio.github.io/renv/) cache among multiple containers.
+
+### [`rstudio-server`](src/rstudio-server/README.md)
+
+Install [RStudio Server](https://posit.co/products/open-source/rstudio-server/).
