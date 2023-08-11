@@ -130,7 +130,7 @@ check_packages curl ca-certificates gdebi-core
 check_r
 
 # Soft version matching
-# If RS_VERSION contains `daily` like `2023.09.0-daily+304`, the check will be skipped.
+# If RS_VERSION contains `daily` like `2023.09.0-daily+310`, the check will be skipped.
 if [[ "${RS_VERSION}" != "stable" ]] && [[ "${RS_VERSION}" != "preview" ]] && [[ "${RS_VERSION}" != *"daily"* ]]; then
     if [ ! -x "$(command -v git)" ]; then
         check_packages git
