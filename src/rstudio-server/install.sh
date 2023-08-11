@@ -123,9 +123,6 @@ install_rstudio() {
     gdebi --non-interactive "${deb_file}"
     popd
     rm -rf /tmp/rstudio-server
-
-    ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
-    ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 }
 
 export DEBIAN_FRONTEND=noninteractive
@@ -146,6 +143,9 @@ fi
 echo "Downloading RStudio Server..."
 
 install_rstudio "${RS_VERSION}"
+
+ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
+ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 
 mkdir -p "${RSTUDIO_DATA_DIR}"
 cat <<EOF >"${RSTUDIO_DATA_DIR}/dbconf.conf"
