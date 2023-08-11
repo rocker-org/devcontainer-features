@@ -3,11 +3,11 @@
 RS_VERSION=${VERSION:-"stable"}
 SINGLE_USER=${SINGLEUSER:-"true"}
 
-RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcotnainer-features/rstudio-server/data"}
+RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcontainer-features/rstudio-server/data"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
-LIFECYCLE_SCRIPTS_DIR="/usr/local/share/rocker-devcotnainer-features/rstudio-server/scripts"
+LIFECYCLE_SCRIPTS_DIR="/usr/local/share/rocker-devcontainer-features/rstudio-server/scripts"
 
 set -e
 
