@@ -166,7 +166,7 @@ EOF
 
 # Set Lifecycle scripts
 if [ -f oncreate.sh ]; then
-    mkidr -p "${LIFECYCLE_SCRIPTS_DIR}"
+    mkdir -p "${LIFECYCLE_SCRIPTS_DIR}"
     cp oncreate.sh "${LIFECYCLE_SCRIPTS_DIR}/oncreate.sh"
 fi
 
