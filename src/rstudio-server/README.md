@@ -32,7 +32,7 @@ Installs the RStudio Server, enables to run the RStudio IDE on the browser.
 To run RStudio Server, the `rserver` command should be executed.
 
 If we want to run RStudio Server automatically, for example,
-we can set the `rserver` command to `postCreateCommand` as follows.
+we can set the `rserver` command to `postAttachCommand` as follows.
 
 Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also configured here.
 
@@ -42,7 +42,7 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
     },
-    "postCreateCommand": {
+    "postAttachCommand": {
         "rstudio-start": "rserver"
     },
     "forwardPorts": [
