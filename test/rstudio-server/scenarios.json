@@ -14,7 +14,7 @@
 		}
 	},
 	"daily": {
-		"image": "rocker/r-ver",
+		"image": "rocker/rstudio",
 		"features": {
 			"rstudio-server": {
 				"version": "daily"
