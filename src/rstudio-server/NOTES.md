@@ -33,8 +33,8 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
 
 ## RStudio's initial working directory
 
-This Feature sets `onCreateCommand`, and the `onCreateCommand` sets `initial_working_directory`
-to file `rstudio-prefs.json` immediately after container creation.
+This Feature sets `onCreateCommand` to the Docker image, and the `onCreateCommand` sets `initial_working_directory`
+to the `rstudio-prefs.json` file (A file containing RStudio preferences) immediately after container creation.
 
 If `rstudio-prefs.json` already exists when the container is created,
 the `jq` command must be installed to update `rstudio-prefs.json`.
