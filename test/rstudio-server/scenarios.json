@@ -28,5 +28,16 @@
 				"version": "2023.09.0-daily+310"
 			}
 		}
+	},
+	"update-prefs": {
+		"build": {
+			"dockerfile": "Dockerfile"
+		},
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+				"packages": "jq"
+			},
+			"rstudio-server":{}
+		}
 	}
 }
