@@ -14,6 +14,11 @@
 			"default": "stable",
 			"description": "Select version of the RStudio Server, if not stable."
 		},
+		"allowReinstall": {
+			"type": "boolean",
+			"default": true,
+			"description": "Reinstall in case RStudio Server is already installed."
+		},
 		"singleUser": {
 			"type": "boolean",
 			"default": true,

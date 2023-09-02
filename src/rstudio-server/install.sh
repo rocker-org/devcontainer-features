@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 RS_VERSION=${VERSION:-"stable"}
+ALLOW_REINSTALL=${ALLOWREINSTALL:-"false"}
 SINGLE_USER=${SINGLEUSER:-"true"}
 
 RSTUDIO_DATA_DIR=${RSTUDIODATADIR:-"/usr/local/share/rocker-devcontainer-features/rstudio-server/data"}
@@ -147,22 +148,26 @@ EOF
 
 export DEBIAN_FRONTEND=noninteractive
 
-check_packages curl ca-certificates gdebi-core
-check_r
+if [ "${ALLOW_REINSTALL}" = "true" ] || [ ! -x "$(command -v rstudio-server)" ]; then
+    check_packages curl ca-certificates gdebi-core
+    check_r
 
-# Soft version matching
-# If RS_VERSION contains `daily` like `2023.09.0-daily+310`, the check will be skipped.
-if [[ "${RS_VERSION}" != "stable" ]] && [[ "${RS_VERSION}" != "preview" ]] && [[ "${RS_VERSION}" != *"daily"* ]]; then
-    if [ ! -x "$(command -v git)" ]; then
-        check_packages git
+    # Soft version matching
+    # If RS_VERSION contains `daily` like `2023.09.0-daily+310`, the check will be skipped.
+    if [[ "${RS_VERSION}" != "stable" ]] && [[ "${RS_VERSION}" != "preview" ]] && [[ "${RS_VERSION}" != *"daily"* ]]; then
+        if [ ! -x "$(command -v git)" ]; then
+            check_packages git
+        fi
+        find_version_from_git_tags RS_VERSION "https://github.com/rstudio/rstudio"
     fi
-    find_version_from_git_tags RS_VERSION "https://github.com/rstudio/rstudio"
+
+    # Install the RStudio Server
+    echo "Downloading RStudio Server..."
+
+    install_rstudio "${RS_VERSION}"
+else
+    echo "RStudio Server is already installed. Skip installation..."
 fi
-
-# Install the RStudio Server
-echo "Downloading RStudio Server..."
-
-install_rstudio "${RS_VERSION}"
 
 if [ "${SINGLE_USER}" = "true" ]; then
     echo "Setting up RStudio Server for single user mode..."
