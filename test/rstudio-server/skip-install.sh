@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "version" bash -c 'rstudio-server version | grep daily'
+check "version" bash -c "rstudio-server version | grep ${RSTUDIO_VERSION}"
 
 # Report result
 reportResults

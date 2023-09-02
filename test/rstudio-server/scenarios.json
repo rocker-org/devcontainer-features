@@ -14,10 +14,19 @@
 		}
 	},
 	"daily": {
-		"image": "rocker/r-ver",
+		"image": "rocker/rstudio",
 		"features": {
 			"rstudio-server": {
 				"version": "daily"
+			}
+		}
+	},
+	"skip-install": {
+		"image": "rocker/rstudio",
+		"features": {
+			"rstudio-server": {
+				"version": "daily",
+				"allowReinstall": false
 			}
 		}
 	},
@@ -37,7 +46,7 @@
 			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
 				"packages": "jq"
 			},
-			"rstudio-server":{}
+			"rstudio-server": {}
 		}
 	}
 }
