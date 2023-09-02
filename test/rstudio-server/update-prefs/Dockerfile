@@ -7,6 +7,7 @@ RUN useradd -s /bin/bash -m rstudio \
 
 USER rstudio
 RUN <<EOF
+mkdir -p ~/.config/rstudio
 cat <<EOF2 >~/.config/rstudio/rstudio-prefs.json
 {
   "initial_working_directory": "/home/rstudio",
