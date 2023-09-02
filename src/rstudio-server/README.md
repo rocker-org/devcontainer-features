@@ -16,6 +16,7 @@ Installs the RStudio Server, enables to run the RStudio IDE on the browser.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of the RStudio Server, if not stable. | string | stable |
+| allowReinstall | Reinstall in case RStudio Server is already installed. | boolean | true |
 | singleUser | If `true`, configures as the single user mode. | boolean | true |
 
 <!-- markdownlint-disable MD041 -->
@@ -48,6 +49,27 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
     "forwardPorts": [
         8787
     ]
+}
+```
+
+## RStudio's initial working directory
+
+This Feature sets `onCreateCommand`, and the `onCreateCommand` sets `initial_working_directory`
+to file `rstudio-prefs.json` immediately after container creation.
+
+If `rstudio-prefs.json` already exists when the container is created,
+the `jq` command must be installed to update `rstudio-prefs.json`.
+
+For example, we can install `jq` with the
+[`ghcr.io/rocker-org/devcontainer-features/apt-packages`](https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages)
+Feature as follows:
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+        "packages": "jq"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
 }
 ```
 
