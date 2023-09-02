@@ -31,6 +31,27 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
 }
 ```
 
+## RStudio's initial working directory
+
+This Feature sets `onCreateCommand`, and the `onCreateCommand` sets `initial_working_directory`
+to file `rstudio-prefs.json` immediately after container creation.
+
+If `rstudio-prefs.json` already exists when the container is created,
+the `jq` command must be installed to update `rstudio-prefs.json`.
+
+For example, we can install `jq` with the
+[`ghcr.io/rocker-org/devcontainer-features/apt-packages`](https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages)
+Feature as follows:
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+        "packages": "jq"
+    },
+    "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
+}
+```
+
 ## Available versions
 
 `"stable"` and `"daily"` refer to the latest stable and daily builds
