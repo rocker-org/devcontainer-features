@@ -16,7 +16,7 @@ Installs the RStudio Server, enables to run the RStudio IDE on the browser.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of the RStudio Server, if not stable. | string | stable |
-| allowReinstall | Reinstall in case RStudio Server is already installed. | boolean | true |
+| allowReinstall | Reinstall in case RStudio Server is already installed. | boolean | false |
 | singleUser | If `true`, configures as the single user mode. | boolean | true |
 
 <!-- markdownlint-disable MD041 -->
@@ -36,6 +36,7 @@ If we want to run RStudio Server automatically, for example,
 we can set the `rserver` command to `postAttachCommand` as follows.
 
 Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also configured here.
+And, set the `portsAttributes` property to clarify what the port is used for.
 
 ```json
 {
@@ -48,7 +49,12 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
     },
     "forwardPorts": [
         8787
-    ]
+    ],
+    "portsAttributes": {
+        "8787": {
+            "label": "RStudio IDE"
+        }
+    }
 }
 ```
 
@@ -97,6 +103,17 @@ For example:
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {},
         "ghcr.io/rocker-org/devcontainer-features/r-apt": {}
+    }
+}
+```
+
+Of course, there is no additional R installation when selecting an image that already has R installed.
+
+```json
+{
+    "image": "ghcr.io/rocker-org/devcontainer/r-ver:4",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
     }
 }
 ```
