@@ -166,7 +166,7 @@ if [ "${ALLOW_REINSTALL}" = "true" ] || [ ! -x "$(command -v rstudio-server)" ];
 
     install_rstudio "${RS_VERSION}"
 else
-    echo "RStudio Server is already installed. Skip installation..."
+    echo "(!) RStudio Server is already installed. Skip installation..."
 fi
 
 if [ "${SINGLE_USER}" = "true" ]; then

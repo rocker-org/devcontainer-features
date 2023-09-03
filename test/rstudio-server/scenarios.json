@@ -17,7 +17,8 @@
 		"image": "rocker/rstudio",
 		"features": {
 			"rstudio-server": {
-				"version": "daily"
+				"version": "daily",
+				"allowReinstall": true
 			}
 		}
 	},
@@ -25,8 +26,7 @@
 		"image": "rocker/rstudio",
 		"features": {
 			"rstudio-server": {
-				"version": "daily",
-				"allowReinstall": false
+				"version": "daily"
 			}
 		}
 	},
