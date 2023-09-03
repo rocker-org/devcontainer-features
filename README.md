@@ -1,4 +1,4 @@
-# Dev Container Features (for R)
+# Dev Container Features by Rocker Project
 
 This repository contains a _collection_ of Dev Container Features.
 
@@ -7,13 +7,16 @@ please check [the specification](https://containers.dev/implementors/features/) 
 [the devcontainers' official Development Container Features repository](https://github.com/devcontainers/features).
 
 This repository is based on the [the `devcontainers/features` repository](https://github.com/devcontainers/features),
-and intended to make it easy to add R-related functionality on top of the Debian base containers.
+and intended to make it easy to add Rocker Project related functionality.
 
 ## Contents
 
 ### [`apt-packages`](src/apt-packages/README.md)
 
 Installs packages of the user's choice via apt.
+
+A simple Feature that implements the functionality proposed in
+[devcontainers/features#67](https://github.com/devcontainers/features/issues/67).
 
 ### [`miniforge`](src/miniforge/README.md)
 
