@@ -1,5 +1,5 @@
 {
-	"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:0-18",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -10,15 +10,20 @@
 				"redhat.vscode-yaml"
 			],
 			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh"
+				"terminal.integrated.defaultProfile.linux": "zsh",
+				"json.schemas": [
+					{
+						"fileMatch": [
+							"*/devcontainer-feature.json"
+						],
+						"url": "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainerFeature.schema.json"
+					}
+				]
 			}
 		}
 	},
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"version": "latest"
-		}
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},
-	"remoteUser": "node",
-	"postCreateCommand": "npm install -g @devcontainers/cli"
+	"updateContentCommand": "npm install -g @devcontainers/cli"
 }
