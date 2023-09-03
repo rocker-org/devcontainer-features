@@ -19,6 +19,7 @@ set_rstudio_prefs() {
 }
 EOF
     elif jq '.' "${prefs_path}" >/dev/null 2>&1; then
+        echo "Updating RStudio preferences..."
         jq ".initial_working_directory = \"${cur_dir}\"" "${prefs_path}" >"${prefs_path}.tmp" && mv "${prefs_path}.tmp" "${prefs_path}"
     fi
 }
