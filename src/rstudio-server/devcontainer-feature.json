@@ -1,7 +1,7 @@
 {
 	"name": "RStudio Server",
 	"id": "rstudio-server",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"description": "Installs the RStudio Server, enables to run the RStudio IDE on the browser.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/rstudio-server",
 	"options": {
@@ -16,7 +16,7 @@
 		},
 		"allowReinstall": {
 			"type": "boolean",
-			"default": true,
+			"default": false,
 			"description": "Reinstall in case RStudio Server is already installed."
 		},
 		"singleUser": {
