@@ -21,6 +21,9 @@ EOF
     elif jq '.' "${prefs_path}" >/dev/null 2>&1; then
         echo "Updating RStudio preferences..."
         jq ".initial_working_directory = \"${cur_dir}\"" "${prefs_path}" >"${prefs_path}.tmp" && mv "${prefs_path}.tmp" "${prefs_path}"
+    else
+        echo "(!) ${prefs_path} already exists and cannot be updated by the 'jq' command."
+        echo "    Please check the file and the 'jq' command."
     fi
 }
 
