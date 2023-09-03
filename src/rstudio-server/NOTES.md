@@ -15,6 +15,7 @@ If we want to run RStudio Server automatically, for example,
 we can set the `rserver` command to `postAttachCommand` as follows.
 
 Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also configured here.
+And, set the `portsAttributes` property to clarify what the port is used for.
 
 ```json
 {
@@ -27,7 +28,12 @@ Since `rserver` uses the 8787 port by default, `"forwardPorts": [8787]` is also 
     },
     "forwardPorts": [
         8787
-    ]
+    ],
+    "portsAttributes": {
+        "8787": {
+            "label": "RStudio IDE"
+        }
+    }
 }
 ```
 
@@ -76,6 +82,17 @@ For example:
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {},
         "ghcr.io/rocker-org/devcontainer-features/r-apt": {}
+    }
+}
+```
+
+Of course, there is no additional R installation when selecting an image that already has R installed.
+
+```json
+{
+    "image": "ghcr.io/rocker-org/devcontainer/r-ver:4",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/rstudio-server": {}
     }
 }
 ```
