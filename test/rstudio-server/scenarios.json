@@ -48,5 +48,13 @@
 			},
 			"rstudio-server": {}
 		}
+	},
+	"cant-update-prefs": {
+		"build": {
+			"dockerfile": "Dockerfile"
+		},
+		"features": {
+			"rstudio-server": {}
+		}
 	}
 }
