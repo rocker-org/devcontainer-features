@@ -2,6 +2,20 @@
 
 set -e
 
+set_renviron() {
+    local renviron_file
+
+    if [ -n "${R_ENVIRON}" ]; then
+        renviron_file="${R_ENVIRON}"
+    else
+        renviron_file="${HOME}/.Renviron"
+    fi
+
+    echo "Updating '${renviron_file}'..."
+    echo "R_HISTFILE=${R_HISTFILE}" >>"${renviron_file}"
+    echo "Done!"
+}
+
 set_radian_history() {
     local radian_profile_dir
 
@@ -18,4 +32,5 @@ set_radian_history() {
     echo "Done!"
 }
 
+set_renviron
 set_radian_history
