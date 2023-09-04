@@ -29,6 +29,7 @@ jobs:
             pandoc: ./**/pandoc/**
             quarto-cli: ./**/quarto-cli/**
             r-apt: ./**/r-apt/**
+            r-history: ./**/r-history/**
             r-packages: ./**/r-packages/**
             r-rig: ./**/r-rig/**
             renv-cache: ./**/renv-cache/**
@@ -89,6 +90,7 @@ jobs:
           - pandoc
           - quarto-cli
           - r-apt
+          - r-history
           - r-packages
           - r-rig
           - renv-cache
@@ -119,6 +121,7 @@ jobs:
           - pandoc
           - quarto-cli
           - r-apt
+          - r-history
           - r-packages
           - r-rig
           - renv-cache

@@ -1,0 +1,24 @@
+{
+	"name": "R history",
+	"id": "r-history",
+	"version": "0.1.0",
+	"description": "Preserve R terminal history across Dev Container instances.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-history",
+	"options": {},
+	"containerEnv": {
+		"R_HISTFILE": "/dc/r-history/.Rhistory"
+	},
+	"mounts": [
+		{
+			"source": "${devcontainerId}-r-history",
+			"target": "/dc/r-history",
+			"type": "volume"
+		}
+	],
+	"onCreateCommand": {
+		"radian-history-setup": "/usr/local/share/rocker-devcontainer-features/r-history/scripts/oncreate.sh"
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils"
+	]
+}
