@@ -16,7 +16,7 @@
 		}
 	],
 	"onCreateCommand": {
-		"radian-history-setup": "/usr/local/share/rocker-devcontainer-features/r-history/scripts/oncreate.sh"
+		"r-history-setup": "/usr/local/share/rocker-devcontainer-features/r-history/scripts/oncreate.sh"
 	},
 	"installsAfter": [
 		"ghcr.io/devcontainers/features/common-utils"
