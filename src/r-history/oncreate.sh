@@ -2,6 +2,19 @@
 
 set -e
 
+fix_permissions() {
+    local dir
+    dir="${1}"
+
+    if [ ! -w "${dir}" ]; then
+        echo "Fixing permissions of '${dir}'..."
+        sudo chown -R "$(id -u):$(id -g)" "${dir}"
+        echo "Done!"
+    else
+        echo "Permissions of '${dir}' are OK!"
+    fi
+}
+
 set_renviron() {
     local renviron_file
 
@@ -32,5 +45,6 @@ set_radian_history() {
     echo "Done!"
 }
 
+fix_permissions "/dc/r-history"
 set_renviron
 set_radian_history
