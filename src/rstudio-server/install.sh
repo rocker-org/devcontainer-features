@@ -117,9 +117,9 @@ install_rstudio() {
         curl -fsLo "${deb_file}" "${install_url}" ||
             echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
     else
-        curl -fsLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
-            curl -fsLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${RS_VERSION/"+"/"-"}-${architecture}.deb" ||
-            echo "(!) Version ${RS_VERSION} for ${UBUNTU_CODENAME} ${architecture} is not found"
+        curl -fsLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
+            curl -fsLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
+            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
     fi
 
     gdebi --non-interactive "${deb_file}"
@@ -174,6 +174,7 @@ if [ "${SINGLE_USER}" = "true" ]; then
     set_single_user_mode
 fi
 
+echo "Create symlinks for RStudio Server binaries..."
 ln -fs /usr/lib/rstudio-server/bin/rstudio-server /usr/local/bin
 ln -fs /usr/lib/rstudio-server/bin/rserver /usr/local/bin
 
