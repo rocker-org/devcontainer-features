@@ -7,8 +7,5 @@ source dev-container-features-test-lib
 
 # Feature-specific tests
 
-id "$(whoami)"
-ls -l /renv
-
 # Report result
 reportResults

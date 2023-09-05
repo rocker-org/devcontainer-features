@@ -6,11 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-
-id "$(whoami)"
-ls -l /dc
-# touch "${R_HISTFILE}"
-# check "cache dir permission" find /dc/r-history/*
+touch "${R_HISTFILE}"
+check "cache dir permission" find /dc/r-history/*
 
 # Report result
 reportResults
