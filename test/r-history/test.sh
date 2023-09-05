@@ -6,8 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-touch "${R_HISTFILE}"
-check "cache dir permission" find /dc/r-history/*
+check "cache dir permission" bash -c "test -w /dc/r-history/"
 
 # Report result
 reportResults
