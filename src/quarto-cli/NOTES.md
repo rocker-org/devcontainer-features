@@ -65,7 +65,7 @@ On Ubuntu, we need to install missing dependencies by either. For example:
 }
 ```
 
-The package list came from the Puppeteer for WSL. <https://pptr.dev/troubleshooting#running-puppeteer-on-wsl-windows-subsystem-for-linux>
+The package list came from the Puppeteer document. <https://pptr.dev/troubleshooting#running-puppeteer-on-wsl-windows-subsystem-for-linux>
 
 See also: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>
 
