@@ -29,8 +29,9 @@ Chromium may be required to render documents containing [diagrams code blocks](h
 such as `{mermaid}` and `{dot}` into non-HTML formats.
 
 To do this in a Docker container, besides specifying the `installChromium` option of this Feature,
-you also need to install Chromium itself.
-For Debian, this can be done with `devcontainer.json` as follows
+we also need to install necessary shared library dependencies of Chromium.
+
+On Debian, this can be done with installing Chromium via `devcontainer.json` as follows
 using the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature.
 
 ```json
@@ -47,7 +48,7 @@ using the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature.
 }
 ```
 
-Unfortunately, this does not work for Ubuntu because it is not possible to install chromium via apt.
+Unfortunately, this does not work for Ubuntu because it is not possible to install Chromium via apt.
 
 On Ubuntu, we need to install missing dependencies by either. For example:
 
@@ -65,7 +66,8 @@ On Ubuntu, we need to install missing dependencies by either. For example:
 }
 ```
 
-The package list came from the Puppeteer document. <https://pptr.dev/troubleshooting#running-puppeteer-on-wsl-windows-subsystem-for-linux>
+The dependent package list came from [the Puppeteer document](https://pptr.dev/troubleshooting#running-puppeteer-on-wsl-windows-subsystem-for-linux)
+and might get outdated.
 
 See also: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>
 
