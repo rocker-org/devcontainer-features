@@ -49,7 +49,25 @@ using the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature.
 
 Unfortunately, this does not work for Ubuntu because it is not possible to install chromium via apt.
 
-See also the Puppeteer documentation. <https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker>
+On Ubuntu, we need to install missing dependencies by either. For example:
+
+```json
+{
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/quarto-cli:1": {
+            "installChromium": true
+        },
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "libgtk-3-dev,libnotify-dev,libgconf-2-4,libnss3,libxss1,libasound2"
+        }
+    }
+}
+```
+
+The package list came from the Puppeteer for WSL. <https://pptr.dev/troubleshooting#running-puppeteer-on-wsl-windows-subsystem-for-linux>
+
+See also: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>
 
 ## Available versions
 
