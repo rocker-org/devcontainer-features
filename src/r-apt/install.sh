@@ -18,6 +18,11 @@ PIP_PACKAGES=()
 
 set -e
 
+if R --version >/dev/null 2>&1; then
+    echo "(!) R is already installed. This script is designed only for non-R Debian and Ubuntu."
+    exit 1
+fi
+
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
