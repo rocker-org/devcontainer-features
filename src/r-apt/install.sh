@@ -18,6 +18,12 @@ PIP_PACKAGES=()
 
 set -e
 
+if R --version >/dev/null 2>&1 && dpkg -s r-base >/dev/null 2>&1; then
+    echo "(!) R has already been installed via a non-apt method."
+    echo "    This script is designed only for non-R Debian and Ubuntu."
+    exit 1
+fi
+
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
@@ -156,8 +162,8 @@ elif [ "${ID}" = "debian" ]; then
     if [ "${USE_TESTING}" = "true" ]; then
         echo "Set up Debian testing..."
         echo "deb http://http.debian.net/debian testing main" >/etc/apt/sources.list.d/debian-testing.list
+        echo "deb http://http.debian.net/debian-security testing-security main" >>/etc/apt/sources.list.d/debian-testing.list
         echo "deb http://http.debian.net/debian unstable main" >/etc/apt/sources.list.d/debian-unstable.list
-        echo 'APT::Default-Release "testing";' >/etc/apt/apt.conf.d/default
     else
         echo "Set up for Debian ${VERSION_CODENAME}..."
         curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
@@ -218,7 +224,7 @@ fi
 if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
     check_packages \
         g++ make r-cran-later r-cran-systemfonts r-cran-bh \
-        libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev
+        libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype-dev libpng-dev
     R -q -e 'install.packages("httpgd")'
 fi
 
