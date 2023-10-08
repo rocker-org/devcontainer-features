@@ -224,7 +224,7 @@ fi
 if [ "${ID}" = "debian" ] && [ "${install_httpgd}" = "true" ]; then
     check_packages \
         g++ make r-cran-later r-cran-systemfonts r-cran-bh \
-        libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev
+        libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype-dev libpng-dev
     R -q -e 'install.packages("httpgd")'
 fi
 
