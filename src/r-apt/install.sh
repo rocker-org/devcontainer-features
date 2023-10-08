@@ -18,8 +18,9 @@ PIP_PACKAGES=()
 
 set -e
 
-if R --version >/dev/null 2>&1; then
-    echo "(!) R is already installed. This script is designed only for non-R Debian and Ubuntu."
+if R --version >/dev/null 2>&1 && dpkg -s r-base >/dev/null 2>&1; then
+    echo "(!) R has already been installed via a non-apt method."
+    echo "    This script is designed only for non-R Debian and Ubuntu."
     exit 1
 fi
 
