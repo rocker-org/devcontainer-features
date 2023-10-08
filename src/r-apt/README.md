@@ -39,6 +39,8 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 
 If the `useTesting` is `true`, `linux/arm64` platform `debian` also supported.
 
+Note that this Feature only supports non-R images. If R is already installed, installation will be failed.
+
 ## R package installation
 
 ### Binary installation via apt
