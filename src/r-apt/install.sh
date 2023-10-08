@@ -162,6 +162,7 @@ elif [ "${ID}" = "debian" ]; then
     if [ "${USE_TESTING}" = "true" ]; then
         echo "Set up Debian testing..."
         echo "deb http://http.debian.net/debian testing main" >/etc/apt/sources.list.d/debian-testing.list
+        echo "deb http://http.debian.net/debian-security testing-security main" >>/etc/apt/sources.list.d/debian-testing.list
         echo "deb http://http.debian.net/debian unstable main" >/etc/apt/sources.list.d/debian-unstable.list
     else
         echo "Set up for Debian ${VERSION_CODENAME}..."
