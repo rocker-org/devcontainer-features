@@ -7,6 +7,14 @@
 			}
 		}
 	},
+	"install-cli-rlang-ws": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-packages": {
+				"packages": "cli, rlang"
+			}
+		}
+	},
 	"install-from-github": {
 		"image": "rocker/r-ver:4",
 		"features": {
