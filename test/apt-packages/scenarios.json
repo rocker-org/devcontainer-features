@@ -7,6 +7,14 @@
 			}
 		}
 	},
+	"install-curl-nano-wget-ws": {
+		"image": "debian:stable-slim",
+		"features": {
+			"apt-packages": {
+				"packages": "curl, nano, wget"
+			}
+		}
+	},
 	"only-upgrade": {
 		"image": "debian:stable-slim",
 		"features": {
