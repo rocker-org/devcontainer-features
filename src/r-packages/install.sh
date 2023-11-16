@@ -92,7 +92,7 @@ install_r_packages() {
             fi
         fi
 
-        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(unlist(strsplit('${packages}', ','))); pak::cache_clean()\""
+        su "${USERNAME}" -c "R -q -e \"pak::repo_add(${ADDITIONAL_REPOSITORIES}); pak::pak(trimws(unlist(strsplit('${packages}', ',')))); pak::cache_clean()\""
 
         if [ "${is_apt}" = "true" ]; then
             # Clean up
