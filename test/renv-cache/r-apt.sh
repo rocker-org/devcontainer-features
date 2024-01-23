@@ -6,6 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
+check "cache dir permission" bash -c "test -w /renv/cache/"
 check "renv" R -q -e 'packageVersion("renv")'
 check "renv::install" R -q -e 'renv::install("jsonlite")'
 check "cache dir" find /renv/cache/*
