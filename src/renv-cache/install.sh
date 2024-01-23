@@ -4,6 +4,8 @@ RENV_PATHS_CACHE=${RENV_PATHS_CACHE:-"/renv/cache"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER}}
 
+LIFECYCLE_SCRIPTS_DIR="/usr/local/share/rocker-devcontainer-features/renv-cache/scripts"
+
 set -e
 
 create_cache_dir() {
@@ -49,5 +51,11 @@ export DEBIAN_FRONTEND=noninteractive
 create_cache_dir "${RENV_PATHS_CACHE}" "${USERNAME}"
 check_r
 install_renv "${USERNAME}"
+
+# Set Lifecycle scripts
+if [ -f poststart.sh ]; then
+    mkdir -p "${LIFECYCLE_SCRIPTS_DIR}"
+    cp poststart.sh "${LIFECYCLE_SCRIPTS_DIR}/poststart.sh"
+fi
 
 echo "Done!"

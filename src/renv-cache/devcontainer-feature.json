@@ -15,6 +15,9 @@
 			"type": "volume"
 		}
 	],
+	"postStartCommand": {
+		"renv-cache-setup": "/usr/local/share/rocker-devcontainer-features/renv-cache/scripts/poststart.sh"
+	},
 	"installsAfter": [
 		"ghcr.io/devcontainers/features/common-utils",
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages",
