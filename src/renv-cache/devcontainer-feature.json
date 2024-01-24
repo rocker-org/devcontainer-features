@@ -1,7 +1,7 @@
 {
 	"name": "renv cache",
 	"id": "renv-cache",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "Install the renv R package and set renv cache to a Docker volume. Cache is shared by all containers.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/renv-cache",
 	"options": {},
@@ -15,6 +15,9 @@
 			"type": "volume"
 		}
 	],
+	"postStartCommand": {
+		"renv-cache-setup": "/usr/local/share/rocker-devcontainer-features/renv-cache/scripts/poststart.sh"
+	},
 	"installsAfter": [
 		"ghcr.io/devcontainers/features/common-utils",
 		"ghcr.io/rocker-org/devcontainer-features/apt-packages",
