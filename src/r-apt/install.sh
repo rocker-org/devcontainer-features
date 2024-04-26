@@ -189,7 +189,7 @@ chmod g+ws "${R_LIBRARY_PATH}"
 install_pip_packages ${PIP_PACKAGES[*]}
 
 # Install pak
-R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"
+R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/stable/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"
 
 if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
     check_packages \
