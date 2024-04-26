@@ -247,7 +247,7 @@ install_pak() {
             echo "pak is already installed. Skip pak installation..."
             return
         else
-            version="devel"
+            version="stable"
         fi
     fi
 
