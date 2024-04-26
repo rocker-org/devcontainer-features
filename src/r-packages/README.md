@@ -16,7 +16,7 @@ Installs R packages via the pak R package's function. R must be already installe
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | packages | Comma separated list of packages to install to pass to the `pak::pak()` function. | string | - |
-| pakVersion | Version of pak to install. By default, the devel version is installed if needed. | string | auto |
+| pakVersion | Version of pak to install. By default, the stable version is installed if needed. | string | auto |
 | additionalRepositories | String passed to the `pak::repo_add()` function. | string | - |
 | installSystemRequirements | Install packages' system requirements if available via `pak::pak()`. | boolean | false |
 | notCran | The 'NOT_CRAN' environment variable that is referenced during the installation of this Feature. | boolean | false |
