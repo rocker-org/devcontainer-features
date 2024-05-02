@@ -30,7 +30,7 @@
 		"image": "rocker/r-ver:4",
 		"features": {
 			"ghcr.io/rocker-org/devcontainer-features/apt-packages": {
-				"packages": "libxml2-dev"
+				"packages": "libcurl4-openssl-dev,libssl-dev,libxml2-dev"
 			},
 			"r-packages": {
 				"packages": "rversions",
@@ -39,12 +39,12 @@
 			}
 		}
 	},
-	"install-stable-pak": {
+	"install-devel-pak": {
 		"image": "rocker/r-ver:4",
 		"features": {
 			"r-packages": {
 				"packages": "cli,rlang",
-				"pakVersion": "stable",
+				"pakVersion": "devel",
 				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
