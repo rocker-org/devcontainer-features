@@ -14,18 +14,6 @@ The following example installs `curl` and `nano`.
 }
 ```
 
-### Specifiying R packages
-
-When installing R packages via `r-cran-<package>`, note that R package name references must be lowercase. For example, the following example installs the {kableExtra} R package.
-
-```json
-"features": {
-    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-        "packages": "r-cran-kableextra"
-    }
-}
-```
-
 ## Installation order
 
 Specify the installation order of Features
