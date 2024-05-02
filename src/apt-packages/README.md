@@ -53,7 +53,6 @@ The following example installs the `r-cran-curl` package after the `r-apt` Featu
 ]
 ```
 
-
 ---
 
 _Note: This file was auto-generated from the [devcontainer-feature.json](https://github.com/rocker-org/devcontainer-features/blob/main/src/apt-packages/devcontainer-feature.json).  Add additional notes to a `NOTES.md`._
