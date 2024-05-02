@@ -3,8 +3,8 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-INSTALL_SYS_REQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 
+export PKG_SYSREQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 export NOT_CRAN=${NOTCRAN:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
@@ -76,14 +76,10 @@ install_pak() {
 install_r_packages() {
     local packages=$1
     local is_apt="false"
-    local ci_old
 
     if [ -n "${packages}" ]; then
 
-        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
-            ci_old="${CI}"
-            export CI="true"
-            echo "Set 'CI' to '${CI}'..."
+        if [ "${PKG_SYSREQS}" = "true" ]; then
             # shellcheck source=/dev/null
             source /etc/os-release
             if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
@@ -97,10 +93,6 @@ install_r_packages() {
         if [ "${is_apt}" = "true" ]; then
             # Clean up
             rm -rf /var/lib/apt/lists/*
-        fi
-        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
-            export CI="${ci_old}"
-            echo "Set 'CI' to '${CI}'..."
         fi
     fi
 }
