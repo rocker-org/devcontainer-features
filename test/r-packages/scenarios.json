@@ -64,7 +64,8 @@
 			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
 			"r-packages": {
 				"packages": "curl,R6",
-				"installSystemRequirements": true
+				"installSystemRequirements": true,
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
