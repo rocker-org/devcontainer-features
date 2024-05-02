@@ -1,0 +1,19 @@
+{
+	"name": "R packages from the DESCRIPTION file (r-dependent-packages)",
+	"id": "r-dependent-packages",
+	"version": "0.1.0",
+	"description": "This Feature sets scripts to install dependent R packages from the DESCRIPTION file in the repository.",
+	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-dependent-packages",
+	"options": {
+		"pakVersion": {
+			"type": "string",
+			"enum": [
+				"auto",
+				"devel",
+				"stable"
+			],
+			"default": "auto",
+			"description": "Version of pak to install. By default, the stable version is installed if needed."
+		}
+	}
+}
