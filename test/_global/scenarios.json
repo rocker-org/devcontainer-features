@@ -10,7 +10,7 @@
 		}
 	},
 	"r-apt_quarto": {
-		"image": "ubuntu:latest",
+		"image": "ubuntu:jammy",
 		"features": {
 			"r-apt": {
 				"installRMarkdown": true,
@@ -20,7 +20,7 @@
 		}
 	},
 	"r-apt_pandoc": {
-		"image": "ubuntu:latest",
+		"image": "ubuntu:jammy",
 		"features": {
 			"r-apt": {
 				"installRMarkdown": true
