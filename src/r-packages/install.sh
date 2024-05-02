@@ -3,6 +3,7 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
+CRAN_MIRROR=${CRANMIRROR:-""}
 
 export PKG_SYSREQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 export NOT_CRAN=${NOTCRAN:-"false"}
@@ -102,6 +103,11 @@ export DEBIAN_FRONTEND=noninteractive
 echo "Install R packages..."
 mkdir /tmp/r-packages
 pushd /tmp/r-packages
+
+if [ -n "${CRAN_MIRROR}" ]; then
+    echo "Use '${CRAN_MIRROR}' as the CRAN mirror..."
+    export PKG_CRAN_MIRROR="${CRAN_MIRROR}"
+fi
 
 install_pak "${PAK_VERSION}"
 

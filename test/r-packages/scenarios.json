@@ -3,7 +3,8 @@
 		"image": "rocker/r-ver:4",
 		"features": {
 			"r-packages": {
-				"packages": "cli,rlang"
+				"packages": "cli,rlang",
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
@@ -11,7 +12,8 @@
 		"image": "rocker/r-ver:4",
 		"features": {
 			"r-packages": {
-				"packages": "cli, rlang"
+				"packages": "cli, rlang",
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
@@ -19,7 +21,8 @@
 		"image": "rocker/r-ver:4",
 		"features": {
 			"r-packages": {
-				"packages": "cli,github::r-lib/crayon,rlang"
+				"packages": "cli,github::r-lib/crayon,rlang",
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
@@ -31,7 +34,8 @@
 			},
 			"r-packages": {
 				"packages": "rversions",
-				"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
+				"additionalRepositories": "rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'",
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
@@ -40,7 +44,8 @@
 		"features": {
 			"r-packages": {
 				"packages": "cli,rlang",
-				"pakVersion": "devel"
+				"pakVersion": "devel",
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},
@@ -59,7 +64,8 @@
 			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
 			"r-packages": {
 				"packages": "curl,R6",
-				"installSystemRequirements": true
+				"installSystemRequirements": true,
+				"cranMirror": "https://cloud.r-project.org/"
 			}
 		}
 	},

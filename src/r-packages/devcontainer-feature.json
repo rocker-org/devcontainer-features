@@ -1,7 +1,7 @@
 {
 	"name": "R packages (via pak)",
 	"id": "r-packages",
-	"version": "1.0.6",
+	"version": "1.1.0",
 	"description": "Installs R packages via the pak R package's function. R must be already installed.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages",
 	"options": {
@@ -37,6 +37,11 @@
 			"type": "boolean",
 			"default": false,
 			"description": "Install packages' system requirements if available via `pak::pak()`. Converted to the `PKG_SYSREQS` env var during the installation."
+		},
+		"cranMirror" :{
+			"type": "string",
+			"default": "",
+			"description": "The CRAN mirror to use for installing packages. Converted to the `PKG_CRAN_MIRROR` env var if not empty."
 		},
 		"notCran":{
 			"type": "boolean",
