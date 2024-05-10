@@ -14,6 +14,15 @@
 			],
 			"default": "auto",
 			"description": "Version of pak to install. By default, the stable version is installed if needed."
-		}
+		},
+		"additionalRepositories": {
+			"type": "string",
+			"default": "",
+			"description": "String passed to the `pak::repo_add()` function.",
+			"proposals": [
+				"",
+				"rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
+			]
+		},
 	}
 }
