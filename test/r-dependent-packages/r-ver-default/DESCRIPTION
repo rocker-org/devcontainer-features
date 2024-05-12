@@ -1,5 +1,5 @@
 Package: foo
 Version: 0.0.0.9000
 Suggests:
-    cli
+    cli,
     rlang

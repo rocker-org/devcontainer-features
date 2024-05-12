@@ -2,7 +2,9 @@
 	"r-ver-default": {
 		"image": "rocker/r-ver:4",
 		"features": {
-			"r-dependent-packages": {}
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer"
+			}
 		}
 	}
 }
