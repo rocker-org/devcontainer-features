@@ -1,0 +1,42 @@
+{
+	"r-ver-default": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer"
+			}
+		}
+	},
+	"r-ver-postcreate": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer",
+				"when": "postCreate"
+			}
+		}
+	},
+	"r-ver-updatecontent": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer",
+				"when": "updateContent"
+			}
+		}
+	},
+	"realworld": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer",
+				"dependencyTypes": "all, Config/Needs/website, Config/Needs/dev",
+				"additionalRepositories": "rlib = 'https://r-lib.r-universe.dev'"
+			}
+		},
+		"containerEnv": {
+			"NOT_CRAN": "true",
+			"PKG_CRAN_MIRROR": "https://cloud.r-project.org/"
+		}
+	}
+}
