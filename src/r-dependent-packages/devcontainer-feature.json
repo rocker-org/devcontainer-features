@@ -27,7 +27,7 @@
 		},
 		"manifestRoot": {
 			"type": "string",
-			"default": "DESCRIPTION",
+			"default": ".",
 			"description": "The root path of the DESCRIPTION file recording the dependent R packages. Passed to the `root` argument of the `pak::local_install_deps()` function.",
 			"proposals": [
 				"."
