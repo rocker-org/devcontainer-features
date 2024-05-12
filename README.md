@@ -40,6 +40,11 @@ Install [the Quarto CLI](https://quarto.org/).
 Install the latest [R](https://www.r-project.org/) and R packages via apt.
 When installing R packages via apt, dependencies are automatically installed as well, and it is very fast.
 
+
+### [`r-dependent-packages`](src/r-dependent-packages/README.md)
+
+Install R packages from a `DESCRIPTION` file in the repository.
+
 ### [`r-history`](src/r-history/README.md)
 
 A simple setup to preserve R terminal history across Dev Container instances.
