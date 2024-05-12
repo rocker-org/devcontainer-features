@@ -93,6 +93,11 @@ For example, the following example runs as `pak::repo_add(rhub = 'https://r-hub.
 }
 ```
 
+## See also
+
+- [r-dependent-packages Feature](../r-dependent-packages/README.md)
+- [renv-cache Feature](../renv-cache/README.md)
+
 ## References
 
 - [pak](https://pak.r-lib.org/)
