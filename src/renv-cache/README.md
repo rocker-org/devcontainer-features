@@ -48,6 +48,10 @@ The cache directory in the container is set to `/renv/cache`.
 This directory is stored in a volume named `devcontainer-renv-cache`
 and is shared among multiple containers.
 
+## See also
+
+- [r-dependent-packages Feature](../r-dependent-packages/README.md)
+
 ## References
 
 - [renv](https://rstudio.github.io/renv/)
