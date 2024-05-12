@@ -71,6 +71,13 @@ See [the reference of the `pak` package](https://pak.r-lib.org/reference/pak-con
 }
 ```
 
+## Cache directory and cache volume
+
+The package cache directory in the container is set to `/pak/cache`.
+
+This directory is stored in a volume named `devcontainer-pak-cache`
+and is shared among multiple containers.
+
 ## References
 
 - [pak](https://pak.r-lib.org/)

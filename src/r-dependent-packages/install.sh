@@ -6,6 +6,8 @@ ROOT=${MANIFESTROOT:-"."}
 REPOS=${ADDITIONALREPOSITORIES:-""}
 DEPS=${DEPENDENCYTYPES:-"all"}
 
+PKG_PACKAGE_CACHE_DIR=${PKG_PACKAGE_CACHE_DIR:-"/pak/cache"}
+
 USERNAME=${USERNAME:-${_REMOTE_USER}}
 
 LIFECYCLE_SCRIPTS_DIR="/usr/local/share/rocker-devcontainer-features/r-dependent-packages/scripts"
@@ -16,6 +18,22 @@ if [ "$(id -u)" -ne 0 ]; then
     echo -e 'Script must be run as root. Use sudo, su, or add "USER root" to your Dockerfile before running this script.'
     exit 1
 fi
+
+create_cache_dir() {
+    if [ -d "$1" ]; then
+        echo "Cache directory $1 already exists. Skip creation..."
+    else
+        echo "Create cache directory $1..."
+        mkdir -p "$1"
+    fi
+
+    if [ -z "$2" ]; then
+        echo "No username provided. Skip chown..."
+    else
+        echo "Change owner of $1 to $2..."
+        chown -R "$2:$2" "$1"
+    fi
+}
 
 check_r() {
     if [ ! -x "$(command -v R)" ]; then
@@ -43,6 +61,8 @@ install_pak() {
 }
 
 export DEBIAN_FRONTEND=noninteractive
+
+create_cache_dir "${PKG_PACKAGE_CACHE_DIR}" "${USERNAME}"
 
 # Set Lifecycle scripts
 mkdir -p "${LIFECYCLE_SCRIPTS_DIR}"

@@ -53,6 +53,16 @@
 			]
 		}
 	},
+	"containerEnv": {
+		"PKG_PACKAGE_CACHE_DIR": "/pak/cache"
+	},
+	"mounts": [
+		{
+			"source": "devcontainer-pak-cache",
+			"target": "/pak/cache",
+			"type": "volume"
+		}
+	],
 	"onCreateCommand": {
 		"r-dependent-packages": "/usr/local/share/rocker-devcontainer-features/r-dependent-packages/scripts/oncreate.sh"
 	},
