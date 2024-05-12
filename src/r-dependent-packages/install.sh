@@ -3,8 +3,8 @@
 WHEN=${WHEN:-"postCreate"}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ROOT=${MANIFESTROOT:-"."}
-ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-DEPENDENCIES=${DEPENDENTTYPES:-"all"}
+REPOS=${ADDITIONALREPOSITORIES:-""}
+DEPS=${DEPENDENCYTYPES:-"all"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER}}
 
@@ -60,8 +60,8 @@ install_pak "${PAK_VERSION}"
 echo "Set the lifecycle script for '${WHEN}'..."
 sed \
     -e "s|@ROOT@|${ROOT}|" \
-    -e "s|@REPOS@|${ADDITIONAL_REPOSITORIES}|" \
-    -e "s|@DEPS@|${DEPENDENCIES}|" \
+    -e "s|@REPOS@|${REPOS//"'"/'"'}|" \
+    -e "s|@DEPS@|${DEPS}|" \
     lifecycle_script.sh >"${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
 
 echo "Done!"
