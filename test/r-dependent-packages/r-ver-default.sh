@@ -6,8 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "R cli package" R -q -e 'names(installed.packages()[, 3])' | grep cli
-check "R rlang package" R -q -e 'names(installed.packages()[, 3])' | grep rlang
+check "R cli package" bash -c "R -q -e 'names(installed.packages()[, 3])' | grep cli"
+check "R rlang package" bash -c "R -q -e 'names(installed.packages()[, 3])' | grep rlang"
 
 # Report result
 reportResults
