@@ -78,6 +78,8 @@ The package cache directory in the container is set to `/pak/cache`.
 This directory is stored in a volume named `devcontainer-pak-cache`
 and is shared among multiple containers.
 
+## See also
+
 - [r-packages Feature](../r-packages/README.md)
 - [renv-cache Feature](../renv-cache/README.md)
 
