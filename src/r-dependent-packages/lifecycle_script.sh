@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# set -e
+set -e
 
 echo "Install dependent R packages..."
 
