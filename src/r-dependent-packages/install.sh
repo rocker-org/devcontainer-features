@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
+WHEN=${WHEN:-"postCreate"}
 PAK_VERSION=${PAKVERSION:-"auto"}
-ROOT=${ROOT:-"."}
+ROOT=${MANIFESTPATH:-"DESCRIPTION"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-DEPENDENCIES=${DEPENDENCIES:-"all"}
+DEPENDENCIES=${DEPENDENTTYPES:-"all"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER}}
 
@@ -45,11 +46,22 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Set Lifecycle scripts
 mkdir -p "${LIFECYCLE_SCRIPTS_DIR}"
+
+POSSIBLE_LIFECYCLE=("onCreate" "updateContent" "postCreate")
+for lifecycle in "${POSSIBLE_LIFECYCLE[@]}"; do
+    cp empty_script.sh "${LIFECYCLE_SCRIPTS_DIR}/${lifecycle,,}.sh"
+done
+
+# Enxure pak installed
+check_r
+install_pak "${PAK_VERSION}"
+
+# Replace the target lifecycle script
+echo "Set the lifecycle script for '${WHEN}'..."
 sed \
     -e "s|@ROOT@|${ROOT}|" \
     -e "s|@REPOS@|${ADDITIONAL_REPOSITORIES}|" \
     -e "s|@DEPS@|${DEPENDENCIES}|" \
-    lifecycle_script.sh >"${LIFECYCLE_SCRIPTS_DIR}/lifecycle_script.sh"
+    lifecycle_script.sh >"${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
 
-check_r
-install_pak "${PAK_VERSION}"
+echo "Done!"

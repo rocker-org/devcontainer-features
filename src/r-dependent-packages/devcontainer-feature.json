@@ -5,6 +5,16 @@
 	"description": "This Feature sets scripts to install dependent R packages from the DESCRIPTION file in the repository.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-dependent-packages",
 	"options": {
+		"when": {
+			"type": "string",
+			"default": "postCreate",
+			"enum": [
+				"onCreate",
+				"updateContent",
+				"postCreate"
+			],
+			"description": "When to install the dependent R packages? Each option corresponds to the lifecycle scripts."
+		},
 		"pakVersion": {
 			"type": "string",
 			"enum": [
@@ -15,6 +25,14 @@
 			"default": "auto",
 			"description": "Version of pak to install. By default, the stable version is installed if needed."
 		},
+		"manifestPath": {
+			"type": "string",
+			"default": "DESCRIPTION",
+			"description": "The path of DESCRIPTION file recording the dependent R packages. Passed to the `root` argument of the `pak::local_install_deps()` function.",
+			"proposals": [
+				"DESCRIPTION"
+			]
+		},
 		"additionalRepositories": {
 			"type": "string",
 			"default": "",
@@ -24,5 +42,30 @@
 				"rhub = 'https://r-hub.r-universe.dev', jeroen = 'https://jeroen.r-universe.dev'"
 			]
 		},
-	}
+		"dependencyTypes": {
+			"type": "string",
+			"default": "all",
+			"description": "Comma separated list of dependency types to install. Passed to the `dependencies` argument of the `pak::local_install_deps()` function.",
+			"proposals": [
+				"all",
+				"hard",
+				"all,Config/Needs/website"
+			]
+		}
+	},
+	"onCreateCommand": {
+		"r-dependent-packages": "/usr/local/share/rocker-devcontainer-features/r-dependent-packages/scripts/oncreate.sh"
+	},
+	"updateContentCommand": {
+		"r-dependent-packages": "/usr/local/share/rocker-devcontainer-features/r-dependent-packages/scripts/updatecontent.sh"
+	},
+	"postCreateCommand": {
+		"r-dependent-packages": "/usr/local/share/rocker-devcontainer-features/r-dependent-packages/scripts/postcreate.sh"
+	},
+	"installsAfter": [
+		"ghcr.io/devcontainers/features/common-utils",
+		"ghcr.io/rocker-org/devcontainer-features/r-apt",
+		"ghcr.io/rocker-org/devcontainer-features/r-packages",
+		"ghcr.io/rocker-org/devcontainer-features/r-rig"
+	]
 }
