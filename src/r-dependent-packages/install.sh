@@ -58,12 +58,10 @@ install_pak "${PAK_VERSION}"
 
 # Replace the target lifecycle script
 echo "Set the lifecycle script for '${WHEN}'..."
-target_script="${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
 sed \
     -e "s|@ROOT@|${ROOT}|" \
     -e "s|@REPOS@|${ADDITIONAL_REPOSITORIES}|" \
     -e "s|@DEPS@|${DEPENDENCIES}|" \
-    lifecycle_script.sh >"${target_script}"
-chmod +x "${target_script}"
+    lifecycle_script.sh >"${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
 
 echo "Done!"
