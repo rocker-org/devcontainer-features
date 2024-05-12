@@ -1,5 +1,5 @@
 {
-	"name": "R packages from the DESCRIPTION file (r-dependent-packages)",
+	"name": "R packages from the DESCRIPTION file (via pak)",
 	"id": "r-dependent-packages",
 	"version": "0.1.0",
 	"description": "This Feature sets scripts to install dependent R packages from the DESCRIPTION file in the repository.",
