@@ -25,12 +25,12 @@
 			"default": "auto",
 			"description": "Version of pak to install. By default, the stable version is installed if needed."
 		},
-		"manifestPath": {
+		"manifestRoot": {
 			"type": "string",
 			"default": "DESCRIPTION",
-			"description": "The path of DESCRIPTION file recording the dependent R packages. Passed to the `root` argument of the `pak::local_install_deps()` function.",
+			"description": "The root path of the DESCRIPTION file recording the dependent R packages. Passed to the `root` argument of the `pak::local_install_deps()` function.",
 			"proposals": [
-				"DESCRIPTION"
+				"."
 			]
 		},
 		"additionalRepositories": {
