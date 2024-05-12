@@ -6,5 +6,23 @@
 				"manifestRoot": ".devcontainer"
 			}
 		}
+	},
+	"r-ver-postcreate": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer",
+				"when": "postCreate"
+			}
+		}
+	},
+	"r-ver-updatecontent": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"manifestRoot": ".devcontainer",
+				"when": "updateContent"
+			}
+		}
 	}
 }
