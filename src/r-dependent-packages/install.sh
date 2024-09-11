@@ -78,10 +78,11 @@ install_pak "${PAK_VERSION}"
 
 # Replace the target lifecycle script
 echo "Set the lifecycle script for '${WHEN}'..."
+LIFECYCLE_SCRIPT_PATH="${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
 sed \
     -e "s|@ROOT@|${ROOT}|" \
     -e "s|@REPOS@|${REPOS//"'"/'"'}|" \
     -e "s|@DEPS@|${DEPS}|" \
-    lifecycle_script.sh >"${LIFECYCLE_SCRIPTS_DIR}/${WHEN,,}.sh"
-
+    lifecycle_script.sh >"${LIFECYCLE_SCRIPT_PATH}"
+echo "The lifecycle script is generated at '${LIFECYCLE_SCRIPT_PATH}'"
 echo "Done!"
