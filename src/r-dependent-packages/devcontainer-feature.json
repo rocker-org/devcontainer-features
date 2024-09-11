@@ -1,7 +1,7 @@
 {
 	"name": "R packages from the DESCRIPTION file (via pak)",
 	"id": "r-dependent-packages",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "This Feature sets scripts to install dependent R packages from the DESCRIPTION file in the repository.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-dependent-packages",
 	"options": {
@@ -11,9 +11,10 @@
 			"enum": [
 				"onCreate",
 				"updateContent",
-				"postCreate"
+				"postCreate",
+				"skip"
 			],
-			"description": "When to install the dependent R packages? Each option corresponds to the lifecycle scripts."
+			"description": "When to install the dependent R packages? Each option corresponds to the lifecycle scripts. 'skip' means to skip the installation."
 		},
 		"pakVersion": {
 			"type": "string",

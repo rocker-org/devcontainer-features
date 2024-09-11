@@ -16,6 +16,14 @@
 			}
 		}
 	},
+	"r-ver-skip": {
+		"image": "rocker/r-ver:4",
+		"features": {
+			"r-dependent-packages": {
+				"when": "skip"
+			}
+		}
+	},
 	"r-ver-updatecontent": {
 		"image": "rocker/r-ver:4",
 		"features": {
