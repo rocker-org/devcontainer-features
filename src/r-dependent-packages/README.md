@@ -15,7 +15,7 @@ This Feature sets scripts to install dependent R packages from the DESCRIPTION f
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| when | When to install the dependent R packages? Each option corresponds to the lifecycle scripts. | string | postCreate |
+| when | When to install the dependent R packages? Each option corresponds to the lifecycle scripts. 'skip' means to skip the installation. | string | postCreate |
 | pakVersion | Version of pak to install. By default, the stable version is installed if needed. | string | auto |
 | manifestRoot | The root path of the DESCRIPTION file recording the dependent R packages. Passed to the `root` argument of the `pak::local_install_deps()` function. | string | . |
 | additionalRepositories | String passed to the `pak::repo_add()` function. | string | - |
