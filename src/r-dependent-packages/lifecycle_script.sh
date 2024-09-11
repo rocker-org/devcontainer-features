@@ -19,6 +19,7 @@ fix_permissions() {
 
 fix_permissions "${PKG_PACKAGE_CACHE_DIR}"
 
+echo "The manifest DESCRIPTION file was set to '@ROOT@/DESCRIPTION'"
 echo "Install dependent R packages..."
 
 R -q -e \
