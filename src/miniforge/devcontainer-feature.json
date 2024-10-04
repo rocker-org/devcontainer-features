@@ -1,7 +1,7 @@
 {
 	"name": "Conda, Mamba (Miniforge)",
 	"id": "miniforge",
-	"version": "1.0.1",
+	"version": "2.0.0",
 	"description": "Installs Conda and Mamba package manager and Python3. conda-forge set as the default (and only) channel.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/miniforge",
 	"options": {
@@ -17,12 +17,10 @@
 			"type": "string",
 			"enum": [
 				"Miniforge3",
-				"Miniforge-pypy3",
-				"Mambaforge",
-				"Mambaforge-pypy3"
+				"Miniforge-pypy3"
 			],
-			"default": "Mambaforge",
-			"description": "Select Conda only (Miniforge) or Conda plus Mamba (Mambaforge), and install CPython (non-suffixed) or PyPy (-pypy3)."
+			"default": "Miniforge3",
+			"description": "Select install CPython (3) or PyPy (-pypy3)."
 		}
 	},
 	"installsAfter": [
