@@ -1,9 +1,9 @@
 {
-	"miniforge3": {
+	"mambaforge": {
 		"image": "debian:stable-slim",
 		"features": {
 			"miniforge": {
-				"variant": "Miniforge3"
+				"variant": "Mambaforge"
 			}
 		}
 	},
