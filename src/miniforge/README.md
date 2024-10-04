@@ -7,7 +7,7 @@ Installs Conda and Mamba package manager and Python3. conda-forge set as the def
 
 ```json
 "features": {
-    "ghcr.io/rocker-org/devcontainer-features/miniforge:1": {}
+    "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {}
 }
 ```
 
@@ -16,7 +16,7 @@ Installs Conda and Mamba package manager and Python3. conda-forge set as the def
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of Miniforge. | string | latest |
-| variant | Select Conda only (Miniforge) or Conda plus Mamba (Mambaforge), and install CPython (non-suffixed) or PyPy (-pypy3). | string | Mambaforge |
+| variant | Select install CPython (3) or PyPy (-pypy3). | string | Miniforge3 |
 
 <!-- markdownlint-disable MD041 -->
 
@@ -45,6 +45,15 @@ installs only [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/mic
 micromamba is lightweight, so installation is quick.
 
 If you do not need Conda, Mamba (which exist on top of Python) or Python by default, the micromamba Feature may be a better choice.
+
+## Release notes
+
+### 2.0.0
+
+- Change the default value of `variant` from `"Mambaforge"` to `"Miniforge3"`,
+  sinse as of 2024-07-21, `Mambaforge` is deprecated.
+  See the official announcement:
+  [Sunsetting Mambaforge](https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/)
 
 ## References
 
