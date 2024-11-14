@@ -1,7 +1,7 @@
 {
 	"name": "RStudio Server",
 	"id": "rstudio-server",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"description": "Installs the RStudio Server, enables to run the RStudio IDE on the browser.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/rstudio-server",
 	"options": {

@@ -106,20 +106,27 @@ install_rstudio() {
     local deb_file="rstudio-server.deb"
     local install_url
     local architecture
+    local ubuntu_codename
     architecture="$(dpkg --print-architecture)"
+    # Exported from /etc/os-release
+    ubuntu_codename="${UBUNTU_CODENAME}"
+
+    if [ "${ubuntu_codename}" = "noble" ]; then
+        ubuntu_codename="jammy"
+    fi
 
     mkdir -p /tmp/rstudio-server
     pushd /tmp/rstudio-server
 
     if [[ "${version}" == "stable" ]] || [[ "${version}" == "preview" ]] || [[ "${version}" == "daily" ]]; then
-        install_url="https://rstudio.org/download/latest/${version}/server/${UBUNTU_CODENAME}/rstudio-server-latest-${architecture}.deb"
+        install_url="https://rstudio.org/download/latest/${version}/server/${ubuntu_codename}/rstudio-server-latest-${architecture}.deb"
         echo "Download from ${install_url}"
         curl -fsLo "${deb_file}" "${install_url}" ||
-            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
+            echo "(!) Version ${version} for ${ubuntu_codename} ${architecture} is not found"
     else
-        curl -fsLo "${deb_file}" "https://download2.rstudio.org/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
-            curl -fsLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${UBUNTU_CODENAME}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
-            echo "(!) Version ${version} for ${UBUNTU_CODENAME} ${architecture} is not found"
+        curl -fsLo "${deb_file}" "https://download2.rstudio.org/server/${ubuntu_codename}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
+            curl -fsLo "${deb_file}" "https://s3.amazonaws.com/rstudio-ide-build/server/${ubuntu_codename}/${architecture}/rstudio-server-${version/"+"/"-"}-${architecture}.deb" ||
+            echo "(!) Version ${version} for ${ubuntu_codename} ${architecture} is not found"
     fi
 
     gdebi --non-interactive "${deb_file}"
