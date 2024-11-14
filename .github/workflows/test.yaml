@@ -48,6 +48,7 @@ jobs:
           - debian:stable-slim
           - ubuntu:focal
           - ubuntu:jammy
+          - ubuntu:noble
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
@@ -100,6 +101,7 @@ jobs:
           - debian:stable-slim
           - ubuntu:focal
           - ubuntu:jammy
+          - ubuntu:noble
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
