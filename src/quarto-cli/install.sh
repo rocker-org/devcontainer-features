@@ -133,14 +133,14 @@ install_cli "${CLI_VERSION}"
 if [ "${INSTALL_TINYTEX}" = "true" ]; then
     echo "Installing TinyTeX..."
     check_packages libfontconfig
-    su "${USERNAME}" -c 'quarto tools install tinytex'
+    su "${USERNAME}" -c 'quarto install tinytex'
 fi
 
 if [ "${INSTALL_CHROMIUM}" = "true" ]; then
     echo "Installing chromium..."
     echo "(!) Quarto CLI installs headless Chromium via Puppeteer. The bundled Chromium that Puppeteer installs may not work on Docker containers."
     echo "    Please check the Puppeteer document: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>"
-    su "${USERNAME}" -c 'quarto tools install chromium'
+    su "${USERNAME}" -c 'quarto install chromium'
 fi
 
 # Clean up
