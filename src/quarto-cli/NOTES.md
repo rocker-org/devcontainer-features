@@ -76,7 +76,7 @@ See also: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>
 `"latest"` and `"prerelease"` refer to the release and pre-release versions
 listed in [the Quarto CLI's download page](https://quarto.org/docs/download).
 
-You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
+You can also specify a version number **greater than** `"1.2"`, like `"1.3"` or `"1.6.42"`.
 
 `"1"` matches the highest numbered tag has pattern `1.Y.Z` in
 [the Quarto CLI GitHub repository](https://github.com/quarto-dev/quarto-cli).
