@@ -1,4 +1,20 @@
 {
+	"version-1.0.38": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "1.0.38"
+			}
+		}
+	},
+	"version-0": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "0"
+			}
+		}
+	},
 	"tinytex": {
 		"image": "debian:stable-slim",
 		"features": {
