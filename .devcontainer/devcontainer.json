@@ -1,5 +1,5 @@
 {
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-18-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/javascript-node:1-20",
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -10,7 +10,6 @@
 				"redhat.vscode-yaml"
 			],
 			"settings": {
-				"terminal.integrated.defaultProfile.linux": "zsh",
 				"json.schemas": [
 					{
 						"fileMatch": [
