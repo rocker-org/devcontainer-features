@@ -16,8 +16,8 @@ Installs the Quarto CLI. Auto-detects latest version.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of the Quarto CLI, if not latest. | string | latest |
-| installTinyTex | Install TinyTeX by using the `quarto install tinytex` command. Works only with version 1.2 or later. | boolean | false |
-| installChromium | Run the `quarto install chromium` command. Check the document for details. | boolean | false |
+| installTinyTex | Install TinyTeX by using the `quarto tools install tinytex` command. Works only with version 1.2 or later. | boolean | false |
+| installChromium | Run the `quarto tools install chromium` command. Check the document for details. | boolean | false |
 
 ## Customizations
 
@@ -103,7 +103,7 @@ See also: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>
 `"latest"` and `"prerelease"` refer to the release and pre-release versions
 listed in [the Quarto CLI's download page](https://quarto.org/docs/download).
 
-You can also specify a version number **greater than** `"1.2"`, like `"1.3"` or `"1.6.42"`.
+You can also specify a version number, like `"1"`, `"1.2"`, `"1.0.38"`.
 
 `"1"` matches the highest numbered tag has pattern `1.Y.Z` in
 [the Quarto CLI GitHub repository](https://github.com/quarto-dev/quarto-cli).
