@@ -1,4 +1,20 @@
 {
+	"version-1.0.38": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "1.0.38"
+			}
+		}
+	},
+	"version-0": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "0"
+			}
+		}
+	},
 	"tinytex": {
 		"image": "debian:stable-slim",
 		"features": {
@@ -27,6 +43,7 @@
 		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
 			"quarto-cli": {
+				"version": "1.4", // https://github.com/quarto-dev/quarto-cli/issues/10961
 				"installChromium": true
 			},
 			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
@@ -38,6 +55,7 @@
 		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 		"features": {
 			"quarto-cli": {
+				"version": "1.4", // https://github.com/quarto-dev/quarto-cli/issues/10961
 				"installChromium": true
 			},
 			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
