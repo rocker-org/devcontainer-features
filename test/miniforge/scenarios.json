@@ -9,7 +9,7 @@
 		}
 	},
 	"miniforge-existing-conda": {
-		"image": "jupyter/base-notebook",
+		"image": "quay.io/jupyter/base-notebook",
 		"features":{
 			"miniforge": {}
 		},
