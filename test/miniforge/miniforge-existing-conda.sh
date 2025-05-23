@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Check that conda is installed
-check "conda" conda --version 
+check "conda" conda --version
 
 # Report result
 reportResults
