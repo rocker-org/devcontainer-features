@@ -16,7 +16,7 @@ Installs Conda and Mamba package manager and Python3. conda-forge set as the def
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of Miniforge. | string | latest |
-| variant | Select install CPython (3) or PyPy (-pypy3). | string | Miniforge3 |
+| variant | Select install CPython (3) or PyPy (-pypy3, which is deprecated and no longer available after version 24.9.0). | string | Miniforge3 |
 
 <!-- markdownlint-disable MD041 -->
 
