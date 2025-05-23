@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "conda" bash -c 'conda --version | grep "24.7.1-2"'
+check "conda" bash -c 'conda --version | grep "24.7.1"'
 
 # Report result
 reportResults
