@@ -15,6 +15,14 @@
 			}
 		}
 	},
+	"version-prerelease": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "prerelease"
+			}
+		}
+	},
 	"tinytex": {
 		"image": "debian:stable-slim",
 		"features": {
