@@ -144,13 +144,6 @@ Pin: release l=CRAN-Apt Packages
 Pin-Priority: 700
 EOF
 elif [ "${ID}" = "debian" ]; then
-    # On Debian, renv, languageserver and httpgd are not available via apt
-    # shellcheck disable=SC2206
-    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-renv})
-    # shellcheck disable=SC2206
-    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
-    # shellcheck disable=SC2206
-    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
     if [ "${USE_TESTING}" = "true" ]; then
         echo "Set up Debian testing..."
         echo "deb http://http.debian.net/debian testing main" >/etc/apt/sources.list.d/debian-testing.list
@@ -161,6 +154,13 @@ elif [ "${ID}" = "debian" ]; then
         curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
         echo "deb http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
     fi
+    # On Debian, renv, languageserver and httpgd are not available via apt
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-renv})
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
+    # shellcheck disable=SC2206
+    APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
 fi
 
 apt-get update -y
