@@ -2,9 +2,7 @@
 
 ## Supported platforms
 
-`linux/amd64` platform `debian`, `ubuntu:focal` and `ubuntu:jammy`.
-
-If the `useTesting` is `true`, `linux/arm64` platform `debian` also supported.
+`linux/amd64` and `linux/arm64` platforms `debian`, `ubuntu` LTS.
 
 Note that this Feature only supports non-R images. If R is already installed, installation will be failed.
 
