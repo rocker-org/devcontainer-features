@@ -161,6 +161,9 @@ elif [ "${ID}" = "debian" ]; then
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
+else
+    echo "Unreachable"
+    exit 1
 fi
 
 apt-get update -y
