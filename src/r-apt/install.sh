@@ -132,6 +132,8 @@ usermod -a -G staff "${USERNAME}"
 
 check_packages curl ca-certificates
 
+# shellcheck source=/dev/null
+source /etc/os-release
 if [ "${ID}" = "ubuntu" ]; then
     echo "Set up r2u..."
     curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc >/dev/null
@@ -162,7 +164,8 @@ elif [ "${ID}" = "debian" ]; then
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
 else
-    echo "Unreachable"
+    echo "(!) Unsupported distribution: ${ID}"
+    echo "    This script is designed only for Debian and Ubuntu."
     exit 1
 fi
 
