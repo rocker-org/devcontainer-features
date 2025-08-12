@@ -41,21 +41,22 @@
 			}
 		}
 	},
-	"all-on-not-testing": {
-		"image": "debian:stable-slim",
-		"features": {
-			"r-apt": {
-				"useTesting": false,
-				"vscodeRSupport": "full",
-				"installDevTools": true,
-				"installREnv": true,
-				"installRMarkdown": true,
-				"installVscDebugger": true,
-				"installJupyterlab": true,
-				"installRadian": true
-			}
-		}
-	},
+	// TODO: some packages are not available on stable for now
+	// "all-on-not-testing": {
+	// 	"image": "debian:stable-slim",
+	// 	"features": {
+	// 		"r-apt": {
+	// 			"useTesting": false,
+	// 			"vscodeRSupport": "full",
+	// 			"installDevTools": true,
+	// 			"installREnv": true,
+	// 			"installRMarkdown": true,
+	// 			"installVscDebugger": true,
+	// 			"installJupyterlab": true,
+	// 			"installRadian": true
+	// 		}
+	// 	}
+	// },
 	// TODO: enable tesing on debian
 	// "bspm-debian": {
 	// 	"image": "mcr.microsoft.com/devcontainers/base:debian",

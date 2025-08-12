@@ -38,18 +38,6 @@ if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
     exit 1
 fi
 
-# Only debian testing supports arm64
-# shellcheck source=/dev/null
-source /etc/os-release
-if [ "${ID}" = "ubuntu" ] && [ "${architecture}" != "amd64" ]; then
-    echo "(!) Ubuntu $architecture unsupported"
-    exit 1
-fi
-if [ "${ID}" = "debian" ] && [ "${architecture}" != "amd64" ] && [ "${USE_TESTING}" != "true" ]; then
-    echo "(!) To use Debian $architecture, please set useTesting option to true"
-    exit 1
-fi
-
 # Determine the appropriate non-root user
 if [ "${USERNAME}" = "auto" ] || [ "${USERNAME}" = "automatic" ]; then
     USERNAME=""
@@ -144,13 +132,15 @@ usermod -a -G staff "${USERNAME}"
 
 check_packages curl ca-certificates
 
+# shellcheck source=/dev/null
+source /etc/os-release
 if [ "${ID}" = "ubuntu" ]; then
     echo "Set up for Ubuntu..."
     curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc >/dev/null
-    echo "deb [arch=amd64] https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
+    echo "deb https://cloud.r-project.org/bin/linux/ubuntu ${UBUNTU_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-ubuntu.list
     echo "Set up r2u..."
     curl -fsSL https://eddelbuettel.github.io/r2u/assets/dirk_eddelbuettel_key.asc | tee -a /etc/apt/trusted.gpg.d/cranapt_key.asc >/dev/null
-    echo "deb [arch=amd64] https://r2u.stat.illinois.edu/ubuntu ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
+    echo "deb https://r2u.stat.illinois.edu/ubuntu ${UBUNTU_CODENAME} main" >/etc/apt/sources.list.d/cranapt.list
     # Pinning
     cat <<EOF >"/etc/apt/preferences.d/99cranapt"
 Package: *
@@ -167,7 +157,7 @@ elif [ "${ID}" = "debian" ]; then
     else
         echo "Set up for Debian ${VERSION_CODENAME}..."
         curl -fsSL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x95c0faf38db3ccad0c080a7bdc78b2ddeabc47b7" | tee -a /etc/apt/trusted.gpg.d/cran_debian_key.asc >/dev/null
-        echo "deb [arch=amd64] http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
+        echo "deb http://cloud.r-project.org/bin/linux/debian ${VERSION_CODENAME}-cran40/" >/etc/apt/sources.list.d/cran-debian.list
     fi
     # On Debian, renv, languageserver and httpgd are not available via apt
     # shellcheck disable=SC2206
@@ -176,6 +166,10 @@ elif [ "${ID}" = "debian" ]; then
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-languageserver})
     # shellcheck disable=SC2206
     APT_PACKAGES=(${APT_PACKAGES[@]/r-cran-httpgd})
+else
+    echo "(!) Unsupported distribution: ${ID}"
+    echo "    This script is designed only for Debian and Ubuntu."
+    exit 1
 fi
 
 apt-get update -y
@@ -189,7 +183,7 @@ chmod g+ws "${R_LIBRARY_PATH}"
 install_pip_packages ${PIP_PACKAGES[*]}
 
 # Install pak
-R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/devel/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"
+R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/stable/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"
 
 if [ "${ID}" = "debian" ] && [ "${install_languageserver}" = "true" ]; then
     check_packages \

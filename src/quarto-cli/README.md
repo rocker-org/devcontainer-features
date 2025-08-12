@@ -16,8 +16,8 @@ Installs the Quarto CLI. Auto-detects latest version.
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
 | version | Select version of the Quarto CLI, if not latest. | string | latest |
-| installTinyTex | Install TinyTeX by using the `quarto tools install tinytex` command. Works only with version 1.2 or later. | boolean | false |
-| installChromium | Run the `quarto tools install chromium` command. Check the document for details. | boolean | false |
+| installTinyTex | Install TinyTeX by using the `quarto install tinytex` command. Works only with version 1.2 or later. | boolean | false |
+| installChromium | Run the `quarto install chromium` command. Check the document for details. | boolean | false |
 
 ## Customizations
 

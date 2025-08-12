@@ -2,9 +2,7 @@
 
 ## Supported platforms
 
-`linux/amd64` platform `debian`, `ubuntu:focal` and `ubuntu:jammy`.
-
-If the `useTesting` is `true`, `linux/arm64` platform `debian` also supported.
+`linux/amd64` and `linux/arm64` platforms `debian`, `ubuntu` LTS.
 
 Note that this Feature only supports non-R images. If R is already installed, installation will be failed.
 
@@ -29,7 +27,7 @@ apt-get -y install --no-install-recommends r-cran-dplyr
 Thanks to [r2u](https://eddelbuettel.github.io/r2u/), on Ubuntu,
 all packages on CRAN and BioConductor can be installed via apt.
 
-If you want to install R packages via apt during the container build phase,
+If you want to install R packages via apt during the container build phase (as opposed to installing R packages using the [`r-packages` Feature](https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages)),
 you can use [the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature](https://github.com/rocker-org/devcontainer-features/blob/main/src/apt-packages)
 to do so.
 
@@ -47,6 +45,20 @@ to do so.
 
 `ghcr.io/rocker-org/devcontainer-features/apt-packages` is not guaranteed to install after this Feature,
 so be sure to set up [the `overrideFeatureInstallOrder` property](https://containers.dev/implementors/features/#overrideFeatureInstallOrder).
+
+When installing R packages via `r-cran-<package>` using the `apt-packages` Feature, R package name references must be lowercase. For example, the following snippet installs the {kableExtra} R package.
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+        "packages": "r-cran-kableextra"
+    }
+},
+"overrideFeatureInstallOrder": [
+    "ghcr.io/rocker-org/devcontainer-features/r-apt"
+]
+```
 
 ### Source installation via R
 

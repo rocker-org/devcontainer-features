@@ -2,11 +2,10 @@
 
 set -e
 
-# shellcheck source=/dev/null
+# Optional: Import test library bundled with the devcontainer CLI
 source dev-container-features-test-lib
 
-# Check that conda is installed
-check "conda" conda --version 
+# Feature-specific tests
 
 # Report result
 reportResults

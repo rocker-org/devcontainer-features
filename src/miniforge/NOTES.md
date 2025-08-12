@@ -26,6 +26,15 @@ micromamba is lightweight, so installation is quick.
 
 If you do not need Conda, Mamba (which exist on top of Python) or Python by default, the micromamba Feature may be a better choice.
 
+## Release notes
+
+### 2.0.0
+
+- Change the default value of `variant` from `"Mambaforge"` to `"Miniforge3"`,
+  sinse as of 2024-07-21, `Mambaforge` is deprecated.
+  See the official announcement:
+  [Sunsetting Mambaforge](https://conda-forge.org/news/2024/07/29/sunsetting-mambaforge/)
+
 ## References
 
 - [Conda](https://docs.conda.io)

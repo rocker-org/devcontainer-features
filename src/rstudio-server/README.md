@@ -23,7 +23,7 @@ Installs the RStudio Server, enables to run the RStudio IDE on the browser.
 
 ## Supported platforms
 
-`linux/amd64` and `linux/arm64` platform `ubuntu:focal` and `ubuntu:jammy`.
+`linux/amd64` and `linux/arm64` platform `ubuntu:focal`, `ubuntu:jammy` and `ubuntu:noble`.
 
 `linux/arm64` platform supports are currently experimental and only available on daily builds for testing purposes.
 ([rstudio/rstudio#13340](https://github.com/rstudio/rstudio/issues/13340))

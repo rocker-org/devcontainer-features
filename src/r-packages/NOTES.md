@@ -21,8 +21,21 @@ or this should be installed after installing Features that installs R
 Note that source installation of the R packages may require the installation of
 additional build tools and system packages.
 
-For Debian and Ubuntu,
-you can use [the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature](https://github.com/rocker-org/devcontainer-features/blob/main/src/apt-packages)
+If many cases, we can use the `installSystemRequirements` option to install the system requirements
+automatically by `pak::pak()`.
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:latest": {},
+    "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+        "packages": "cli",
+        "installSystemRequirements": true
+    }
+}
+```
+
+Or, for Debian and Ubuntu,
+we can use [the `ghcr.io/rocker-org/devcontainer-features/apt-packages` Feature](https://github.com/rocker-org/devcontainer-features/blob/main/src/apt-packages)
 to install apt packages before installing this Feature.
 
 ```json
@@ -79,6 +92,11 @@ For example, the following example runs as `pak::repo_add(rhub = 'https://r-hub.
     }
 }
 ```
+
+## See also
+
+- [r-dependent-packages Feature](../r-dependent-packages/README.md)
+- [renv-cache Feature](../renv-cache/README.md)
 
 ## References
 

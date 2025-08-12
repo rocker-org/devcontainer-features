@@ -3,8 +3,9 @@
 PACKAGES=${PACKAGES:-""}
 PAK_VERSION=${PAKVERSION:-"auto"}
 ADDITIONAL_REPOSITORIES=${ADDITIONALREPOSITORIES:-""}
-INSTALL_SYS_REQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
+CRAN_MIRROR=${CRANMIRROR:-""}
 
+export PKG_SYSREQS=${INSTALLSYSTEMREQUIREMENTS:-"false"}
 export NOT_CRAN=${NOTCRAN:-"false"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
@@ -64,7 +65,7 @@ install_pak() {
             echo "pak is already installed. Skip pak installation..."
             return
         else
-            version="devel"
+            version="stable"
         fi
     fi
 
@@ -76,14 +77,10 @@ install_pak() {
 install_r_packages() {
     local packages=$1
     local is_apt="false"
-    local ci_old
 
     if [ -n "${packages}" ]; then
 
-        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
-            ci_old="${CI}"
-            export CI="true"
-            echo "Set 'CI' to '${CI}'..."
+        if [ "${PKG_SYSREQS}" = "true" ]; then
             # shellcheck source=/dev/null
             source /etc/os-release
             if [ "${ID}" = "debian" ] || [ "${ID_LIKE}" = "debian" ]; then
@@ -98,10 +95,6 @@ install_r_packages() {
             # Clean up
             rm -rf /var/lib/apt/lists/*
         fi
-        if [ "${INSTALL_SYS_REQS}" = "true" ]; then
-            export CI="${ci_old}"
-            echo "Set 'CI' to '${CI}'..."
-        fi
     fi
 }
 
@@ -110,6 +103,11 @@ export DEBIAN_FRONTEND=noninteractive
 echo "Install R packages..."
 mkdir /tmp/r-packages
 pushd /tmp/r-packages
+
+if [ -n "${CRAN_MIRROR}" ]; then
+    echo "Use '${CRAN_MIRROR}' as the CRAN mirror..."
+    export PKG_CRAN_MIRROR="${CRAN_MIRROR}"
+fi
 
 install_pak "${PAK_VERSION}"
 
