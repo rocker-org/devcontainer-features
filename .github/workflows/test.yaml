@@ -52,7 +52,7 @@ jobs:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -72,7 +72,7 @@ jobs:
       matrix:
         features: ${{ fromJSON(needs.detect-changes.outputs.features) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -105,7 +105,7 @@ jobs:
           - mcr.microsoft.com/devcontainers/base:ubuntu
           - mcr.microsoft.com/devcontainers/base:debian
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -132,7 +132,7 @@ jobs:
           - renv-cache
           - rstudio-server
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
@@ -144,7 +144,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: "Install latest devcontainer CLI"
         run: npm install -g @devcontainers/cli
