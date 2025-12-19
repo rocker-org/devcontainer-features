@@ -187,7 +187,8 @@ if [ "${R_VERSION}" != "latest" ]; then
         exit 1
     fi
     echo "Installing R version ${RESOLVED_VERSION}"
-    APT_PACKAGES=("r-base=${RESOLVED_VERSION}")
+    # Pin both r-base and r-recommended to avoid dependency conflicts
+    APT_PACKAGES=("r-base=${RESOLVED_VERSION}" "r-recommended=${RESOLVED_VERSION}")
 fi
 
 # shellcheck disable=SC2048 disable=SC2086
