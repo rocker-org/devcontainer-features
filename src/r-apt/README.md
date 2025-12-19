@@ -11,10 +11,25 @@ Installs the latest R, some R packages, and needed dependencies. Note: May requi
 }
 ```
 
+### Installing a specific R version
+
+To install a specific R version (e.g., R 4.4.x), specify the major.minor version:
+
+```json
+"features": {
+    "ghcr.io/rocker-org/devcontainer-features/r-apt:0": {
+        "version": "4.4"
+    }
+}
+```
+
+This is useful when you need pre-built binary packages from repositories like [Posit Package Manager (P3M)](https://packagemanager.posit.co/) that may not yet have binaries for the latest R version.
+
 ## Options
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
+| version | Select version of R (e.g., '4.4', '4.3', or 'latest' for the newest available). | string | latest |
 | vscodeRSupport | Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package. | string | minimal |
 | installDevTools | Install the `devtools` R package. | boolean | false |
 | installREnv | Install the `renv` R package. | boolean | false |

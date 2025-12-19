@@ -5,6 +5,16 @@
 	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
+		"version": {
+			"type": "string",
+			"proposals": [
+				"latest",
+				"4.4",
+				"4.3"
+			],
+			"default": "latest",
+			"description": "Select version of R (e.g., '4.4', '4.3', or 'latest' for the newest available)."
+		},
 		"vscodeRSupport": {
 			"type": "string",
 			"enum": [

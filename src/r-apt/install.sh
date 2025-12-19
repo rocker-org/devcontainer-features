@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+R_VERSION=${VERSION:-"latest"}
 USE_TESTING=${USETESTING:-"true"}
 VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
@@ -173,6 +174,22 @@ else
 fi
 
 apt-get update -y
+
+# Resolve R version if a specific version was requested
+if [ "${R_VERSION}" != "latest" ]; then
+    echo "Resolving R version ${R_VERSION}..."
+    # Find the latest available version matching the requested major.minor version
+    RESOLVED_VERSION=$(apt-cache policy r-base | grep -E "^\s+${R_VERSION}\." | head -1 | awk '{print $1}')
+    if [ -z "${RESOLVED_VERSION}" ]; then
+        echo "(!) Error: Could not find R version matching ${R_VERSION}"
+        echo "    Available versions:"
+        apt-cache policy r-base | grep -E "^\s+[0-9]+\.[0-9]+" | head -10
+        exit 1
+    fi
+    echo "Installing R version ${RESOLVED_VERSION}"
+    APT_PACKAGES=("r-base=${RESOLVED_VERSION}")
+fi
+
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
 
