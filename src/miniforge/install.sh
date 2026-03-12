@@ -87,12 +87,19 @@ find_version_from_git_tags() {
         check_packages ca-certificates
         version_list="$(git ls-remote --tags "${repository}" | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
         if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
-            declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
-        else
-            set +e
-            declare -g "${variable_name}"="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
-            set -e
+            if [ "${repository}" = "https://github.com/conda-forge/miniforge" ]; then
+                check_packages curl
+                requested_version="$(curl -fsSL "https://api.github.com/repos/conda-forge/miniforge/releases/latest" | sed -nE 's/^[[:space:]]*"tag_name":[[:space:]]*"([^"]+)".*/\1/p')"
+                if [ -z "${requested_version}" ]; then
+                    requested_version="$(echo "${version_list}" | head -n 1)"
+                fi    
+            else
+                requested_version="$(echo "${version_list}" | head -n 1)"
+            fi
         fi
+        set +e
+        declare -g "${variable_name}"="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+        set -e
     fi
     if [ -z "${!variable_name}" ] || ! echo "${version_list}" | grep "^${!variable_name//./\\.}$" >/dev/null 2>&1; then
         echo -e "Invalid ${variable_name} value: ${requested_version}\nValid values:\n${version_list}" >&2
