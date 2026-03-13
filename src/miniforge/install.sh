@@ -51,7 +51,7 @@ elif [ "${USERNAME}" = "none" ] || ! id -u "${USERNAME}" >/dev/null 2>&1; then
 fi
 
 apt_get_update() {
-    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+    if [ ! -d /var/lib/apt/lists ] || [ -z "$(ls -A /var/lib/apt/lists 2>/dev/null)" ]; then
         echo "Running apt-get update..."
         apt-get update -y
     fi
@@ -87,13 +87,20 @@ find_version_from_git_tags() {
         check_packages ca-certificates
         version_list="$(git ls-remote --tags "${repository}" | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
         if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+            requested_version=""
             if [ "${repository}" = "https://github.com/conda-forge/miniforge" ]; then
                 check_packages curl
-                requested_version="$(curl -fsSL "https://api.github.com/repos/conda-forge/miniforge/releases/latest" | sed -nE 's/^[[:space:]]*"tag_name":[[:space:]]*"([^"]+)".*/\1/p')"
-                if [ -z "${requested_version}" ]; then
-                    requested_version="$(echo "${version_list}" | head -n 1)"
-                fi    
-            else
+                github_api_headers=()
+                if [ -n "${GITHUB_TOKEN:-}" ]; then
+                    # use GITHUB_TOKEN to raise rate limits
+                    github_api_headers=(-H "Authorization: Bearer ${GITHUB_TOKEN}" -H "X-GitHub-Api-Version: 2022-11-28")
+                fi
+                set +e
+                requested_version="$(curl -fsSL "${github_api_headers[@]}" "https://api.github.com/repos/conda-forge/miniforge/releases/latest" | sed -nE 's/^[[:space:]]*"tag_name":[[:space:]]*"([^"]+)".*/\1/p')"
+                set -e
+            fi
+            # fallback to most recent git tag if rate limit exceeded; this may unfortunately include pre-releases
+            if [ -z "${requested_version}" ]; then
                 requested_version="$(echo "${version_list}" | head -n 1)"
             fi
         fi
