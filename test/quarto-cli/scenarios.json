@@ -51,7 +51,7 @@
 		"image": "mcr.microsoft.com/devcontainers/base:debian",
 		"features": {
 			"quarto-cli": {
-				"version": "1.4", // https://github.com/quarto-dev/quarto-cli/issues/10961
+				"version": "1.4",
 				"installChromium": true
 			},
 			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
