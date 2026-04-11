@@ -142,7 +142,7 @@ if [ "${INSTALL_CHROMIUM}" = "true" ]; then
     echo "(!) Quarto CLI installs headless Chromium via Puppeteer."
     echo "    The bundled Chromium that Puppeteer installs may not work on Docker containers."
     echo "    Please check the Puppeteer document: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>"
-    su "${USERNAME}" -c 'quarto install chrome-headless-shell --quiet || quarto install chrome --quiet'
+    su "${USERNAME}" -c 'quarto install chrome-headless-shell --quiet || quarto install chromium --quiet'
     echo "Chromium installation complete."
 fi
 
