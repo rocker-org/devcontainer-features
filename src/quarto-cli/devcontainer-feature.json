@@ -1,7 +1,7 @@
 {
 	"name": "Quarto CLI",
 	"id": "quarto-cli",
-	"version": "1.1.4",
+	"version": "1.1.5",
 	"description": "Installs the Quarto CLI. Auto-detects latest version.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/quarto-cli",
 	"options": {
@@ -22,7 +22,7 @@
 		"installChromium": {
 			"type": "boolean",
 			"default": false,
-			"description": "Run the `quarto install chromium` command. Check the document for details."
+			"description": "Run the `quarto install chromium` or `quarto install chrome-headless-shell` command. Check the document for details."
 		}
 	},
 	"installsAfter": [

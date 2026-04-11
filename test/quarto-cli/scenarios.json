@@ -59,6 +59,18 @@
 			}
 		}
 	},
+	"chromiumheadless-on-debian": {
+		"image": "mcr.microsoft.com/devcontainers/base:debian",
+		"features": {
+			"quarto-cli": {
+				"version": "1.9",
+				"installChromium": true
+			},
+			"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+				"packages": "chromium"
+			}
+		}
+	},
 	"chromium-on-ubuntu": {
 		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 		"features": {
