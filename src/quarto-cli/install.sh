@@ -57,6 +57,10 @@ check_packages() {
     fi
 }
 
+quarto_supports_chrome_headless_shell() {
+    LC_ALL=C quarto install --help 2>&1 | grep -Fq 'chrome-headless-shell'
+}
+
 find_version_from_git_tags() {
     local variable_name=$1
     local requested_version=${!variable_name}
@@ -142,7 +146,11 @@ if [ "${INSTALL_CHROMIUM}" = "true" ]; then
     echo "(!) Quarto CLI installs headless Chromium via Puppeteer."
     echo "    The bundled Chromium that Puppeteer installs may not work on Docker containers."
     echo "    Please check the Puppeteer document: <https://pptr.dev/troubleshooting#running-puppeteer-in-docker>"
-    su "${USERNAME}" -c 'quarto install chromium --quiet'
+    if quarto_supports_chrome_headless_shell; then
+        su "${USERNAME}" -c 'quarto install chrome-headless-shell --quiet'
+    else
+        su "${USERNAME}" -c 'quarto install chromium --quiet'
+    fi
     echo "Chromium installation complete."
 fi
 
