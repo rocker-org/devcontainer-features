@@ -1,11 +1,12 @@
 {
 	"name": "R history",
 	"id": "r-history",
-	"version": "0.1.0",
-	"description": "Preserve R terminal history across Dev Container instances. Supports Radian and RStudio's R console.",
+	"version": "0.2.0",
+	"description": "Preserve R terminal history across Dev Container instances. Supports Radian, arf console and RStudio's R console.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-history",
 	"options": {},
 	"containerEnv": {
+		"ARF_HISTORY_DIR": "/dc/r-history",
 		"R_HISTFILE": "/dc/r-history/.Rhistory"
 	},
 	"mounts": [
