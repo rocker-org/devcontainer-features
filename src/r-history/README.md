@@ -1,7 +1,7 @@
 
 # R history (r-history)
 
-Preserve R terminal history across Dev Container instances. Supports Radian and RStudio's R console.
+Preserve R terminal history across Dev Container instances. Supports Radian, arf console and RStudio's R console.
 
 ## Example Usage
 
