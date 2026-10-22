@@ -6,7 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "version" R --version | grep 4.0.5
+check "version" bash -c "R --version | grep 'R version 4.0.5'"
 
 # Report result
 reportResults
