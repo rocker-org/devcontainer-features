@@ -15,6 +15,16 @@ R_PACKAGES=()
 
 set -e
 
+# Temporary directories to be removed on exit, even on failure
+TEMP_DIRS=()
+
+cleanup_temp_dirs() {
+    if [ "${#TEMP_DIRS[@]}" -gt 0 ]; then
+        rm -rf "${TEMP_DIRS[@]}"
+    fi
+}
+trap cleanup_temp_dirs EXIT
+
 # Clean up
 rm -rf /var/lib/apt/lists/*
 
@@ -147,8 +157,10 @@ check_glibc() {
 }
 
 install_arf() {
-    local tmp_dir=/tmp/arf
+    local tmp_dir
     local asset
+    tmp_dir="$(mktemp -d)"
+    TEMP_DIRS+=("${tmp_dir}")
 
     echo "Checking glibc version for arf..."
     if ! check_glibc 2.34; then
@@ -162,7 +174,6 @@ install_arf() {
     asset="arf-console-${architecture}-unknown-linux-gnu.tar.xz"
 
     echo "Downloading arf ${ARF_VERSION}..."
-    mkdir -p "${tmp_dir}"
     pushd "${tmp_dir}"
     curl -fsSLO "https://github.com/eitsupi/arf/releases/download/v${ARF_VERSION}/${asset}"
     curl -fsSLO "https://github.com/eitsupi/arf/releases/download/v${ARF_VERSION}/${asset}.sha256"
@@ -184,9 +195,11 @@ install_rig() {
 resolve_major_r_version() {
     local major=$1
     local resolved
+    local url
     # Versions listed by rig may not be resolvable on this platform, so check them from the newest
     for candidate in $(rig available --json --all 2>/dev/null | grep -oP '"version": "\K[0-9]+\.[0-9]+\.[0-9]+(?=")' | grep -E "^${major}\\." | sort -rV); do
-        if rig resolve "${candidate}" >/dev/null 2>&1; then
+        url="$(rig resolve "${candidate}" 2>/dev/null | awk '{print $2}')" || true
+        if [[ "${url}" =~ ^https?:// ]]; then
             resolved="${candidate}"
             break
         fi
@@ -224,45 +237,48 @@ install_r_packages() {
     fi
 
     # Phase 1: Get the commands to install system requirements (as the user)
-    rm -f /tmp/r-rig/sysreqs.sh
-    cat <<"RSCRIPT" >/tmp/r-rig/sysreqs.R
+    # The user writes the commands into a user-owned temporary directory,
+    # and root copies them to a root-owned file before running them.
+    local user_tmp_dir
+    user_tmp_dir="$(su "${USERNAME}" -c 'mktemp -d')"
+    TEMP_DIRS+=("${user_tmp_dir}")
+    cat <<"RSCRIPT" >"${WORK_DIR}/sysreqs.R"
 pkgs <- unlist(strsplit(Sys.getenv("R_RIG_PACKAGES"), " "))
-tryCatch(
-  {
-    sr <- pak::pkg_sysreqs(pkgs)
-    writeLines(
-      c(sr$pre_install, sr$install_scripts, sr$post_install),
-      "/tmp/r-rig/sysreqs.sh"
-    )
-  },
-  error = function(e) {
-    message("Could not get the system requirements: ", conditionMessage(e))
-  }
+sr <- pak::pkg_sysreqs(pkgs)
+writeLines(
+  c(sr$pre_install, sr$install_scripts, sr$post_install),
+  Sys.getenv("R_RIG_SYSREQS_FILE")
 )
 RSCRIPT
-    chmod 644 /tmp/r-rig/sysreqs.R
+    chmod 644 "${WORK_DIR}/sysreqs.R"
     echo "Checking system requirements of the R packages..."
-    su "${USERNAME}" -c "R_RIG_PACKAGES='${packages}' R -q -f /tmp/r-rig/sysreqs.R"
+    su "${USERNAME}" -c "R_RIG_PACKAGES='${packages}' R_RIG_SYSREQS_FILE='${user_tmp_dir}/sysreqs.sh' R -q -f ${WORK_DIR}/sysreqs.R"
 
-    # Phase 2: Install system requirements (as root)
-    if [ -s /tmp/r-rig/sysreqs.sh ]; then
+    rm -f "${WORK_DIR}/sysreqs.sh"
+    if [ -f "${user_tmp_dir}/sysreqs.sh" ]; then
+        install -m 600 "${user_tmp_dir}/sysreqs.sh" "${WORK_DIR}/sysreqs.sh"
+    fi
+    rm -rf "${user_tmp_dir}"
+
+    # Phase 2: Install system requirements (as root, from the root-owned copy)
+    if [ -s "${WORK_DIR}/sysreqs.sh" ]; then
         echo "Installing system requirements..."
-        cat /tmp/r-rig/sysreqs.sh
+        cat "${WORK_DIR}/sysreqs.sh"
         apt_get_update
-        bash -e /tmp/r-rig/sysreqs.sh
+        bash -e "${WORK_DIR}/sysreqs.sh"
     else
         echo "No system requirements need to be installed."
     fi
 
     # Phase 3: Install R packages (as the user)
-    cat <<"RSCRIPT" >/tmp/r-rig/install.R
+    cat <<"RSCRIPT" >"${WORK_DIR}/install.R"
 pkgs <- unlist(strsplit(Sys.getenv("R_RIG_PACKAGES"), " "))
 pak::pak(pkgs)
 pak::cache_clean()
 pak::meta_clean(force = TRUE)
 RSCRIPT
-    chmod 644 /tmp/r-rig/install.R
-    su "${USERNAME}" -c "PKG_SYSREQS=false R_RIG_PACKAGES='${packages}' R -q -f /tmp/r-rig/install.R"
+    chmod 644 "${WORK_DIR}/install.R"
+    su "${USERNAME}" -c "PKG_SYSREQS=false R_RIG_PACKAGES='${packages}' R -q -f ${WORK_DIR}/install.R"
 }
 
 export DEBIAN_FRONTEND=noninteractive
@@ -312,9 +328,11 @@ if [ ! -f "${_REMOTE_USER_HOME}/.gitconfig" ]; then
 fi
 
 # Install the pak package
-mkdir -p /tmp/r-rig
-chmod 777 /tmp/r-rig
-pushd /tmp/r-rig
+# Root-owned work dir: the user can read and enter it, but cannot write to it
+WORK_DIR="$(mktemp -d)"
+TEMP_DIRS+=("${WORK_DIR}")
+chmod 755 "${WORK_DIR}"
+pushd "${WORK_DIR}"
 
 install_pak "${PAK_VERSION}"
 
@@ -322,7 +340,7 @@ install_pak "${PAK_VERSION}"
 install_r_packages ${R_PACKAGES[*]}
 
 popd
-rm -rf /tmp/r-rig
+rm -rf "${WORK_DIR}"
 
 # Should not add .gitconfig to the user's home directory
 # https://github.com/r-lib/credentials/issues/25
