@@ -7,9 +7,7 @@
 				"installDevTools": true,
 				"installREnv": true,
 				"installRMarkdown": true,
-				"installVscDebugger": true,
-				"installJupyterlab": true,
-				"installRadian": true
+				"arfVersion": "latest"
 			}
 		}
 	},
@@ -20,10 +18,7 @@
 				"vscodeRSupport": "full",
 				"installDevTools": true,
 				"installREnv": true,
-				"installRMarkdown": true,
-				"installVscDebugger": true,
-				"installJupyterlab": true,
-				"installRadian": true
+				"installRMarkdown": true
 			}
 		}
 	},
@@ -35,9 +30,15 @@
 				"installDevTools": true,
 				"installREnv": true,
 				"installRMarkdown": true,
-				"installVscDebugger": true,
-				"installJupyterlab": true,
-				"installRadian": true
+				"arfVersion": "latest"
+			}
+		}
+	},
+	"arf-noble": {
+		"image": "ubuntu:noble",
+		"features": {
+			"r-apt": {
+				"arfVersion": "latest"
 			}
 		}
 	},
@@ -51,9 +52,7 @@
 	// 			"installDevTools": true,
 	// 			"installREnv": true,
 	// 			"installRMarkdown": true,
-	// 			"installVscDebugger": true,
-	// 			"installJupyterlab": true,
-	// 			"installRadian": true
+	// 			"arfVersion": "latest"
 	// 		}
 	// 	}
 	// },

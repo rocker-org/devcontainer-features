@@ -1,7 +1,7 @@
 {
 	"name": "R (via apt)",
 	"id": "r-apt",
-	"version": "0.5.0",
+	"version": "1.0.0",
 	"description": "Installs the latest R, some R packages, and needed dependencies. Note: May require source code compilation for some R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-apt",
 	"options": {
@@ -14,37 +14,31 @@
 				"full"
 			],
 			"default": "minimal",
-			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
+			"description": "Install R packages to make vscode-R work. minimal means the packages required by the session watcher of vscode-R (processx, later, jsonlite and rstudioapi), lsp means minimal plus the languageserver package, full means lsp plus the jgd package (the graphics device for the vscode-R plot viewer)."
 		},
 		"installDevTools": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `devtools` R package."
+			"description": "Install the devtools R package."
 		},
 		"installREnv": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `renv` R package."
+			"description": "Install the renv R package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation."
+			"description": "Install the rmarkdown R package. It is required for R Markdown or Quarto documentation."
 		},
-		"installJupyterlab": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks."
-		},
-		"installRadian": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight."
-		},
-		"installVscDebugger": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
+		"arfVersion": {
+			"type": "string",
+			"proposals": [
+				"none",
+				"latest"
+			],
+			"default": "none",
+			"description": "Install arf (R console, https://github.com/eitsupi/arf) from GitHub releases. latest means the latest stable release, or specify a version like `0.6.0`. Requires glibc >= 2.34."
 		},
 		"useTesting": {
 			"type": "boolean",
@@ -58,8 +52,7 @@
 		}
 	},
 	"installsAfter": [
-		"ghcr.io/devcontainers/features/common-utils",
-		"ghcr.io/devcontainers/features/python"
+		"ghcr.io/devcontainers/features/common-utils"
 	],
 	"customizations": {
 		"vscode": {

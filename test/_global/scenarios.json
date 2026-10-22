@@ -12,8 +12,7 @@
 		"image": "ubuntu:jammy",
 		"features": {
 			"r-apt": {
-				"installRMarkdown": true,
-				"installJupyterlab": true
+				"installRMarkdown": true
 			},
 			"quarto-cli": {}
 		}
