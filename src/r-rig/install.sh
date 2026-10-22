@@ -6,15 +6,11 @@ VSCODE_R_SUPPORT=${VSCODERSUPPORT:-"minimal"}
 INSTALL_DEVTOOLS=${INSTALLDEVTOOLS:-"false"}
 INSTALL_RENV=${INSTALLRENV:-"false"}
 INSTALL_RMARKDOWN=${INSTALLRMARKDOWN:-"false"}
-INSTALL_JUPYTERLAB=${INSTALLJUPYTERLAB:-"false"}
-INSTALL_RADIAN=${INSTALLRADIAN:-"false"}
-INSTALL_VSCDEBUGGER=${INSTALLVSCDEBUGGER:-"false"}
-PANDOC_VERSION=${PANDOCVERSION:-"auto"}
+ARF_VERSION=${ARFVERSION:-"none"}
 
 USERNAME=${USERNAME:-${_REMOTE_USER:-"automatic"}}
 
-APT_PACKAGES=()
-PIP_PACKAGES=()
+APT_PACKAGES=(curl ca-certificates)
 R_PACKAGES=()
 
 set -e
@@ -27,8 +23,8 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
-architecture="$(dpkg --print-architecture)"
-if [ "${architecture}" != "amd64" ] && [ "${architecture}" != "arm64" ]; then
+architecture="$(uname -m)"
+if [ "${architecture}" != "x86_64" ] && [ "${architecture}" != "aarch64" ]; then
     echo "(!) Architecture $architecture unsupported"
     exit 1
 fi
@@ -56,37 +52,21 @@ if [ "${R_VERSION}" = "latest" ]; then
 fi
 
 # Check options for installing packages
-if [ "${VSCODE_R_SUPPORT}" = "minimal" ]; then
-    R_PACKAGES+=(jsonlite rlang)
-elif [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ]; then
+if [ "${VSCODE_R_SUPPORT}" = "minimal" ] || [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ] || [ "${VSCODE_R_SUPPORT}" = "full" ]; then
+    # Required by the session watcher (sess) of vscode-R
+    R_PACKAGES+=(processx later jsonlite rstudioapi)
+fi
+
+if [ "${VSCODE_R_SUPPORT}" = "lsp" ] || [ "${VSCODE_R_SUPPORT}" = "languageserver" ] || [ "${VSCODE_R_SUPPORT}" = "full" ]; then
     R_PACKAGES+=(languageserver)
-    APT_PACKAGES+=(libxml2-dev libicu-dev)
-elif [ "${VSCODE_R_SUPPORT}" = "full" ]; then
-    R_PACKAGES+=(languageserver httpgd)
-    APT_PACKAGES+=(libxml2-dev libicu-dev libcairo2-dev libfontconfig1-dev libfreetype6-dev libpng-dev)
+fi
+
+if [ "${VSCODE_R_SUPPORT}" = "full" ]; then
+    R_PACKAGES+=(jgd)
 fi
 
 if [ "${INSTALL_DEVTOOLS}" = "true" ]; then
-    APT_PACKAGES+=( \
-        make \
-        libgit2-dev \
-        libcurl4-openssl-dev \
-        libxml2-dev \
-        libssl-dev \
-        libfontconfig1-dev \
-        libharfbuzz-dev \
-        libfribidi-dev \
-        libfreetype6-dev \
-        libpng-dev \
-        libtiff-dev \
-        libjpeg-dev \
-        libicu-dev \
-        zlib1g-dev \
-    )
     R_PACKAGES+=(devtools)
-    if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
-        PANDOC_VERSION="latest"
-    fi
 fi
 
 if [ "${INSTALL_RENV}" = "true" ]; then
@@ -94,34 +74,11 @@ if [ "${INSTALL_RENV}" = "true" ]; then
 fi
 
 if [ "${INSTALL_RMARKDOWN}" = "true" ]; then
-    APT_PACKAGES+=(make libicu-dev)
     R_PACKAGES+=(rmarkdown)
-    if [ "${PANDOC_VERSION}" = "auto" ] && [ ! -x "$(command -v pandoc)" ]; then
-        PANDOC_VERSION="latest"
-    fi
-fi
-
-if [ "${INSTALL_RADIAN}" = "true" ]; then
-    PIP_PACKAGES+=(radian)
-fi
-
-if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
-    APT_PACKAGES+=(libzmq3-dev)
-    PIP_PACKAGES+=(jupyterlab)
-    R_PACKAGES+=(IRkernel)
-fi
-
-if [ "${PANDOC_VERSION}" = "os-provided" ]; then
-    APT_PACKAGES+=(pandoc)
-    PANDOC_VERSION="none"
-fi
-
-if [ "${PANDOC_VERSION}" = "auto" ]; then
-    PANDOC_VERSION="none"
 fi
 
 apt_get_update() {
-    if [ "$(find /var/lib/apt/lists/* | wc -l)" = "0" ]; then
+    if [ "$(find /var/lib/apt/lists/* 2>/dev/null | wc -l)" = "0" ]; then
         echo "Running apt-get update..."
         apt-get update -y
     fi
@@ -141,6 +98,14 @@ check_git() {
     fi
 }
 
+check_xz() {
+    if [ ! -x "$(command -v xz)" ]; then
+        check_packages xz-utils
+    fi
+}
+
+# Resolve a (partial) version to a full version using the git tags.
+# Tags with a pre-release suffix (e.g. v0.7.0-alpha.1) are ignored.
 find_version_from_git_tags() {
     local variable_name=$1
     local requested_version=${!variable_name}
@@ -148,27 +113,17 @@ find_version_from_git_tags() {
     local repository=$2
     local prefix=${3:-"tags/v"}
     local separator=${4:-"."}
-    local last_part_optional=${5:-"false"}
-    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
-        local escaped_separator=${separator//./\\.}
-        local last_part
-        if [ "${last_part_optional}" = "true" ]; then
-            last_part="(${escaped_separator}[0-9]+)*"
-        else
-            last_part="${escaped_separator}[0-9]+"
-        fi
-        local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
-        local version_list
-        check_git
-        check_packages ca-certificates
-        version_list="$(git ls-remote --tags "${repository}" | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
-        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
-            declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
-        else
-            set +e
-            declare -g "${variable_name}"="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
-            set -e
-        fi
+    local escaped_separator=${separator//./\\.}
+    local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${escaped_separator}[0-9]+$"
+    local version_list
+    requested_version="${requested_version#v}"
+    version_list="$(git ls-remote --tags "${repository}" | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
+    if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
+        declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
+    else
+        set +e
+        declare -g "${variable_name}"="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
+        set -e
     fi
     if [ -z "${!variable_name}" ] || ! echo "${version_list}" | grep "^${!variable_name//./\\.}$" >/dev/null 2>&1; then
         echo -e "Invalid ${variable_name} value: ${requested_version}\nValid values:\n${version_list}" >&2
@@ -177,66 +132,70 @@ find_version_from_git_tags() {
     echo "${variable_name}=${!variable_name}"
 }
 
-find_version_from_json() {
-    local variable_name=$1
-    local requested_version=${!variable_name}
-    if [ "${requested_version}" = "none" ]; then return; fi
-    local json_url=$2
-    local prefix=${3:-""}
-    local separator=${4:-"."}
-    local last_part_optional=${5:-"false"}
-    if [ "$(echo "${requested_version}" | grep -o "." | wc -l)" != "2" ]; then
-        local escaped_separator=${separator//./\\.}
-        local last_part
-        if [ "${last_part_optional}" = "true" ]; then
-            last_part="(${escaped_separator}[0-9]+)?"
-        else
-            last_part="${escaped_separator}[0-9]+"
-        fi
-        local regex="${prefix}\\K[0-9]+${escaped_separator}[0-9]+${last_part}$"
-        local version_list
-        check_packages curl ca-certificates
-        version_list="$(curl -sL "${json_url}" | tr '"' '\n' | grep -oP "${regex}" | tr -d ' ' | tr "${separator}" "." | sort -rV)"
-        if [ "${requested_version}" = "latest" ] || [ "${requested_version}" = "current" ] || [ "${requested_version}" = "lts" ]; then
-            declare -g "${variable_name}"="$(echo "${version_list}" | head -n 1)"
-        else
-            set +e
-            declare -g "${variable_name}"="$(echo "${version_list}" | grep -E -m 1 "^${requested_version//./\\.}([\\.\\s]|$)")"
-            set -e
-        fi
+check_glibc() {
+    local required=$1
+    local current
+    current="$(getconf GNU_LIBC_VERSION 2>/dev/null | awk '{print $2}')"
+    if [ -z "${current}" ]; then
+        echo "(!) glibc is required, but this system does not seem to use glibc." >&2
+        return 1
     fi
-    if [ -z "${!variable_name}" ] || ! echo "${version_list}" | grep "^${!variable_name//./\\.}$" >/dev/null 2>&1; then
-        echo -e "Invalid ${variable_name} value: ${requested_version}\nValid values:\n${version_list}" >&2
+    if [ "$(printf '%s\n%s\n' "${required}" "${current}" | sort -V | head -n 1)" != "${required}" ]; then
+        echo "(!) glibc ${required} or later is required, but glibc ${current} was found." >&2
+        return 1
+    fi
+}
+
+install_arf() {
+    local tmp_dir=/tmp/arf
+    local asset
+
+    echo "Checking glibc version for arf..."
+    if ! check_glibc 2.34; then
+        echo "(!) arf requires glibc >= 2.34 (e.g. Debian 12+ or Ubuntu 22.04+). Set arfVersion to none or use a newer base image." >&2
         exit 1
     fi
-    echo "${variable_name}=${!variable_name}"
+
+    check_git
+    check_xz
+    find_version_from_git_tags ARF_VERSION "https://github.com/eitsupi/arf" "tags/v"
+    asset="arf-console-${architecture}-unknown-linux-gnu.tar.xz"
+
+    echo "Downloading arf ${ARF_VERSION}..."
+    mkdir -p "${tmp_dir}"
+    pushd "${tmp_dir}"
+    curl -fsSLO "https://github.com/eitsupi/arf/releases/download/v${ARF_VERSION}/${asset}"
+    curl -fsSLO "https://github.com/eitsupi/arf/releases/download/v${ARF_VERSION}/${asset}.sha256"
+    sha256sum -c "${asset}.sha256"
+    tar xJf "${asset}"
+    install -m 0755 "arf-console-${architecture}-unknown-linux-gnu/arf" /usr/local/bin/arf
+    popd
+    rm -rf "${tmp_dir}"
+
+    arf --version
 }
 
 install_rig() {
-    local download_url
-    if [ "$architecture" = "amd64" ]; then
-        download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-latest.tar.gz"
-    elif [ "$architecture" = "arm64" ]; then
-        download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-arm64-latest.tar.gz"
-    fi
-    check_packages curl ca-certificates
-    curl -sL "${download_url}" | tar xz -C /usr/local
+    local download_url="https://github.com/r-lib/rig/releases/download/latest/rig-linux-${architecture}-latest.tar.gz"
+    curl -fsSL "${download_url}" | tar xz -C /usr/local
 }
 
-install_pandoc() {
-    local version=$1
-    local deb_file="pandoc.deb"
-    local architecture
-    local download_url
-    architecture="$(dpkg --print-architecture)"
-    download_url="https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-${architecture}.deb"
-    check_packages curl ca-certificates
-    mkdir -p /tmp/pandoc
-    pushd /tmp/pandoc
-    curl -sLo "${deb_file}" "${download_url}"
-    dpkg -i "${deb_file}"
-    popd
-    rm -rf /tmp/pandoc
+# rig cannot resolve a major-only version (e.g. 4), so resolve it here
+resolve_major_r_version() {
+    local major=$1
+    local resolved
+    # Versions listed by rig may not be resolvable on this platform, so check them from the newest
+    for candidate in $(rig available --json --all 2>/dev/null | grep -oP '"version": "\K[0-9]+\.[0-9]+\.[0-9]+(?=")' | grep -E "^${major}\\." | sort -rV); do
+        if rig resolve "${candidate}" >/dev/null 2>&1; then
+            resolved="${candidate}"
+            break
+        fi
+    done
+    if [ -z "${resolved}" ]; then
+        echo "(!) No R ${major}.x version is available." >&2
+        exit 1
+    fi
+    echo "${resolved}"
 }
 
 install_pak() {
@@ -256,56 +215,64 @@ install_pak() {
     su "${USERNAME}" -c 'R -q -e "install.packages(\"pak\", repos = sprintf(\"https://r-lib.github.io/p/pak/'"${version}"'/%s/%s/%s\", .Platform\$pkgType, R.Version()\$os, R.Version()\$arch))"'
 }
 
+# Install R packages in two phases, so that the packages are installed
+# into the user's library while the system requirements are installed by root.
 install_r_packages() {
     local packages="$*"
-    if [ -n "${packages}" ]; then
-        su "${USERNAME}" -c "R -q -e \"pak::pak(unlist(strsplit('${packages}', ' '))); pak::cache_clean()\""
+    if [ -z "${packages}" ]; then
+        return
     fi
-}
 
-check_pip() {
-    if ! python3 -m pip --help >/dev/null 2>&1; then
-        check_packages python3-pip python3-dev
-    fi
-}
+    # Phase 1: Get the commands to install system requirements (as the user)
+    rm -f /tmp/r-rig/sysreqs.sh
+    cat <<"RSCRIPT" >/tmp/r-rig/sysreqs.R
+pkgs <- unlist(strsplit(Sys.getenv("R_RIG_PACKAGES"), " "))
+tryCatch(
+  {
+    sr <- pak::pkg_sysreqs(pkgs)
+    writeLines(
+      c(sr$pre_install, sr$install_scripts, sr$post_install),
+      "/tmp/r-rig/sysreqs.sh"
+    )
+  },
+  error = function(e) {
+    message("Could not get the system requirements: ", conditionMessage(e))
+  }
+)
+RSCRIPT
+    chmod 644 /tmp/r-rig/sysreqs.R
+    echo "Checking system requirements of the R packages..."
+    su "${USERNAME}" -c "R_RIG_PACKAGES='${packages}' R -q -f /tmp/r-rig/sysreqs.R"
 
-install_pip_packages() {
-    local packages="$*"
-    if [ -n "${packages}" ]; then
-        check_pip
-        export PIP_BREAK_SYSTEM_PACKAGES=1
-        # shellcheck disable=SC2086
-        python3 -m pip install --upgrade --no-cache-dir --no-warn-script-location ${packages}
+    # Phase 2: Install system requirements (as root)
+    if [ -s /tmp/r-rig/sysreqs.sh ]; then
+        echo "Installing system requirements..."
+        cat /tmp/r-rig/sysreqs.sh
+        apt_get_update
+        bash -e /tmp/r-rig/sysreqs.sh
+    else
+        echo "No system requirements need to be installed."
     fi
+
+    # Phase 3: Install R packages (as the user)
+    cat <<"RSCRIPT" >/tmp/r-rig/install.R
+pkgs <- unlist(strsplit(Sys.getenv("R_RIG_PACKAGES"), " "))
+pak::pak(pkgs)
+pak::cache_clean()
+pak::meta_clean(force = TRUE)
+RSCRIPT
+    chmod 644 /tmp/r-rig/install.R
+    su "${USERNAME}" -c "PKG_SYSREQS=false R_RIG_PACKAGES='${packages}' R -q -f /tmp/r-rig/install.R"
 }
 
 export DEBIAN_FRONTEND=noninteractive
 
 # shellcheck disable=SC2048 disable=SC2086
 check_packages ${APT_PACKAGES[*]}
-# shellcheck disable=SC2048 disable=SC2086
-install_pip_packages ${PIP_PACKAGES[*]}
 
-if [ "${INSTALL_VSCDEBUGGER}" = "true" ]; then
-    check_git
-    R_PACKAGES+=("ManuelHentschel/vscDebugger@$(git ls-remote --tags https://github.com/ManuelHentschel/vscDebugger | grep -oP "v[0-9]+\\.[0-9]+\\.[0-9]+" | sort -V | tail -n 1)")
-fi
-
-# Install pandoc if needed
-if [ "${PANDOC_VERSION}" != "none" ]; then
-    find_version_from_git_tags PANDOC_VERSION "https://github.com/jgm/pandoc" "tags/" "." "true"
-    echo "Downloading pandoc ${PANDOC_VERSION}..."
-    install_pandoc "${PANDOC_VERSION}"
-fi
-
-# Soft version matching
-# https://github.com/r-lib/rig/issues/101
-if [ "${R_VERSION}" != "release" ] && [ "${R_VERSION}" != "devel" ] && [ "${R_VERSION}" != "none" ]; then
-    if [ "${architecture}" = "amd64" ]; then
-        find_version_from_json R_VERSION "https://cdn.rstudio.com/r/versions.json"
-    elif [ "${architecture}" = "arm64" ]; then
-        find_version_from_git_tags R_VERSION "https://github.com/r-hub/R"
-    fi
+# Install arf first, so that an unsupported environment fails fast
+if [ "${ARF_VERSION}" != "none" ]; then
+    install_arf
 fi
 
 # Install rig
@@ -327,8 +294,12 @@ fi
 if [ "${R_VERSION}" = "none" ]; then
     echo "Skipping R installation"
 else
+    if [[ "${R_VERSION}" =~ ^[0-9]+$ ]]; then
+        R_VERSION="$(resolve_major_r_version "${R_VERSION}")"
+        echo "R_VERSION=${R_VERSION}"
+    fi
     echo "Downloading R ${R_VERSION}..."
-    rig add "${R_VERSION}" --without-pak --without-sysreqs
+    rig add "${R_VERSION}" --without-pak
 fi
 
 echo "Install R packages..."
@@ -341,7 +312,8 @@ if [ ! -f "${_REMOTE_USER_HOME}/.gitconfig" ]; then
 fi
 
 # Install the pak package
-mkdir /tmp/r-rig
+mkdir -p /tmp/r-rig
+chmod 777 /tmp/r-rig
 pushd /tmp/r-rig
 
 install_pak "${PAK_VERSION}"
@@ -354,16 +326,9 @@ rm -rf /tmp/r-rig
 
 # Should not add .gitconfig to the user's home directory
 # https://github.com/r-lib/credentials/issues/25
-if [ "${DELETE_GITCONFIG}" = "true" ] && [ -f "${_REMOTE_USER_HOME}/.gitconfig" ] ; then
+if [ "${DELETE_GITCONFIG}" = "true" ] && [ -f "${_REMOTE_USER_HOME}/.gitconfig" ]; then
     echo "Remove ${_REMOTE_USER_HOME}/.gitconfig file..."
     rm -f "${_REMOTE_USER_HOME}/.gitconfig"
-fi
-
-# Set up IRkernel
-if [ "${INSTALL_JUPYTERLAB}" = "true" ]; then
-    echo "Register IRkernel..."
-    # shellcheck disable=SC2016
-    su "${USERNAME}" -c 'export PATH="/home/'"${USERNAME}"'/.local/bin:/root/.local/bin:${PATH}"; R -q -e "IRkernel::installspec()"'
 fi
 
 # Clean up

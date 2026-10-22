@@ -6,8 +6,7 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "R" R --version
-check "jupyter" jupyter kernelspec list
+check "version" bash -c "R --version | grep -E 'R version 4\.[0-9]+\.[0-9]+'"
 
 # Report result
 reportResults

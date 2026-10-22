@@ -1,8 +1,8 @@
 {
 	"name": "R (via rig)",
 	"id": "r-rig",
-	"version": "1.2.4",
-	"description": "Installs R, some R packages, and needed dependencies. Note: May require source code compilation for R packages.",
+	"version": "2.0.0",
+	"description": "Installs R (via rig), some R packages, and needed system dependencies. Optionally installs the arf R console. Note: May require source code compilation for R packages.",
 	"documentationURL": "https://github.com/rocker-org/devcontainer-features/tree/main/src/r-rig",
 	"options": {
 		"version": {
@@ -34,53 +34,36 @@
 				"full"
 			],
 			"default": "minimal",
-			"description": "Install R packages to make vscode-R work. lsp means the `languageserver` package, full means lsp plus the `httpgd` package."
+			"description": "Install R packages to make vscode-R work. minimal means the packages required by the session watcher of vscode-R (processx, later, jsonlite and rstudioapi), lsp means minimal plus the languageserver package, full means lsp plus the jgd package (the graphics device for the vscode-R plot viewer)."
 		},
 		"installDevTools": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `devtools` R package."
+			"description": "Install the devtools R package."
 		},
 		"installREnv": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `renv` R package."
+			"description": "Install the renv R package."
 		},
 		"installRMarkdown": {
 			"type": "boolean",
 			"default": false,
-			"description": "Install the `rmarkdown` R package. It is required for R Markdown or Quarto documentation."
+			"description": "Install the rmarkdown R package. It is required for R Markdown or Quarto documentation. Note that this feature does not install pandoc, use the pandoc Feature."
 		},
-		"installJupyterlab": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install and setup JupyterLab (via `python3 -m pip`). JupyterLab is a web-based interactive development environment for notebooks."
-		},
-		"installRadian": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install radian (via `python3 -m pip`). radian is an R console with multiline editing and rich syntax highlight."
-		},
-		"installVscDebugger": {
-			"type": "boolean",
-			"default": false,
-			"description": "Install the `vscDebugger` R package from the GitHub repo. It is required for the VSCode-R-Debugger."
-		},
-		"pandocVersion": {
+		"arfVersion": {
 			"type": "string",
 			"proposals": [
-				"auto",
 				"none",
-				"os-provided",
 				"latest"
 			],
-			"default": "auto",
-			"description": "Select version of Pandoc. By default, the latest version is installed if needed."
+			"default": "none",
+			"description": "Install arf (R console, https://github.com/eitsupi/arf) from GitHub releases. latest means the latest stable release, or specify a version like `0.6.0`. Requires glibc >= 2.34."
 		}
 	},
 	"installsAfter": [
 		"ghcr.io/devcontainers/features/common-utils",
-		"ghcr.io/devcontainers/features/python"
+		"ghcr.io/rocker-org/devcontainer-features/pandoc"
 	],
 	"customizations": {
 		"vscode": {

@@ -6,8 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
+check "arf version" bash -c "arf --version | grep 0.6.0"
 check "R" R -q -e "sessionInfo()"
-check "pandoc" R -q -e 'rmarkdown::pandoc_version()'
 
 # Report result
 reportResults

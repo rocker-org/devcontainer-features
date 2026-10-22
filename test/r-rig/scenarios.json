@@ -1,38 +1,4 @@
 {
-	"rpackages-source-install": {
-		"image": "debian:stable-slim",
-		"features": {
-			"r-rig": {
-				"vscodeRSupport": "full",
-				"installDevTools": true,
-				"installREnv": true,
-				"installRMarkdown": true,
-				"installVscDebugger": true,
-				"installJupyterlab": true,
-				"installRadian": true
-			}
-		}
-	},
-	"latest-pandoc": {
-		"image": "rocker/r-ver:4",
-		"features": {
-			"r-rig": {
-				"version": "none",
-				"installRMarkdown": true,
-				"pandocVersion": "latest"
-			}
-		}
-	},
-	"os-pandoc": {
-		"image": "rocker/r-ver:4",
-		"features": {
-			"r-rig": {
-				"version": "none",
-				"installRMarkdown": true,
-				"pandocVersion": "os-provided"
-			}
-		}
-	},
 	"version-latest": {
 		"image": "debian:stable-slim",
 		"features": {
@@ -41,37 +7,65 @@
 			}
 		}
 	},
-	"version-specific-3": {
-		"image": "debian:stable-slim",
+	"version-specific-4": {
+		"image": "ubuntu:noble",
 		"features": {
 			"r-rig": {
-				"version": "3"
+				"version": "4"
 			}
 		}
 	},
 	"version-specific-40": {
-		"image": "debian:stable-slim",
+		"image": "ubuntu:jammy",
 		"features": {
 			"r-rig": {
 				"version": "4.0"
 			}
 		}
 	},
-	"install-on-devcontainer-r-ver": {
-		"image": "ghcr.io/rocker-org/devcontainer/r-ver:4",
+	"full": {
+		"image": "debian:stable-slim",
 		"features": {
 			"r-rig": {
-				"version": "none",
-				"installJupyterlab": true
+				"vscodeRSupport": "full",
+				"installDevTools": true,
+				"installREnv": true,
+				"installRMarkdown": true,
+				"arfVersion": "latest"
 			}
 		}
 	},
-	"python-packages-global": {
-		"image": "rocker/rstudio:4",
+	"arf-specific-version": {
+		"image": "ubuntu:noble",
+		"features": {
+			"r-rig": {
+				"arfVersion": "0.6.0"
+			}
+		}
+	},
+	"rmarkdown-with-pandoc-feature": {
+		"image": "ubuntu:noble",
+		"features": {
+			"pandoc": {},
+			"r-rig": {
+				"installRMarkdown": true
+			}
+		}
+	},
+	"version-none-on-r-ver": {
+		"image": "rocker/r-ver:4",
 		"features": {
 			"r-rig": {
 				"version": "none",
-				"installRadian": true
+				"vscodeRSupport": "lsp"
+			}
+		}
+	},
+	"non-root-user": {
+		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+		"features": {
+			"r-rig": {
+				"vscodeRSupport": "lsp"
 			}
 		}
 	}

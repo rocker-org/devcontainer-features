@@ -3,8 +3,7 @@
 		"image": "ubuntu:latest",
 		"features": {
 			"r-rig": {
-				"installRMarkdown": true,
-				"installJupyterlab": true
+				"installRMarkdown": true
 			},
 			"quarto-cli": {}
 		}

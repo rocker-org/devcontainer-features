@@ -6,7 +6,8 @@ set -e
 source dev-container-features-test-lib
 
 # Feature-specific tests
-check "version" R --version | grep 3.6.3
+check "languageserver" R -q -e "library(languageserver)"
+check "jsonlite" R -q -e "library(jsonlite)"
 
 # Report result
 reportResults
