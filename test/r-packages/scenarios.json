@@ -105,6 +105,27 @@
 			}
 		}
 	},
+	"sysreqs-default-ubuntu-xml2": {
+		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+		"remoteUser": "vscode",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-rig": {},
+			"r-packages": {
+				"packages": "xml2"
+			}
+		}
+	},
+	"sysreqs-false-ubuntu-R6": {
+		"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+		"remoteUser": "vscode",
+		"features": {
+			"ghcr.io/rocker-org/devcontainer-features/r-apt": {},
+			"r-packages": {
+				"packages": "R6",
+				"installSystemRequirements": false
+			}
+		}
+	},
 	"pkgsysreqs-true-centos7-curl-R6": {
 		"image": "rstudio/r-base:4.1-centos7",
 		"features": {
