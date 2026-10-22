@@ -11,17 +11,6 @@
 			}
 		}
 	},
-	"all-on-focal": {
-		"image": "ubuntu:focal",
-		"features": {
-			"r-apt": {
-				"vscodeRSupport": "full",
-				"installDevTools": true,
-				"installREnv": true,
-				"installRMarkdown": true
-			}
-		}
-	},
 	"all-on-jammy": {
 		"image": "ubuntu:jammy",
 		"features": {
